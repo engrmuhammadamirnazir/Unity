@@ -228,7 +228,7 @@ C:\Users\Amir Nazir\.openclaw\
 │   ├── HEARTBEAT.md                  Heartbeat config
 │   ├── TOOLS.md                      Local tool config (whisper, voice)
 │   ├── USER.md                       Amir's contact info
-│   ├── skills\                       21 custom skills (SKILL.md each)
+│   ├── skills\                       33 custom skills (SKILL.md each, ~22K lines)
 │   ├── agents\                       Sub-agent workspaces (9 agents)
 │   │   ├── hamza\                    Hamza Ali (Senior Odoo Developer)
 │   │   ├── saad\                     Saad Raza (Business Development Manager)

@@ -47,7 +47,26 @@ status: active
 | **Usman Tariq** | `usman` | GoHighLevel CRM Specialist | GHL pipelines, funnels, workflows, white-label SaaS, CRM migration from HubSpot/Salesforce/Zoho | `gohighlevel-crm` |
 | **Nadia Hassan** | `nadia` | AI Agent Services Specialist | OpenClaw deployment, custom skills, multi-agent orchestration, industry wrappers, integration consulting | `openclaw-agent-services` |
 
-All 10 agents now have 2 universal skills: `obsidian-second-brain` (vault navigation) and `claude-code-development` (dev tooling).
+All 10 agents now have 5 universal skills: `obsidian-second-brain` (vault navigation), `claude-code-development` (dev tooling with Opus model preference), `pmp-project-management` (PMBOK 7th Edition), `professional-sdlc` (full SDLC/testing/CI-CD), and `information-security-ops` (CISSP/Security+ level security).
+
+### Professional Certification Skills (Added 2026-03-02)
+
+Each agent also has a domain-specific certification skill:
+
+| Agent | Certification Skill | Knowledge Base | Total Skills |
+|-------|-------------------|---------------|-------------|
+| Zain | (PMP serves as cert) | PMBOK 7, program management | 12 |
+| Hamza | `odoo-certified-developer` | ORM mastery, model inheritance, v14-v19 migration | 15 |
+| Saad | `certified-sales-professional` | SPIN/Challenger/Sandler, enterprise deals, negotiation | 18 |
+| Hira | `digital-marketing-certified` | GA4, SEO/SEM, content marketing, email, social | 14 |
+| Kashif | `business-analytics-certified` | KPI design, financial modeling, dashboards, statistics | 13 |
+| Waqar | `qa-security-certified` | ISTQB, OWASP Top 10, pen testing, security auditing | 10 |
+| Bilal | `cpa-accounting-certified` | GAAP/ASC, audit, tax, financial analysis, budgeting | 14 |
+| Fatima | `shopify-partner-certified` | Liquid mastery, Dawn OS 2.0, checkout extensibility, WCAG | 15 |
+| Usman | `crm-automation-certified` | CRM architecture, marketing automation, lead scoring | 17 |
+| Nadia | `ai-solutions-architect` | AWS Well-Architected, API design, AI/ML deployment | 16 |
+
+**Total skills: 33** (21 original + 12 new professional skills). ~22,000 lines of professional knowledge.
 
 ### Agent Identity Profiles (New)
 
