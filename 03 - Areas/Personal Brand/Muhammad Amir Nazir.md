@@ -21,10 +21,12 @@ aliases: [Muhammad Amir, Amir Nazir]
 Muhammad Amir Nazir is the founder of Ecosire Private Limited, an AI-powered business solutions company operating under the brand [[Odovation]] (odovation.com). With 8+ years of hands-on engineering experience, he has led 2,500+ Odoo implementations across 50+ countries, built 35+ marketplace connectors, and expanded into AI and automation integration. He operates 100% remotely from Pakistan, serving clients globally.
 
 ### Career Timeline
+- **2017**: Incorporated Plan Empire (Private) Limited (SECP, CUIN 0108914)
 - **2018**: Started Odoo development
 - **2021**: Built 35+ marketplace connectors
 - **2023**: Expanded into AI and automation integration
-- **2024**: Founded ECOSIRE Private Limited
+- **2024**: Renamed Plan Empire → ECOSIRE (Private) Limited (Jan 24, 2024)
+- **2026**: Formed ECOSIRE LLC in Wyoming (Mar 31); EIN issued (Apr 10); BOIR filed (Apr 11)
 
 ---
 

@@ -3,7 +3,7 @@ type: company
 founded: 2024
 location: Pakistan
 website: https://www.ecosire.com
-email: ecosire@gmail.com
+email: info@ecosire.com
 tags: [ecosire, company, odoo, saas]
 aliases: [Ecosire, ECOSIRE]
 ---
@@ -16,7 +16,7 @@ aliases: [Ecosire, ECOSIRE]
 
 ## Company Overview
 
-Ecosire Private Limited is an AI-powered business solutions company and top-tier Odoo partner based in Pakistan. The company specializes in Odoo ERP implementation, marketplace connector development, and SaaS platform delivery, serving clients globally across 50+ countries. The company operates the full-stack SaaS platform at ecosire.com and sells 35+ Odoo marketplace connectors.
+Ecosire Private Limited is an AI-powered business solutions company and top-tier Odoo partner based in Pakistan. The company specializes in Odoo ERP implementation, marketplace connector development, and SaaS platform delivery, serving clients globally across 50+ countries. The company operates the full-stack SaaS platform at ecosire.com and has built **201 marketplace connector modules** for Odoo (the largest collection in the ecosystem), plus 14 additional products — totaling ~215 modules across Odoo 17, 18, and 19.
 
 ---
 
@@ -26,8 +26,10 @@ Ecosire Private Limited is an AI-powered business solutions company and top-tier
 |--------|-------|
 | **Legal Name** | Ecosire (Private) Limited |
 | **DBA** | [[Odovation]] (odovation.com) |
-| **Founded** | 2024 (Pakistan entity) |
+| **Founded** | Incorporated 29 May 2017 as **Plan Empire (Private) Limited** (CUIN 0108914); renamed to ECOSIRE 24 Jan 2024 |
+| **US Entity** | **ECOSIRE LLC** — Wyoming LLC formed 2026-03-31 (Entity ID 2026-001937194). **EIN issued 2026-04-10**, **BOIR filed 2026-04-11** |
 | **UK Entity** | ECOSIRE LTD (#14386513) — Incorporated Sep 2022, Dissolved Mar 2024 |
+| **SECP Status** | Partial compliance — FY2018/2020/2021/2022/2023 Form A filed. **Gaps:** FY2019, FY2024, FY2025 Form A still outstanding. See `D:\Company\README.md` for filing history and [[Ecosire Private Limited - Corporate Filings]] |
 | **Website** | https://www.ecosire.com |
 | **Email** | info@ecosire.com / support@ecosire.com / ecosire@gmail.com |
 | **Phone** | +923130168262 |
@@ -37,7 +39,7 @@ Ecosire Private Limited is an AI-powered business solutions company and top-tier
 | **Countries** | 50+ countries served |
 | **Clients** | 500+ businesses |
 | **Industries** | 33+ industries |
-| **Modules** | 35+ marketplace connectors |
+| **Modules** | 201 marketplace connectors + 14 other products (~215 total) |
 | **Funding** | Bootstrapped (unfunded) |
 
 ### Social Media
@@ -49,24 +51,34 @@ Ecosire Private Limited is an AI-powered business solutions company and top-tier
 
 ## Products & Services
 
-### 1. Marketplace Connectors (35+ Modules)
-Odoo modules connecting to major e-commerce platforms. See [[Ecosire - Odoo Module Library]] for full list.
+### 1. Marketplace Connectors (201 Modules)
+Odoo modules connecting to 63 major e-commerce platforms worldwide. See [[Ecosire - Odoo Module Library]] for full list.
 
-| Tier | Price | Platforms |
-|------|-------|-----------|
-| **Standard** | $99 | AliExpress, Catch, Cdiscount, Coupang, Daraz, Flipkart, Fruugo, Kaufland, Lazada, MercadoLibre, Noon, Ozon, Rakuten, SHEIN, Shopee, Tokopedia |
-| **Professional** | $149 | Allegro, BigCommerce, Bol.com, Etsy, OpenCart, PrestaShop, Temu, TikTok, Walmart, Wix |
-| **Premium** | $199 | eBay, Magento, Shopify, WooCommerce |
-| **Enterprise** | $399 | Otto, Zalando |
-| **Enterprise+** | $499 | Amazon SP-API |
+| Tier | App Store Price | Count | Example Platforms |
+|------|----------------|-------|-------------------|
+| **Regional/Niche** | $249 | 40 modules | AliExpress, Daraz, Flipkart, Lazada, MercadoLibre, Noon, Ozon, Shopee, Tokopedia, Snapdeal, Jumia, Takealot, Vinted, Wish |
+| **Mid-Tier** | $349 | 46 modules | Allegro, BigCommerce, Bol.com, Etsy, TikTok, Walmart, Wayfair, Wildberries, Trendyol, Back Market, Faire, Instagram, Pinterest |
+| **Major** | $499 | 22 modules | Amazon (SP-API), Shopify, WooCommerce, eBay, Magento, Zalando, Otto, Alibaba, Facebook, Google Shopping |
+| **Hub** | $599 | 1 module | Vinculum OMS |
 
-### 2. ECOSIRE.COM SaaS Platform
+### 2. Additional Products
+| Product | Price | Description |
+|---------|-------|-------------|
+| Power BI Connector | $499 | Odoo ↔ Power BI data integration with Azure service principal |
+| OpenClaw AI Assistant | $250 | AI agent connector for Odoo (WhatsApp, Telegram, Slack) |
+| SaaS Business Management | $499 | Multi-tenant SaaS management module |
+| Branding Management | Internal | 8 sub-modules for UI customization |
+| Subscriptions | Internal | Subscription-based service management |
+| Ecosire License Client | Free | License verification (required dependency for all modules) |
+| Private Enterprise | Internal | Blocks Odoo phone-home (3-layer HTTP interception) |
+
+### 3. ECOSIRE.COM SaaS Platform
 Full-stack SaaS platform with Growth Engine. See [[ECOSIRE.COM Platform]].
-- **Backend**: NestJS 11 (54 modules)
-- **Frontend**: Next.js 16 (216 pages)
-- **11 Languages**: EN, ZH, ES, AR, PT, FR, DE, JA, TR, HI, UR
+- **Backend**: NestJS 11 (55 modules)
+- **Frontend**: Next.js 16 (246 pages)
+- **11 Languages**, 8,991 translation keys: EN, ZH, ES, AR, PT, FR, DE, JA, TR, HI, UR
 
-### 3. Odoo ERP Services
+### 4. Odoo ERP Services
 | Service | Description |
 |---------|-------------|
 | Implementation | Full lifecycle setup, config, migration, go-live |
@@ -74,25 +86,25 @@ Full-stack SaaS platform with Growth Engine. See [[ECOSIRE.COM Platform]].
 | Migration | SAP-to-Odoo, version upgrades (12-24 week timelines) |
 | Support | Ongoing maintenance and optimization |
 
-### 4. Support Plans
+### 5. Support Plans
 | Plan | Price | Details |
 |------|-------|---------|
 | Starter | $499/mo | 10 hrs support, 1-15 users |
 | Professional | $1,499/mo | 20 support + 10 dev hrs |
 | Enterprise | $3,499/mo | 40 support + 20 dev hrs, 24/7 |
 
-### 5. Shopify Integration
+### 6. Shopify Integration
 | Plan | Price | Stores |
 |------|-------|--------|
 | Standard | $49/mo | 1 Shopify store |
 | Professional | $99/mo | 3 Shopify stores |
 
-### 6. AI-Powered Solutions
+### 7. AI-Powered Solutions
 - **OpenClaw** — AI personal assistant framework (multi-channel: WhatsApp, Telegram, Slack, Discord)
 - **Ecosire AI** — AI content engine, natural language ERP queries
 - **Multi-Agent Orchestration** — 99.9% coordination, 50ms task routing
 
-### 7. Additional Services
+### 8. Additional Services
 - Accounting & Bookkeeping
 - POS & Inventory Management
 - Business Process Automation
@@ -107,12 +119,14 @@ Full-stack SaaS platform with Growth Engine. See [[ECOSIRE.COM Platform]].
 | Odoo Dev (v19) | `D:\Development\odoo19\` | Primary development, port 8072 |
 | Odoo Dev (v18) | `D:\Development\odoo18\` | Backport target, port 8069 |
 | Odoo Dev (v17) | `D:\Development\odoo17\` | Backport target, port 8070 |
-| Module Source | `D:\Development\Ecosire Solutions\` | 42 module folders |
+| Module Staging | `D:\Development\EcosireSolutions\` | 201+ module publish folders |
 | Platform Source | `D:\ECOSIRE.COM\` | Full-stack monorepo |
-| Customer Projects | `D:\Ecosire Customer Service\` | Active client repos |
-| Reference Modules | `D:\Odoo Modules\` | 60+ reference ZIPs by version |
-| R&D | `D:\R&D\` | Marketplace strategy research |
-| Cover Assets | `D:\Odoo App Store Covers\` | Module branding |
+| Client Projects | `D:\Development\EcosireClients\` | Active client repos |
+| Competitor Modules | `D:\OdooModules\` | 69GB, 5,500+ modules (v12-v19) |
+| Active Study | `D:\Development\competitorsreferencemodules\` | Competitor modules under study |
+| Platform API Intel | `D:\Development\platform-api-intelligence\` | 63 platforms, ~6,500 endpoints |
+| Scripts | `D:\Development\scripts\` | Backporting, publishing, testing, generation |
+| Agent Fleet | `D:\Development\.claude\` | 27 agents, 99 skills, 16 teams |
 
 ---
 
@@ -127,17 +141,27 @@ See [[Ecosire - Team Directory]] for full roster.
 
 ---
 
-## Active Clients
+## Active Clients (as of April 2026)
 
-- [[PRJ - Oenoteca Fine Wines]] — Wine distribution, Odoo 19 Enterprise (Houston, TX)
-- [[PRJ - Aligners Pakistan]] — Dental aligners, custom store development
-- [[PRJ - Odoo-Shopify Connector]] — Internal product development
-- Ai Content Automation — Active project (`D:\Ecosire Customer Service\`)
-- Alvi Dental — Dental practice management
-- DTS Connector — Integration project
-- PSL Premium Sports Lighting — Custom solution
-- Sahara Properties — Property management
-- UsTelekom — Telecom client
+### Implementation & Custom Development
+- [[PRJ - Obliq Furniture]] — Furniture manufacturing, Odoo 19, Dubai ($2,500)
+- [[PRJ - Sahara Properties]] — Real estate PMS, Odoo 19, Dubai (custom module v19.0.3.10.0)
+- [[PRJ - Oenoteca Fine Wines]] — Wine distribution, Odoo 19, Houston TX ($517K revenue posted)
+- **Remittance Management** — Financial services, Odoo 19 Enterprise, Salueman Arif (custom module v19.0.5.0.2 LIVE)
+- **RedXpider** — Manufacturing (ATE), Odoo 18 Enterprise, Netherlands ($3K/4 milestones, Odoo.sh)
+- **Alvi Dental** — Healthcare, Odoo 19 migration planned, Hetzner EX44 provisioned
+
+### Module Delivery (App Store Customers)
+- **Tariq Almaimani** — Trendyol connector, Saudi Arabia, deployed on Odoo.sh staging (80 orders synced)
+- **Quicken Accounting (Soovah)** — Wayfair connector v3.7.0, 2,110 orders, payout reconciliation LIVE
+- **Gaspar Muhlmann** — MercadoLibre connector, Argentina (Odoo Partner, channel partner)
+- **Rebecca Lee** — Amazon connector for Odoo 18, China ($1K proposal sent)
+
+### Prospective
+- **Ximplifika** — Import/Trading ERP, Mexico ($3,500 proposal sent)
+- **Texas Closeout** — 3PL WMS, Houston TX ($1,999 proposal sent via Mastero)
+- **Airport Taxi Hub** — Airport transfers marketplace, Delaware/UK ($4K proposal sent)
+- **Quicken/SAP B1** — SAP B1 ↔ Odoo integration ($1,250 proposal sent)
 
 See [[Ecosire - Client Portfolio]] for full details.
 
@@ -157,7 +181,7 @@ See [[Ecosire - Client Portfolio]] for full details.
 - [[MOC - Ecosire]] — Full knowledge map
 - [[Odovation]] — Client-facing brand
 - [[Ecosire - Technical Stack]] — Full technical infrastructure
-- [[Ecosire - Odoo Module Library]] — All 42 modules
+- [[Ecosire - Odoo Module Library]] -- All modules
 - [[ECOSIRE.COM Platform]] — SaaS platform details
 - [[Ecosire - Client Portfolio]] — All clients
 - [[MOC - Odoo Expertise]] — Technical knowledge
