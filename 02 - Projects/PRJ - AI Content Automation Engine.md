@@ -8,7 +8,7 @@ created: 2026-03-02
 # PRJ — AI Content Automation Engine
 
 > AI-powered SaaS platform for automated WordPress content generation and SEO optimization.
-> Source: `D:\Ecosire Customer Service\Active Clients\Ai Content Automation\ai-content-engine\`
+> Source: `D:\ECOSIRE.AI\` (canonical README at `D:\ECOSIRE.AI\README.md`)
 
 ---
 
@@ -18,12 +18,12 @@ Multi-tenant SaaS platform that automates WordPress content creation using AI. T
 
 | Field | Value |
 |-------|-------|
-| **Product** | AI Content Automation Engine |
-| **Live URL** | https://ecosire.org |
-| **Auth URL** | https://auth.ecosire.org |
-| **Server** | 3.28.95.67 (AWS EC2 t3.large) |
-| **SSH Key** | `aicontentgeneration.pem` |
-| **Status** | Active — 22 build sessions complete + extensive post-blueprint work |
+| **Product** | Ecosire AI -- Multi-engine Visibility Platform |
+| **Live URL** | https://ecosire.ai |
+| **Auth URL** | https://auth.ecosire.ai |
+| **Server** | 54.197.92.23 (AWS EC2 t3.large, us-east-1) |
+| **SSH Key** | `ecosire.pem` |
+| **Status** | Active -- 22 build sessions + mobile app + agent fleet (21 agents, 21 skills) |
 
 ---
 
@@ -46,10 +46,10 @@ Multi-tenant SaaS platform that automates WordPress content creation using AI. T
 | Framework | FastAPI |
 | ORM | SQLAlchemy 2.0 (fully async) |
 | Task Queue | Celery 5 + Redis 7 |
-| Database | PostgreSQL 16 (23 tables, migration 0010) |
+| Database | PostgreSQL 16 (23 tables, migration 0011) |
 | Auth | Authentik OIDC (PyJWT + JWKS) |
 | AI | Claude (Sonnet/Opus/Haiku) primary, GPT-4o secondary |
-| Testing | pytest-asyncio (1,519 tests passing) |
+| Testing | pytest-asyncio (1,517 tests passing) |
 
 ### Frontend (Dashboard)
 | Component | Technology |
@@ -116,7 +116,7 @@ Crawl → 7 Parallel Analyzers → StrategyGenerator → Dashboard → StrategyE
 - Centralized in `seo_knowledge.py`
 - Powers all AI agents and analyzers
 
-### 5. WordPress Plugin v2.0.6+
+### 5. WordPress Plugin v2.1.0
 - Dual authentication (API key + JWT)
 - 8 React-powered admin pages
 - PHP class architecture with REST API

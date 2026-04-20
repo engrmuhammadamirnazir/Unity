@@ -2,7 +2,7 @@
 type: resource
 tags: [claude-code, memory, unified, development, reference]
 created: 2026-03-02
-updated: 2026-03-02
+updated: 2026-03-09
 ---
 
 # Claude Code Unified Memory
@@ -13,7 +13,7 @@ updated: 2026-03-02
 
 ---
 
-## Source Projects (8 workspaces)
+## Source Projects (11 workspaces)
 
 | # | Project Path | Memory Files | Key Domain |
 |---|-------------|-------------|------------|
@@ -44,6 +44,44 @@ These vault notes already contain related knowledge:
 
 ---
 
+## Claude Code Agent Teams Automation (2026-03-05)
+
+### GitHub Backup
+- **Repo:** https://github.com/engrmuhammadamirnazir/claude.git (PRIVATE)
+- **What:** Full backup of `C:\Users\Amir Nazir\.claude\` (memories, agents, skills, sessions, settings)
+- **Auto-backup:** Windows Task Scheduler runs daily at 11:59 PM via `backup-daily.sh`
+- **Purpose:** Shared knowledge across multiple laptops, disaster recovery
+
+### Agent Team Setup (D:\Development\.claude\)
+- **22 custom agents** (ALL Opus model) with self-evolving memory
+- **73 custom skills** (slash commands)
+- **5 path-scoped rules**, **9 team compositions**, **8+ shared knowledge files**
+
+| Agent | Model | Purpose |
+|-------|-------|---------|
+| module-developer | Opus | Creates new Odoo modules |
+| backporter | Sonnet | Backports v19 to v18/v17 |
+| module-validator | Sonnet | Validates module quality |
+| test-runner | Haiku | Runs and analyzes tests |
+| publisher | Sonnet | Publishes to GitHub |
+| opportunity-scout | Sonnet | Market research |
+
+### Self-Evolving Memory System
+- Each agent reads memory BEFORE starting + writes learnings AFTER completing
+- **Project memory:** `D:\Development\.claude\agent-memory\{agent-name}\MEMORY.md`
+- **Shared knowledge:** `D:\Development\.claude\agent-memory\shared-knowledge\KNOWLEDGE.md`
+- Categories: common issues, module patterns, version gotchas, publishing lessons, test failures, market intel
+
+### Key Skill Commands
+| Command | Purpose |
+|---------|---------|
+| `/new-module [platform]` | Create complete new store module |
+| `/backport-module [name]` | Backport to v18 + v17 |
+| `/validate-module [name]` | Validate across versions |
+| `/full-pipeline [platform]` | Complete create+backport+validate+test+publish |
+| `/setup-agent-teams [path]` | Generate agent teams for ANY project |
+
+---
 ## 1. System Layout
 
 ### Machine & Drives
@@ -119,13 +157,13 @@ See [[OpenClaw Agent Strategy]] for full details. Key memory:
 
 See [[ECOSIRE.COM Platform]] for architecture. Key memory:
 
-### Scale (2026-03-02)
+### Scale (2026-03-09)
 - **Monorepo:** Turborepo 2.8 + pnpm 10.28
-- **NestJS 11:** 54 backend modules, 290 TypeScript files
-- **Next.js 16:** 230 pages (152 admin + 78 public)
+- **NestJS 11:** 55 backend modules, 290+ TypeScript files
+- **Next.js 16:** 246 pages (170 admin + 76 public), 205 blog posts
 - **DB:** PostgreSQL 17, 60 Drizzle schema files, 150+ tables
 - **Auth:** Authentik OIDC → JWT (15m) + refresh (7d) → HttpOnly cookies
-- **i18n:** 11 locales (en, zh, es, ar, pt, fr, de, ja, tr, hi, ur), ~7,765 translation keys
+- **i18n:** 11 locales (en, zh, es, ar, pt, fr, de, ja, tr, hi, ur), 8,991 translation keys
 - **5 apps:** ecosire-web (3000), ecosire-api (3001), ecosire-docs (3002), odovation (3010), muhammadamir (3020)
 - **5 service platforms:** Odoo, Shopify, OpenClaw, GoHighLevel, Accounting
 - **Growth Engine:** 11 apps (workflows, sms, whatsapp, inbox, funnels, pages, checkout, calendar, chat, affiliates, loyalty)
@@ -213,7 +251,8 @@ When updating product prices, ALL 5 sources must be checked:
 - All published to GitHub across 19.0, 18.0, 17.0, main branches
 - Chart.js bundled locally at `static/lib/chart.umd.min.js` (not CDN)
 - Dashboard CSS: unique 2-letter prefix per module (am_, eb_, tk_, etc.)
-- 9 modules lack test suites: bigcommerce, daraz, magento, noon, opencart, prestashop, shopee, tiktok, wix
+- 4 modules lack test suites: prestashop, shopee, tiktok, wix
+- 29 modules have test suites (15 files each)
 
 ### ECOSIRE Branding Standard
 - All manifests: author/company/maintainer = 'ECOSIRE', website = 'https://www.ecosire.com'
@@ -279,19 +318,19 @@ When updating product prices, ALL 5 sources must be checked:
 ## 5. AI Content Automation Engine
 
 ### Overview
-- **URL:** https://ecosire.org (dashboard + API)
-- **Server:** 3.28.95.67 (AWS EC2 t3.large)
-- **PEM:** `aicontentgeneration.pem` (project root, NEVER commit)
-- **Project path on server:** `/opt/ace/ai-content-engine/`
+- **URL:** https://ecosire.ai (dashboard + API)
+- **Server:** 54.197.92.23 (AWS EC2 t3.large, us-east-1)
+- **PEM:** `ecosire.pem` (project root, NEVER commit)
+- **Project path on server:** `/opt/ace/ai-content-engine/ai-content-engine/`
 - **11 Docker containers** (postgres, redis, api, celery-worker, celery-beat, dashboard, nginx, authentik x4)
 
 ### Tech Stack
 - **Backend:** Python 3.12+ / FastAPI / SQLAlchemy 2.0 (async) / Celery 5 / Redis 7
 - **Frontend:** Next.js 16 / shadcn/ui / Tailwind v4 / TanStack Query v5
 - **AI:** Claude (Sonnet/Opus/Haiku) primary, GPT-4o secondary
-- **DB:** PostgreSQL 16, 23 tables, migration 0010
+- **DB:** PostgreSQL 16, 23 tables, migration 0011
 - **Auth:** Authentik OIDC, next-auth 5.0.0-beta.30
-- **Tests:** 1,519 passing (pytest-asyncio, asyncio_mode="auto")
+- **Tests:** 1,517 passing (pytest-asyncio, asyncio_mode="auto")
 
 ### Three Operational Modes
 - **A:** Competitor Intelligence
@@ -330,8 +369,8 @@ AgentDefinition → AgentRuntime → BudgetTracker + ToolRegistry + HookEngine
 - Version bump: 4 files (ecosire-ai.php header, ECOSIRE_VERSION constant, readme.txt, backend plugin.py)
 
 ### Authentik Auth (ecosire.org)
-- Admin: `https://auth.ecosire.org/if/admin/`
-- Application: `ai-content-engine`, OIDC Issuer: `https://auth.ecosire.org/application/o/ai-content-engine/`
+- Admin: `https://auth.ecosire.ai/if/admin/`
+- Application: `ai-content-engine`, OIDC Issuer: `https://auth.ecosire.ai/application/o/ai-content-engine/`
 - **CRITICAL:** `PyJWKClient` MUST have custom User-Agent — Cloudflare blocks default `Python-urllib/3.12`
 - API + Authentik on different Docker networks — use external URL for JWKS
 
@@ -350,7 +389,7 @@ AgentDefinition → AgentRuntime → BudgetTracker + ToolRegistry + HookEngine
 ## 6. Sahara Properties (Client Project)
 
 ### Server
-- **IP:** 158.252.2.128, SSH: bitnami, PEM: `sharaproperties.pem`
+- **IP:** 3.232.201.222, SSH: bitnami, PEM: `sahara.pem`
 - **Bitnami Odoo 19** — 8GB RAM, 60GB Disk
 - **Domain:** saharaproperties.ecosire.com
 - **Custom addons:** `/bitnami/odoo/addons` (NOT core addons path)
@@ -383,8 +422,9 @@ AgentDefinition → AgentRuntime → BudgetTracker + ToolRegistry + HookEngine
 | Server | IP | Purpose | SSH Key | Project Path |
 |--------|----|---------|---------|-------------|
 | ECOSIRE.COM | 13.223.116.181 | Platform (5 PM2 apps + Docker) | ecosire.pem | `/opt/ecosire/app` |
-| AI Content Engine | 3.28.95.67 | SaaS (11 Docker containers) | aicontentgeneration.pem | `/opt/ace/ai-content-engine/` |
-| Sahara Properties | 158.252.2.128 | Client Odoo 19 (Bitnami) | sharaproperties.pem | `/bitnami/odoo/addons/` |
+| ECOSIRE.AI | 54.197.92.23 | AI Engine (11 Docker containers) | ecosire.pem | `/opt/ace/ai-content-engine/ai-content-engine/` |
+| Sahara Properties | 3.232.201.222 | Client Odoo 19 (Bitnami) | sahara.pem | `/bitnami/odoo/addons/` |
+| Oenoteca | 3.20.73.143 | Client Odoo 19 (Bitnami) | ustelekomecosire.pem | `/opt/bitnami/odoo/` |
 
 See [[Ecosire - Production Servers]] for additional servers and full SSH key inventory.
 
@@ -438,7 +478,7 @@ powershell -Command "ssh -i 'D:\ECOSIRE.COM\ecosire.pem' ubuntu@13.223.116.181 '
 ### AI Content Engine
 ```bash
 PEM="D:\Ecosire Customer Service\Active Clients\Ai Content Automation\aicontentgeneration.pem"
-ssh -i "$PEM" ubuntu@3.28.95.67
+ssh -i "ecosire.pem" ubuntu@54.197.92.23
 # On server:
 cd /opt/ace && git pull
 cd ai-content-engine/docker
@@ -499,4 +539,4 @@ OPENCLAW_GATEWAY_PORT=18789 OPENCLAW_GATEWAY_TOKEN={token} \
 - New gotchas are discovered
 - Claude Code memory files are updated with significant new knowledge
 
-**Last full sync:** 2026-03-02 (all 8 project memories consolidated)
+**Last full sync:** 2026-03-09 (all 11 project memories consolidated)

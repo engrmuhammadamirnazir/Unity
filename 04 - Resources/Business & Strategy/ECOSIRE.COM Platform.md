@@ -2,6 +2,7 @@
 type: reference
 tags: [ecosire, platform, saas, nestjs, nextjs]
 created: 2026-03-02
+updated: 2026-04-12
 ---
 
 # ECOSIRE.COM Platform
@@ -22,19 +23,20 @@ ECOSIRE.COM is a comprehensive SaaS platform built as a Turborepo monorepo with 
 | Layer | Technology | Details |
 |-------|-----------|---------|
 | Monorepo | Turborepo 2.8 | pnpm 10.28 workspace |
-| Backend | NestJS 11 | 54 modules, 290+ TypeScript files |
-| Frontend | Next.js 16 | App Router, React 19.2, 216 pages |
-| UI | Tailwind v4.1 + shadcn/ui | 19 shared components |
-| Database | PostgreSQL 17 | Drizzle ORM, 60 schemas, 150+ tables |
-| Auth | Authentik | OIDC, JWT, HttpOnly cookies |
-| Cache | Redis 7 | Session & data caching |
-| i18n | next-intl v4.8.3 | 11 locales, 6,620+ keys |
-| Email | React Email + Nodemailer | AWS SES (prod), Mailpit (dev) |
+| Backend | NestJS 11 | 56 modules, 310+ TypeScript files |
+| Frontend | Next.js 16 | App Router, React 19.2, 249 pages (176 admin + 73 public) |
+| UI | Tailwind v4.1 + shadcn/ui | 19 shared components, TanStack Table |
+| Database | PostgreSQL 17 (port 5433 local) | Drizzle ORM, 65+ schema files |
+| Auth | Authentik | OIDC, JWT, HttpOnly cookies (`ecosire_auth`, `ecosire_refresh`) |
+| Cache | Redis 7 | Session, Celery broker, pub/sub |
+| i18n | next-intl v4.8.3 | 11 locales, ~12,543 keys (nested namespaces, not flat) |
+| Email | React Email + Nodemailer | AWS SES (prod), Mailpit (dev), non-blocking sends |
 | Docs | Docusaurus 3.9 | API & user documentation |
+| Tests | Vitest + Playwright + k6 | 1,301 unit + 206 integration + 92 security + 416 E2E + 5 k6 scripts |
 
 ---
 
-## Applications
+## Applications (7 URLs)
 
 | App | URL | Port | Purpose |
 |-----|-----|------|---------|
@@ -48,7 +50,7 @@ ECOSIRE.COM is a comprehensive SaaS platform built as a Turborepo monorepo with 
 
 ---
 
-## Backend Modules (54)
+## Backend Modules (55)
 
 ### Core (15)
 auth, users, admin, products, billing, licenses, downloads, entitlements, api-keys, email, notifications, support, ai, ecosire-ai, contacts
@@ -79,18 +81,18 @@ crm, projects
 
 ---
 
-## Frontend Pages (216)
+## Frontend Pages (249)
 
-### Public (64 Pages)
+### Public (73 Pages)
 - Homepage, about, pricing, contact
-- Blog (92 posts)
+- Blog: 877 English MDX posts × 11 locales = 9,647 MDX files (100% translated)
 - Products, services, integrations
 - Comparisons, use-cases, solutions
 - Glossary, research, support
 - Terms, privacy, status
 - Cart, checkout, auth
 
-### Admin Panel (152 Pages)
+### Admin Panel (176 Pages)
 Full Odoo 19 Enterprise suite mirror with:
 - CRUD operations for all modules
 - Data tables with filters and sorting
@@ -135,13 +137,15 @@ A full sales & marketing automation platform:
 
 ## Key Documentation
 
-| Document | Lines | Purpose |
-|----------|-------|---------|
-| CLAUDE.md | 18,185 | AI development instructions |
-| SALES_MARKETING_MASTER_PLAN.md | 93,599 | Growth Engine spec |
-| README.md | 319 | Platform overview |
-| ARCHITECTURE.md | — | System patterns |
-| GROWTH-ENGINE.md | — | Feature docs |
+| Document | Purpose |
+|----------|---------|
+| `D:\ECOSIRE.COM\CLAUDE.md` | Canonical AI development instructions (~400 lines, source of truth) |
+| `SALES_MARKETING_MASTER_PLAN.md` | Growth Engine spec |
+| `README.md` | Platform overview |
+| `ARCHITECTURE.md` | System patterns |
+| `GROWTH-ENGINE.md` | Feature docs |
+| `scripts/deploy-production.sh` | 12-step zero-downtime deploy |
+| `scripts/pre-deploy-check.sh` | 6-step quality gate |
 
 ---
 
@@ -234,6 +238,15 @@ See [[Ecosire - Production Servers]] for full deployment commands and architectu
 4. MANDATORY update docs after EVERY deployment
 5. Translation keys follow nested pattern
 6. SEO/AEO/GEO/LLM audit on every new page
+
+---
+
+## Full Audit (2026-03-07)
+
+- **Score**: Overall 5/10 (177 findings: 15 Critical, 52 High, 67 Medium, 43 Low)
+- **17/17 immediate fixes** completed and deployed to production
+- **Sprint N+1**: DTOs, Redis caching, DB transactions, CI gates, error tracking
+- **Sprint N+2**: AuthenticatedRequest, i18n split, org columns
 
 ---
 

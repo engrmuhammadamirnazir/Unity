@@ -13,7 +13,7 @@ created: 2026-03-02
 
 ## Current Position
 
-Ecosire currently sells 35+ Odoo marketplace connectors (priced $99-$499) through its own platform and potentially the Odoo App Store.
+Ecosire currently sells 33 Odoo marketplace connectors (priced $249-$499 App Store, $99-$499 website) through its own platform and potentially the Odoo App Store.
 
 ---
 

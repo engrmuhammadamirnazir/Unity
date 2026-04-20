@@ -19,11 +19,11 @@ start-date: 2026-02-28
 | ------------------ | ----------------------------------------------- |
 | **Client**         | Sahara Properties                               |
 | **Service**        | Custom Odoo 19 ERP + Property Management Module |
-| **Server IP**      | 158.252.2.128                                   |
+| **Server IP**      | 3.232.201.222                                   |
 | **SSH User**       | bitnami                                         |
 | **PEM Key**        | `sharaproperties.pem`                           |
 | **URL**            | https://saharaproperties.ecosire.com            |
-| **Admin Password** | `G,n7@R4759Dt`                                  |
+| **Admin Password** | See [[Client Credentials]]                                  |
 | **Started**        | February 28, 2026                               |
 | **Duration**       | ~2 weeks                                        |
 | **Module Cost**    | $500                                            |
@@ -37,7 +37,7 @@ start-date: 2026-02-28
 | Stack | Bitnami Odoo 19 |
 | RAM | 8 GB |
 | Disk | 60 GB |
-| SSL | Let's Encrypt (expires May 29, 2026) |
+| SSL | Let's Encrypt (expires Jun 6, 2026) |
 | Custom Addons | `/bitnami/odoo/addons` |
 | Core Addons | `/opt/bitnami/odoo/lib/odoo/addons` |
 | Odoo Config | `/opt/bitnami/odoo/conf/odoo.conf` |
@@ -114,9 +114,43 @@ Issues encountered and resolved during this project:
 
 ---
 
+## Production Data (as of 2026-03-08)
+
+| Item | Count |
+|------|-------|
+| Projects | 12 |
+| Tenants | ~162 |
+| Units | 156 |
+| Meters | 196 |
+| PDCs | 577 |
+| Security Deposits | 70 |
+| Bank Journals | 4 (ENBD, ADIB, Ruya, DIB) |
+| Knowledge Articles | 11 |
+
+---
+
+## Phase 2: Landlord Accounting (PLANNED)
+
+- **Status**: Planning (pending client meeting)
+- **Scope**: Master lease tracking (MOU + Ejari), prepaid rent accounting, landlord PDCs, landlord security deposits, maintenance
+- **5 new models**: landlord.lease, payment.line, amortization, renewal, maintenance
+- **Target Version**: 19.0.3.0.0
+
+## Phase 3: Rent Invoicing (PLANNED)
+
+- **Status**: DRAFT plan, waiting for client feedback
+- **Scope**: 2 new models (lease, rent schedule) + invoice generation + PDC integration
+- **Target Version**: 19.0.4.0.0
+
+---
+
 ## Deployment History
 
-- **2026-02-28**: Initial setup — Bitnami Odoo 19, SSL, enterprise modules (662 → 1423), wkhtmltopdf, property management module, SIM + Advanced Web Domain Widget + Auto DB Backup
+- **2026-03-08**: M2/M3 data import -- 577 PDCs, 4 bank journals, 28 new partners
+- **2026-03-06**: Security deposits imported (70 records), new fields (ejari_ref, fewa_account, etc.)
+- **2026-03-04**: PMS v19.0.3.0.0 deployed (landlord accounting features)
+- **2026-03-03**: PMS Phase 0-6 complete, Knowledge module + 9 articles, v19.0.2.2.0
+- **2026-02-28**: Initial setup -- Bitnami Odoo 19, SSL, enterprise modules (662->1423), PMS module
 
 ---
 

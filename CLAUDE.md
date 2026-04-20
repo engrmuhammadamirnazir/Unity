@@ -30,7 +30,7 @@ Any file with frontmatter `security: sensitive` follows the same rule.
 |-------|-------|
 | **Name** | Muhammad Amir Nazir |
 | **Role** | Founder & CEO, Ecosire Private Limited |
-| **Expertise** | Certified Odoo Consultant (v15–v18), 8+ years ERP |
+| **Expertise** | Certified Odoo Consultant (v15–v19), 8+ years ERP |
 | **Location** | Pakistan (operates globally, 100% remote) |
 | **Profile** | `03 - Areas/Personal Brand/Muhammad Amir Nazir.md` |
 | **Company** | `03 - Areas/Ecosire/Ecosire Private Limited.md` |
@@ -72,10 +72,10 @@ Any file with frontmatter `security: sensitive` follows the same rule.
 | **FULL SYSTEM FILE MAP** | `04 - Resources/System Navigation Map.md` |
 | Server SSH details & passwords | `03 - Areas/Credentials & Access/Server Access Credentials.md` |
 | Client API keys & passwords | `03 - Areas/Credentials & Access/Client Credentials.md` |
-| All 42 Odoo modules with pricing | `03 - Areas/Ecosire/Ecosire - Odoo Module Library.md` |
+| All 201 Odoo modules with pricing | `03 - Areas/Ecosire/Ecosire - Odoo Module Library.md` |
 | Production server IPs & architecture | `03 - Areas/Ecosire/Ecosire - Production Servers.md` |
-| Domain portfolio (13 domains) | `03 - Areas/Ecosire/Ecosire - Domain Portfolio.md` |
-| Client list (14+ active) | `03 - Areas/Ecosire/Ecosire - Client Portfolio.md` |
+| Domain portfolio (13+ domains) | `03 - Areas/Ecosire/Ecosire - Domain Portfolio.md` |
+| Client list (10+ active) | `03 - Areas/Ecosire/Ecosire - Client Portfolio.md` |
 | Team members & roles | `03 - Areas/Team & Operations/Ecosire - Team Directory.md` |
 | ECOSIRE.COM platform stack | `04 - Resources/Business & Strategy/ECOSIRE.COM Platform.md` |
 | Odoo dev environment & versions | `04 - Resources/Odoo/Odoo Development Reference.md` |
@@ -98,11 +98,13 @@ This laptop has 2 drives (C: 200GB, D: 275GB). All development is on D:. Key loc
 | **Claude Code memories** | `C:\Users\Amir Nazir\.claude\projects\` | Per-project |
 | **Odoo Development** | `D:\Development\` | Yes (654-line guide) |
 | **ECOSIRE.COM platform** | `D:\ECOSIRE.COM\` | Yes (monorepo guide) |
-| **Client projects** | `D:\Ecosire Customer Service\Active Clients\` | Some clients |
+| **ECOSIRE.AI platform** | `D:\ECOSIRE.AI\` | README.md (FastAPI + Next.js SEO/AEO/GEO SaaS, live at ecosir.ai) |
+| **Client projects** | `D:\Development\EcosireClients\ActiveClients\` | Some clients |
+| **Company documents** | `D:\Company\` | Yes (SECP, LLC formation) |
 | **OpenClaw source** | `D:\OpenClaw\openclaw\` | Yes |
 | **Module archives** | `D:\Odoo Modules\{12-19}\` | No |
 
-**GitHub org:** `github.com/ecosire` (50+ repos) | **Personal:** `github.com/engrmuhammadamirnazir`
+**GitHub org:** `github.com/ecosire` (200+ repos) | **Personal:** `github.com/engrmuhammadamirnazir`
 
 For the complete file/folder/repo/software map, read `04 - Resources/System Navigation Map.md`.
 
@@ -124,15 +126,18 @@ For the complete file/folder/repo/software map, read `04 - Resources/System Navi
 
 ---
 
-## Active Projects (as of 2026-03-02)
+## Active Projects (as of 2026-04-10)
 
 | Project | Client/Product | Status | File |
 |---------|---------------|--------|------|
+| Obliq Furniture | Client (Dubai, UAE) | Active | `02 - Projects/PRJ - Obliq Furniture.md` |
+| Sahara Properties | Client (Dubai, UAE) | Active | `02 - Projects/PRJ - Sahara Properties.md` |
 | Oenoteca Fine Wines | Client (Houston, TX) | Active | `02 - Projects/Oenoteca Fine Wines/PRJ - Oenoteca Fine Wines.md` |
-| Sahara Properties | Client (Pakistan) | Active | `02 - Projects/PRJ - Sahara Properties.md` |
+| Remittance Management | Client (Pakistan) | Active | Custom module — LIVE |
+| RedXpider | Client (Netherlands) | Active | Odoo 18, Odoo.sh |
+| Alvi Dental | Client (Pakistan) | Active | Hetzner EX44 provisioned |
+| PMUP Buildout | Internal Product | Active | 201 modules, 39-session plan |
 | Aligners Pakistan | Client (Pakistan) | Active | `02 - Projects/Aligners Pakistan/PRJ - Aligners Pakistan.md` |
-| AI Content Engine | Internal Product | Active | `02 - Projects/PRJ - AI Content Automation Engine.md` |
-| Odoo-Shopify Connector | Internal Product | Active | `02 - Projects/Odoo-Shopify Connector/PRJ - Odoo-Shopify Connector.md` |
 
 ---
 

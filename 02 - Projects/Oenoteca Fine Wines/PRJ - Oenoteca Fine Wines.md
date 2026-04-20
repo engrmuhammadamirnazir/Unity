@@ -6,7 +6,7 @@ platform: Odoo 19 Enterprise
 start-date: 2025-10-08
 tags: [project, oenoteca, odoo, accounting]
 created: 2025-10-08
-updated: 2026-03-02
+updated: 2026-03-09
 ---
 
 # PRJ — Oenoteca Fine Wines
@@ -43,16 +43,20 @@ Ecosire provides accounting support to Oenoteca Fine Wines (legally A&N Fine Win
 
 ---
 
-## System Snapshot (as of Feb 2026)
+## Current Status (COMPLETE as of 2026-03-08)
 
 | Item | Value |
 |------|-------|
-| Posted journal entries | 630 |
-| Draft entries | 5 |
-| Accounts Receivable | $340,061.74 (196 unreconciled lines) |
-| Accounts Payable | $22,418.09 (9 unreconciled lines) |
-| Bank (BNK1) unreconciled | 378 lines |
-| OENOTECA EXCELLENCE (BNK2) unreconciled | 33 lines |
+| **Revenue** | $517,135 (Oct-Mar 2026) |
+| **Net Income** | $77,133 (14.9% net margin) |
+| **Gross Margin** | 28.0% |
+| **Invoices** | 322 posted (309 paid, 7 partial, 3 unpaid) |
+| **Collection Rate** | 99.0% ($5,161 outstanding) |
+| **Vendor Bills** | 85 ALL PAID ($256K total) |
+| **BSLs Reconciled** | 436/436 (100%) |
+| **Inventory** | 240 products, 7,105 units, $339,830 value |
+| **Sales Orders** | 318 confirmed |
+| **Production** | https://oenoteca.ecosire.com (3.20.73.143) |
 
 ---
 

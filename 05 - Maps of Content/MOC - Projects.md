@@ -1,7 +1,7 @@
 ---
 type: moc
 tags: [moc, projects]
-updated: 2026-03-02
+updated: 2026-03-09
 ---
 
 # MOC — Projects
@@ -12,7 +12,8 @@ updated: 2026-03-02
 
 ## Active Client Projects
 
-- [[PRJ - Oenoteca Fine Wines]] — Odoo 19 Enterprise bookkeeping & bank reconciliation (Houston, TX)
+- [[PRJ - Obliq Furniture]] -- Odoo 19 ERP cleanup & optimization (Dubai, UAE) **NEW**
+- [[PRJ - Oenoteca Fine Wines]] -- COMPLETE: Odoo 19 bookkeeping, $517K revenue, deployed (Houston, TX)
 - [[PRJ - Aligners Pakistan]] — Odoo store development for dental aligners (Pakistan)
 - Alvi Dental — ERP + WooCommerce integration (Pakistan)
 - Sir Sohail Baig / UsTelekom — VOIP billing, Odoo 16/17
@@ -30,9 +31,9 @@ updated: 2026-03-02
 ## Product Development
 
 - [[PRJ - Odoo-Shopify Connector]] — Custom Shopify integration module (v17/v18/v19)
-- Marketplace Connectors — 35 platform connectors ($99-$499)
+- Marketplace Connectors -- 33 platform connectors ($249-$499 App Store)
 - [[ECOSIRE.COM Platform]] — Full-stack SaaS platform (NestJS + Next.js)
-- [[PRJ - AI Content Automation Engine]] — AI-powered content SaaS (FastAPI + Next.js, 1,519 tests)
+- [[PRJ - AI Content Automation Engine]] -- AI content SaaS at ecosire.ai (FastAPI + Next.js + Mobile, 1,517 tests)
 - OpenClaw — AI personal assistant framework
 
 ---
