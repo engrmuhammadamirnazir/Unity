@@ -10,7 +10,7 @@ updated: 2026-04-22
 
 # Remittance — Salueman Arif
 
-**Bridge-remittance operator.** Custom `remittance_management` module on Bitnami Odoo 19 Enterprise. Biggest private-module build of Q2 2026 (end-to-end from build to UAT).
+**Bridge-remittance operator.** Custom `remittance_management` module on Bitnami Odoo 19 Enterprise. Biggest private-module build of Q2 2026 — culminated 2026-04-22 in the v19.0.9.0.0 lifecycle-first refactor that rebuilt the system around end-to-end money-flow tracking.
 
 ## Quick facts
 
@@ -18,39 +18,53 @@ updated: 2026-04-22
 |-------|-------|
 | Server | Bitnami Odoo 19 Enterprise — `52.28.45.137` |
 | SSH key | `Unity/03 - Areas/Credentials & Access/SSH Keys/remittance.pem` · user `bitnami` |
-| Domain | `remittanceaccounting.ecosire.com` |
-| Custom module | `remittance_management` @ `v19.0.8.2.4` (LIVE on prod + remtest 2026-04-21 18:22 UTC) |
-| DB stats | 1029 transactions identical across both DBs |
-| Test coverage | 237/238 tests pass |
+| Domains | `remittanceaccounting.ecosire.com` (prod) + `remtest.ecosire.com` (staging) |
+| Custom module | `remittance_management` @ `v19.0.9.0.0` (LIVE on both DBs 2026-04-22 evening) |
+| DB state | 0 transactions (wipe approved 2026-04-22), 134 intermediary partners preserved, 10 stage_config seeded |
+| GitHub | `engrmuhammadamirnazir/remittance_management` (PRIVATE) — branch `feat/v19.0.9-lifecycle-first` + tag `v19.0.9.0.0` |
 
-## Recent state (2026-04-22)
+## Current state (2026-04-22)
 
-- **v19.0.8.2.4 LIVE** — seven post-v8.1.5 drill-surface fixes (Matchup scroll + Dashboard Clients/Bridges partner-first + Print PDF partner-aware + Top 5 Bridges → partner + Revenue Trend = invoice.fees + Compensation Aging → Bridge Outstanding Aging on balance.line + Ledger button → remittance.transaction).
-- Pure view/asset/report upgrade, no schema change.
-- Backups at `/home/bitnami/backups/*_pre_v8_2_4_20260421_182051.*`.
-- GitHub push deferred (private repo not yet synced).
-- User Guide PDF at `docs/Remittance_User_Manual_v19.0.8.2.3.pdf` (still valid — send to Suleman).
+**v19.0.9.0.0 LIVE** — lifecycle-first refactor responding to Suleman's meeting feedback: "still feels like Excel, need end-to-end tracking of client money until it reaches payer-designated final destination, clear all current data, forward only".
 
-## Design lineage (big session 2026-03-31 onward)
+**Architecture:**
+- 6 shadow models dropped: `remittance.client / bridge / case / ledger.entry / reconciliation / balance.engine`. `account.move.line` is the single source of truth via new `remittance_tx_id` tag column.
+- 4 new models: `remittance.stage.config` (10 seeded gate rows), `remittance.suspense.item` (variance discipline with maker-checker), `remittance.flow` (SQL-view lens over chains), `account.move.line._inherit`.
+- `remittance.transaction` refactored: 9 kinds (cash_eur_in/out, cash_aed_in/out/expense, bank_eur_in, bank_eur_out_usd_in — one-tx dual-currency — bank_usd_out, variance_adjust) × 10-stage Kanban pipeline (draft → kyc_cleared → funds_received → eur_locked → usd_booked → usd_out → aed_payout → closed + on_hold + cancelled) × dual-partner legs × `flow_root_id` (stored recursive compute).
+- GL dispatcher posts real `account.move` per kind at `funds_received` stage entry. Every line tagged with `remittance_tx_id` so Balance Breakdown reads directly from the GL.
+- 2 OWL widgets: Flow Timeline (vertical chain walker on tx form) + Partner Ledger (xlsx-exact grid on res.partner form with yellow/green/blue cell semantics matching NEW BUSINESS 2024.xlsx `accounts` sheet).
+- 4-role security: Accountant < Operations < Finance/Compliance < Admin. Maker-checker ir.rule on suspense resolution.
+- 12 control accounts seeded per company (1010/1020/1110/1120/1210/1310/1410/1420/2910/4910/4920/6910) + cash+bank journals per activated currency (EUR/USD/AED/PKR).
 
-- v19.0.7.0.0 — spec v3.2 decisions: DROP bridge, cash skips invoice, dual-leg, auto variance, multi-client outbound split, full lifecycle tree.
-- v19.0.8.0.0 — 15-sheet-feature buildout: split-lines sum==amount, data-driven categories, location auto-infer, cost_tier, 7-bucket P&L, matchup dashboard, Sonstig drill, bank recon + snapshots.
-- v19.0.8.1.x — balance.line role-split (131 bridge + 71 client rows on prod), OWL role badges, partner_client/partner_bridge drill-down.
-- v19.0.8.2.x — ledger 18→9 cols + 6 legacy menus + dashboard partner-role + Active Bridges + top_bridges bridge→partner resolution.
+**Deployment trail:**
+- Spec: `D:/EcosireClients/ActiveClients/Suleman-Remittance/docs/specs/2026-04-22-remittance-v19.0.9-lifecycle-first-design.md` (883 lines, commit `5239ce7`)
+- Plan: `D:/EcosireClients/ActiveClients/Suleman-Remittance/docs/plans/2026-04-22-remittance-v19.0.9-implementation-plan.md` (4085 lines, commit `8110f38`)
+- Pre-deploy backups: `/home/bitnami/backups/remittanceaccounting_pre_v19_0_9_final_20260422_161808.dump` + `remtest_pre_v19_0_9_20260422_145324.dump`
+- Rollback script: `/home/bitnami/rollback_v19_0_9.sh` (prompts YES for safety)
+- Post-seed shell script (Enterprise `create_asset` workaround): `D:/Development/odoo19/server/addons/remittance_management/scripts/seed_control_accounts.py`
+
+## Design lineage
+
+- **v19.0.7.0.0** (2026-04-14) — spec v3.2 decisions: DROP bridge, cash skips invoice, dual-leg, auto variance, multi-client outbound split.
+- **v19.0.8.0.0** (2026-04-17) — 15-sheet-feature buildout from NEW BUSINESS 2024.xlsx: split-lines, categories, location auto-infer, cost_tier, 7-bucket P&L, matchup dashboard, Sonstig drill.
+- **v19.0.8.1.x** (2026-04-17) — balance.line role-split, OWL role badges, partner_client/partner_bridge drill-down.
+- **v19.0.8.2.x** (2026-04-17 to 04-21) — ledger compact, legacy menu cleanup, dashboard partner-role, knowledge-article rewrite.
+- **v19.0.9.0.0** (2026-04-22) — lifecycle-first rebuild: shadow ledger dropped, real GL posting, Flow Timeline + Partner Ledger widgets, 10-stage Kanban, forward-only clean slate.
 
 ## Where detail lives
 
-- Project memory: `~/.claude/projects/D--Development/memory/remittance_client.md`, `remittance_module_status.md`, `remittance_session_2026_04_17_complete.md`, `remittance_v813_partner_first_fix.md`, `remittance_spec_v32_decisions.md`, `remittance_audit_2026_04_17.md`, `remittance_v32_build_decisions_2026_04_17.md`, `remittance_v8_build_complete_2026_04_17.md`, `remittance_server.md`, `session_2026_03_31_remittance.md`, `session_2026_04_17j.md`, `session_2026_04_17l.md`
-- Code: `D:\Development\odoo19\server\addons\remittance_management\` + `D:\EcosireClients\ActiveClients\Suleman-Remittance\`
+- **D:/Development project memory** — `remittance_client.md`, `remittance_v19_0_9_lifecycle_first.md`, `session_2026_04_22_remittance_v09_lifecycle.md`, `feedback_enterprise_account_create_asset.md`, `feedback_bitnami_odoo19_migration_signature.md`, `remittance_server.md`, and all prior session/v8.x memory files.
+- **Code** — `D:\Development\odoo19\server\addons\remittance_management\` (dev) + `D:\EcosireClients\ActiveClients\Suleman-Remittance\` (client repo + docs + backups).
 
 ## Open threads
 
-- GitHub push for v19.0.8.2.4 deferred → clear backlog.
-- I1 variance back-fill pending (per `remittance_audit_2026_04_17.md`).
-- User Manual PDF to be sent to Suleman (UAT activation).
+- **Suleman UAT** pending on `https://remtest.ecosire.com` — test `bank_eur_out_usd_in` end-to-end (the TXN/2026/01031-class scenario), verify Partner Ledger xlsx widget, Flow Timeline.
+- **Polish for next session (non-blocking):** refresh 13 knowledge articles (still reference old "bridge" concept), add Partner Statement PDF report action, fresh data import script once Suleman provides updated xlsx.
+- **$1,875 (75%) residual of $2,500 engagement** collectable upon Suleman UAT sign-off.
 
 ## Next actions
 
-- [ ] Push v19.0.8.2.4 to private GitHub repo.
-- [ ] Email User Guide PDF to Suleman + kick off UAT.
-- [ ] Back-fill I1 variance.
+- [ ] Email Suleman with UAT checklist + remtest login instructions.
+- [ ] Refresh knowledge articles (drop "bridge" terminology).
+- [ ] Optional: Partner Statement PDF report action.
+- [ ] Collect residual $1,875 upon sign-off.
