@@ -1,5 +1,12 @@
-# Credentials — NEVER commit to git
+# Credentials — NEVER commit to git (values live only in Dropbox backup)
 03 - Areas/Credentials & Access/
+
+# Upstream agent skills (graphify, kepano/obsidian-skills) — re-install via git clone if missing
+.claude/
+
+# Graphify build outputs (large, regeneratable from source)
+graphify-out/
+04 - Resources/graphify/
 
 # Obsidian workspace (changes every session, not useful in git)
 .obsidian/workspace.json
