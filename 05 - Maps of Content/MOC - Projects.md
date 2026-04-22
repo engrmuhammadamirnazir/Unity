@@ -1,12 +1,21 @@
 ---
 type: moc
 tags: [moc, projects]
-updated: 2026-03-09
+updated: 2026-04-22
 ---
 
 # MOC — Projects
 
 > Index of all active and completed projects across Ecosire and Odovation.
+>
+> **2026-04-22 reorganization:** Top active clients now have dedicated folders under `02 - Projects/Active Clients/`. Pipeline tracked under `02 - Projects/Prospective Clients/`. Short module engagements under `02 - Projects/One-Off Modules/`. Business lines under `03 - Areas/Businesses/`.
+
+## Quick navigation
+
+- [[../02 - Projects/Active Clients/README|Active Clients — Index]]
+- [[../02 - Projects/Prospective Clients/README|Prospective Clients — Pipeline]]
+- [[../02 - Projects/One-Off Modules/README|One-Off Modules — Short Engagements]]
+- [[../03 - Areas/Businesses/README|Businesses — Product Lines]]
 
 ---
 
