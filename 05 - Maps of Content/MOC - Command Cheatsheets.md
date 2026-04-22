@@ -10,6 +10,9 @@ created: 2026-03-02
 
 ---
 
+## AI / Agent Infrastructure (read first)
+- [[Unity Hive-Mind Cheatsheet]] — **master reference** for Unity + Claude Code skills + graphify + MCP + claude-mem + daily backup + credentials guard. Start here when orienting new agents or yourself. Added 2026-04-22.
+
 ## Development & Version Control
 - [[Git Commands]] — clone, commit, branch, merge, rebase, stash, log, remote
 - [[GitHub CLI Commands]] — gh pr, gh issue, gh repo, gh actions
