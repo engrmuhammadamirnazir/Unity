@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "unity-hive-mind": {
+      "type": "stdio",
+      "command": "C:\\Users\\Amir Nazir\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+      "args": [
+        "-c",
+        "from graphify.serve import serve; serve(r'C:/Users/Amir Nazir/Dropbox/Unity/graphify-out/graph.json')"
+      ],
+      "env": {}
+    }
+  }
+}
