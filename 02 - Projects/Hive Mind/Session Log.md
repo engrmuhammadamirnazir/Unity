@@ -31,6 +31,16 @@ Keep entries tight. Format:
 
 ## Log (newest first)
 
+### 2026-04-22 (evening — addendum) — D:/Development (Oenoteca) — CSCS Inv 13972 rebuilt via proper PO→Bill→Pay→LC flow
+- **Correction to previous entry below.** Nick called out that direct `in_invoice` creation broke Oenoteca's canonical PO-before-Bill rule. Unwound the direct bill + misc payment JE (sequence numbers reused), rebuilt through:
+  - **PO `P00167`** USD $2,332.03 CSCS LLC with landed-cost service products (Freight 454 → 500002, Tariff 1355 → 500001), confirmed.
+  - **Bill `BILL/2026/03/0013`** generated via `purchase.order.action_create_invoice`, `ref=13972`, posted.
+  - **Payment `MISC/2026/03/0009`** manual misc JE (DR 211000 AP / CR 101401 Bank), reconciled → bill `paid`, residual $0.
+  - **Landed Cost `LC/2026/0026`** linked to WH/IN/00048 Pierre Prieur receipt; Freight split `by_quantity` + Tariff `by_current_cost_price`; validated → `STJ/2026/03/0005` capitalized $2,332.03 into Sancerre Blanc inventory.
+- **Permanent rule saved** to local memory (`feedback_oenoteca_po_before_bill.md`): every Oenoteca vendor charge MUST go PO → Bill, including freight / duty / services — never `account.move in_invoice` directly.
+- Cross-project impact: Odoo 19 Enterprise payment-flow gotcha still stands (previous entry). New gotcha: when a freight-forwarder invoice covers an existing wine PO, the clean pattern is a *separate* PO from the forwarder with landed-cost service products, then a `stock.landed.cost` linking both. Applies to every Oenoteca-style inventory-capitalizing client.
+- Canonical facts promoted to Unity: none (Oenoteca-local; rule lives in local project memory, not Unity).
+
 ### 2026-04-22 (evening) — D:/Development (Oenoteca production) — CSCS Inv 13972 booked + lot/serial tracking disabled fleet-wide
 - **Bill booked + paid:** CSCS LLC Invoice #13972 → `BILL/2026/03/0013` dated 2026-03-18, $2,332.03 ($985 Freight 500002 + $1,347.03 Duty 500001) for PO P00114 Pierre Prieur et Fils (BL# 540600022902 Le Havre→Houston). Payment via manual JE `MISC/2026/03/0009` DR 211000 AP / CR 101401 Bank, reconciled → bill paid.
 - **Lot/serial tracking disabled on 17 wine products** (all from Enohance shipment #77) after Nick confirmed he does not track lots/serials anywhere. `WH/OUT/00513` S00343 Uncorked/Altura Wine then validated (15 bottles shipped). 17 existing `stock.lot` rows + 12 lot-linked quants left in place; harmless with tracking=none.
