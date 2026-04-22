@@ -31,6 +31,13 @@ Keep entries tight. Format:
 
 ## Log (newest first)
 
+### 2026-04-22 (evening) — D:/Development — Unity graph built + query skill + audit skill + research pass
+- **Unity knowledge graph built:** 283 nodes, 513 edges, 14 labeled communities (Unity Hive Brain & Corporate Vault / Client Portfolio / Ecosire Platform & Knowledge Base / Odoo Module Library / SEO-AEO-GEO / Agent Fleet / Cheatsheets & Production Infra / CLI Reference / People / + 5 templates). 10 god nodes, 5 surprising cross-community connections. Output: `graphify-out/graph.json` (332KB), `graph.html` (247KB), `GRAPH_REPORT.md` (12KB). Extracted via 5 parallel general-purpose subagents in ~3min.
+- **New skills added at user level:** `hive-mind-query` (queries graphify graph before 3+ reads, 71.5× token reduction) and `hive-mind-audit` (10-point monthly health check — vault, backup, graph freshness, skill wiring, credentials hygiene, session log activity, SSH inventory, graphify features, ecosystem watch).
+- **Research landscape captured:** top 5 similar projects (claude-mem, graphify, obsidian-skills, code-review-graph, cognee/supermemory); prevailing patterns (short CLAUDE.md + Skills, symbol+graph > embeddings, MCP as memory socket, hooks over prompts, AGENTS.md standard); 5 ranked improvements (graphify hook install / graphify.serve MCP / AGENTS.md shims / claude-mem compression / defuddle pipeline); 3 risks (prompt injection via vault, stale graph confidence, Dropbox+multi-agent write races).
+- Canonical facts promoted: [[MOC - Hive Mind]] now references the built graph; user-level [[CLAUDE]] lists all 5 installed skills.
+- Pending next session: run `/graphify .` inside each of D:/Development / D:/ECOSIRE.COM / D:/ECOSIRE.AI / D:/ECOSIRE.IO to build their first code graphs.
+
 ### 2026-04-22 — D:/Development — Unity hive-brain infrastructure complete (rename + graphify + hive-mind skills + daily GitHub backup + server/key inventory)
 - Dropbox vault renamed: `Muhammad Amir Obsidian Vault` → **Unity**. Claude Code project dir + GitHub repo (`engrmuhammadamirnazir/Unity`) renamed to match. Local `origin` remote updated.
 - Installed `kepano/obsidian-skills` into `<vault>/.claude/skills/` (obsidian-markdown, obsidian-bases, json-canvas, obsidian-cli, defuddle) — gitignored (upstream content).
