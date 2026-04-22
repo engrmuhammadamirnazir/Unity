@@ -31,15 +31,17 @@ Keep entries tight. Format:
 
 ## Log (newest first)
 
-### 2026-04-22 — D:/Development — Unity hive-brain rename + graphify + hive-mind sync infrastructure
+### 2026-04-22 — D:/Development — Unity hive-brain infrastructure complete (rename + graphify + hive-mind skills + daily GitHub backup + server/key inventory)
 - Dropbox vault renamed: `Muhammad Amir Obsidian Vault` → **Unity**. Claude Code project dir + GitHub repo (`engrmuhammadamirnazir/Unity`) renamed to match. Local `origin` remote updated.
-- Installed `kepano/obsidian-skills` into `<vault>/.claude/skills/` (obsidian-markdown, obsidian-bases, json-canvas, obsidian-cli, defuddle).
+- Installed `kepano/obsidian-skills` into `<vault>/.claude/skills/` (obsidian-markdown, obsidian-bases, json-canvas, obsidian-cli, defuddle) — gitignored (upstream content).
 - Installed `graphifyy` (v0.4.25) + `/graphify` skill at user level (`~/.claude/skills/graphify/`). Available in every Claude Code session.
 - Wrote `.graphifyignore` for Unity, D:/Development, D:/ECOSIRE.COM, D:/ECOSIRE.AI, D:/ECOSIRE.IO (credentials + heavy binaries excluded).
-- Created this Session Log + `hive-mind-sync` / `hive-mind-load` user-level skills.
-- Cross-project impact: every project CLAUDE.md now instructs agents to call `hive-mind-load` at start, `hive-mind-sync` at end.
-- Daily Unity GitHub backup scheduled (Windows Task Scheduler, 23:50 local).
-- Canonical facts promoted: [[MOC - Hive Mind]] (new), [[CLAUDE]] (vault root updated).
+- Created `hive-mind-sync` + `hive-mind-load` user-level skills at `~/.claude/skills/` (invokable from every session).
+- Updated `~/.claude/CLAUDE.md` (applies to every session) + every sibling project CLAUDE.md (Development, ECOSIRE.COM, ECOSIRE.AI, ECOSIRE.IO, Company, Office, OpenClaw) with a MANDATORY Hive-Mind banner — dev agents previously forgot cross-project state.
+- **Daily Unity backup:** Windows Scheduled Task `Ecosire-Unity-Daily-Backup` runs `C:\Users\Amir Nazir\scripts\hive-mind\backup_unity.bat` at 23:50 local (next run tonight). Script: `backup_unity.sh` (bash). Log dir: `C:\Users\Amir Nazir\scripts\hive-mind\logs\`.
+- **Server & Key Inventory:** Created `[[Server & Key Inventory]]` under `03 - Areas/Credentials & Access/` consolidating every client server, IP, SSH user, and key file path. Copied 11 SSH keys (ecosire.pem, hetzner_demo, sahara.pem, remittance.pem, diamond_group, ecosire_main(+.pub), alvi_aws.pem, ustelekomecosire.pem, id_ed25519(+.pub)) into `03 - Areas/Credentials & Access/SSH Keys/`. Folder is gitignored — values live in Dropbox only.
+- Canonical facts promoted: [[MOC - Hive Mind]], [[Server & Key Inventory]], [[CLAUDE]] (vault root).
+- Pending (not blocking): run `/graphify .` in a fresh session for each of Unity, D:/Development, D:/ECOSIRE.COM, D:/ECOSIRE.AI, D:/ECOSIRE.IO to build their first knowledge graphs. After the first full build, weekly cron can run `graphify update <path>` (no LLM) for incremental refresh.
 
 ---
 

@@ -103,7 +103,7 @@ This laptop has 2 drives (C: 200GB, D: 275GB). All development is on D:. Key loc
 | **Claude Code memories** | `C:\Users\Amir Nazir\.claude\projects\` | Per-project |
 | **Odoo Development** | `D:\Development\` | Yes (654-line guide) |
 | **ECOSIRE.COM platform** | `D:\ECOSIRE.COM\` | Yes (monorepo guide) |
-| **ECOSIRE.AI platform** | `D:\ECOSIRE.AI\` | README.md (FastAPI + Next.js SEO/AEO/GEO SaaS, live at ecosir.ai) |
+| **ECOSIRE.AI platform** | `D:\ECOSIRE.AI\` | README.md (FastAPI + Next.js SEO/AEO/GEO SaaS, live at ecosire.ai) |
 | **Client projects** | `D:\Development\EcosireClients\ActiveClients\` | Some clients |
 | **Company documents** | `D:\Company\` | Yes (SECP, LLC formation) |
 | **OpenClaw source** | `D:\OpenClaw\openclaw\` | Yes |
