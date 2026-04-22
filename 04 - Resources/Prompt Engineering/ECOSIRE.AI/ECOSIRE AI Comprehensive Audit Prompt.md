@@ -878,8 +878,8 @@ ssh -i "$PEM" ubuntu@54.197.92.23 "cd /opt/ace/ai-content-engine/ai-content-engi
 
 ### 14D. Post-Deploy Verification
 
-- [ ] API health check: `curl https://api.ecosir.ai/health` returns 200
-- [ ] Dashboard loads: `https://ecosir.ai` renders correctly
+- [ ] API health check: `curl https://api.ecosire.ai/health` returns 200
+- [ ] Dashboard loads: `https://ecosire.ai` renders correctly
 - [ ] Authentication works: can sign in via Authentik OIDC
 - [ ] Scanner works: can trigger a scan on a test site
 - [ ] Content generation: can generate a test article
