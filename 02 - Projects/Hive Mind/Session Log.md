@@ -31,6 +31,14 @@ Keep entries tight. Format:
 
 ## Log (newest first)
 
+### 2026-04-22 (late evening) — D:/Development (Sahara Properties) — res.partner deduplication on prod + testingsahara cloned
+- **saharaproperties prod: 247 → 184 partners** (63 losers unlinked — clean delete per user requirement, no archive residue). Built end-to-end reusable pipeline at `D:/EcosireClients/ActiveClients/Sahara-Properties/scripts/partner_dedup/` — normalize/tiers/blocking (30 pytest tests), detect.py (rapidfuzz token_set_ratio + inverted-index blocking), enrich.py (context loader), execute.py (per-pair savepoint + `res.partner._merge_method(destination_rs, source_rs)` + FK-count canary + `unlink()` + chain-map for transitive clusters), verify.py (0 dangling FK pointers confirmed).
+- **11 `functional-consultant` subagents dispatched in parallel** to review 102 TIER-2 pairs → 84 MERGE / 9 SKIP / 9 ESCALATE. User resolved escalates: SPECIAL MOMENT EVENTS AND FLOWERS/GC FURNITURE 4-way cluster collapsed to id 86; MUHAMMED/MUHAMMAD ISMAIL + UMMER/UMMAR PUTHAH kept separate (individual names too risky without corroborating data). Final: 63 OK + 25 SKIP_SAME_AFTER_CHAIN + 0 FAILED.
+- **testingsahara cloned** from post-merge saharaproperties (drop+recreate+pg_restore+filestore rsync+Odoo restart). Both DBs serve 181 active partners. Backups at `/home/bitnami/backups/saharaproperties_{pre,post}_merge_2026-04-22.pgdump.gz` + local copies at `D:/EcosireClients/ActiveClients/Sahara-Properties/backups/`.
+- **Odoo 19 gotchas (reusable for every Odoo 19 client in the fleet):** `res.partner.mobile` removed in v19 (merged into `phone`); Odoo returns `False` not `None` for empty char fields; `_merge_method(destination, source)` needs recordsets not ID lists; `__file__` unavailable when piped to `odoo shell` — hardcode paths.
+- Cross-project impact: pipeline is client-agnostic. Applicable to any Odoo 19 tenant with duplicate-partner cleanup needs (Obliq, Diamond/STIG, Amalfi — watch for data-quality candidates). PMS/PDC model names in `enrich.py` would need swapping per-client.
+- Canonical facts promoted to Unity: none (saharaproperties DB state change is client-local; pipeline is reusable but lives in client folder, not Unity).
+
 ### 2026-04-22 (evening — addendum) — D:/Development (Oenoteca) — CSCS Inv 13972 rebuilt via proper PO→Bill→Pay→LC flow
 - **Correction to previous entry below.** Nick called out that direct `in_invoice` creation broke Oenoteca's canonical PO-before-Bill rule. Unwound the direct bill + misc payment JE (sequence numbers reused), rebuilt through:
   - **PO `P00167`** USD $2,332.03 CSCS LLC with landed-cost service products (Freight 454 → 500002, Tariff 1355 → 500001), confirmed.
