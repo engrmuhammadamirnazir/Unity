@@ -1,7 +1,12 @@
 # CLAUDE.md — AI Agent Orientation
 
 > First file any AI agent should read when accessing this vault.
-> Owner: Muhammad Amir Nazir | Vault: Obsidian Second Brain (PARA method)
+> Owner: Muhammad Amir Nazir | Vault: **Unity** — Obsidian hive brain (PARA method)
+> Renamed from "Muhammad Amir Obsidian Vault" on 2026-04-22. GitHub: `github.com/engrmuhammadamirnazir/Unity`.
+
+> **For the cross-workspace project map** (sibling Claude Code workspaces on D:/, their CLAUDE.md paths, who owns what), read **[[MOC - Hive Mind]]** under `05 - Maps of Content/`. That MOC is the authoritative agent-workspace directory.
+
+> **Installed agent skills** (via `kepano/obsidian-skills` at `<vault>/.claude/skills/`): `obsidian-markdown`, `obsidian-bases`, `json-canvas`, `obsidian-cli`, `defuddle`. Invoke these whenever you're editing vault-specific file types so you don't guess syntax.
 
 ---
 
@@ -93,7 +98,7 @@ This laptop has 2 drives (C: 200GB, D: 275GB). All development is on D:. Key loc
 
 | What | Path | CLAUDE.md? |
 |------|------|-----------|
-| **Obsidian Vault (this)** | `C:\Users\Amir Nazir\Dropbox\Muhammad Amir Obsidian Vault\` | Yes (this file) |
+| **Unity — Obsidian hive brain (this)** | `C:\Users\Amir Nazir\Dropbox\Unity\` (renamed from "Muhammad Amir Obsidian Vault" on 2026-04-22) | Yes (this file) |
 | **OpenClaw workspace** | `C:\Users\Amir Nazir\.openclaw\` | In workspace files |
 | **Claude Code memories** | `C:\Users\Amir Nazir\.claude\projects\` | Per-project |
 | **Odoo Development** | `D:\Development\` | Yes (654-line guide) |

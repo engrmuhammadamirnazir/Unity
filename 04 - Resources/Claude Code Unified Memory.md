@@ -2,10 +2,12 @@
 type: resource
 tags: [claude-code, memory, unified, development, reference]
 created: 2026-03-02
-updated: 2026-03-09
+updated: 2026-04-22
 ---
 
 # Claude Code Unified Memory
+
+> **2026-04-22 update:** For the current **project/workspace map** (who lives where, what each workspace does, which sibling touches which), read [[MOC - Hive Mind]] instead — it's kept fresh. This note still holds the older **consolidated technical patterns and gotchas** (ECOSIRE.COM, Odoo, AI Content Engine, servers, Odoo internals), which are still useful but not guaranteed current past March 2026. When a pattern conflicts with reality, trust the per-project CLAUDE.md.
 
 > Consolidated knowledge from all Claude Code project workspaces across this machine.
 > This note prevents knowledge loss by backing up all project-specific learnings, patterns,
@@ -98,7 +100,7 @@ These vault notes already contain related knowledge:
 
 | What | Path |
 |------|------|
-| Obsidian Vault | `C:\Users\Amir Nazir\Dropbox\Muhammad Amir Obsidian Vault\` |
+| Unity (Obsidian hive brain) | `C:\Users\Amir Nazir\Dropbox\Unity\` (renamed from "Muhammad Amir Obsidian Vault" 2026-04-22) |
 | OpenClaw config | `C:\Users\Amir Nazir\.openclaw\openclaw.json` |
 | OpenClaw workspace | `C:\Users\Amir Nazir\.openclaw\workspace\` |
 | OpenClaw source | `D:\OpenClaw\openclaw\` |

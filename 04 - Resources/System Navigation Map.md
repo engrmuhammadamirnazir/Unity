@@ -31,7 +31,7 @@ C:\Users\Amir Nazir\
 ├── Documents\                        GreenHill Timbers docs, PowerShell profiles
 ├── Downloads\                        Installers, PDFs, invoices, proposals
 ├── Dropbox\                          SYNCED — business docs, vault, credentials
-│   ├── Muhammad Amir Obsidian Vault\ THIS VAULT (git-tracked)
+│   ├── Unity\                        THIS VAULT (git-tracked) — renamed from "Muhammad Amir Obsidian Vault" 2026-04-22
 │   ├── ECOSIRE (PRIVATE) LIMITED\    Brand assets, SECP docs, letterhead
 │   ├── ONETECA FINE WINES\           Client accounting data, bank statements
 │   ├── Customers Data\               Client-specific data by name
@@ -178,7 +178,7 @@ Local path: `D:\Development\Ecosire Solutions\{Display Name}\{module_name}\`
 
 | Repo | GitHub | Local Path |
 |------|--------|-----------|
-| Obsidian Vault | `engrmuhammadamirnazir/Muhammad-Amir-Nazir` | `C:\Users\Amir Nazir\Dropbox\Muhammad Amir Obsidian Vault\` |
+| Unity (hive brain) | `engrmuhammadamirnazir/Unity` | `C:\Users\Amir Nazir\Dropbox\Unity\` |
 
 ---
 
@@ -186,7 +186,7 @@ Local path: `D:\Development\Ecosire Solutions\{Display Name}\{module_name}\`
 
 | File | Location | Purpose |
 |------|----------|---------|
-| Obsidian Vault CLAUDE.md | `Dropbox\Muhammad Amir Obsidian Vault\CLAUDE.md` | Vault structure, security rules, naming conventions |
+| Unity vault CLAUDE.md | `Dropbox\Unity\CLAUDE.md` | Vault structure, security rules, naming conventions |
 | Development CLAUDE.md | `D:\Development\CLAUDE.md` | Odoo dev workflow, module structure, scripts, version diffs (654 lines) |
 | ECOSIRE.COM CLAUDE.md | `D:\ECOSIRE.COM\CLAUDE.md` | Monorepo architecture, NestJS/Next.js patterns, build rules |
 | OpenClaw CLAUDE.md | `D:\OpenClaw\openclaw\CLAUDE.md` | OpenClaw contribution rules (points to AGENTS.md) |

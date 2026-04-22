@@ -1,0 +1,29 @@
+# Unity vault — graphify ignore file
+# Renamed 2026-04-22; see CLAUDE.md + MOC - Hive Mind
+
+# SECURITY — never graph these
+03 - Areas/Credentials & Access/
+
+# Git/Obsidian/Claude internals
+.git/
+.obsidian/
+.claude/
+
+# Large binary attachments
+09 - Attachments/
+*.mp4
+*.mov
+*.mp3
+*.wav
+*.webm
+*.zip
+*.pdf.bak
+
+# OS cruft
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Graphify's own output (avoid self-loop)
+graphify-out/
+04 - Resources/graphify/
