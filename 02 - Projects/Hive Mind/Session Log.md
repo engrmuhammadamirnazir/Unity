@@ -31,6 +31,13 @@ Keep entries tight. Format:
 
 ## Log (newest first)
 
+### 2026-04-22 (evening) — D:/Development (Oenoteca production) — CSCS Inv 13972 booked + lot/serial tracking disabled fleet-wide
+- **Bill booked + paid:** CSCS LLC Invoice #13972 → `BILL/2026/03/0013` dated 2026-03-18, $2,332.03 ($985 Freight 500002 + $1,347.03 Duty 500001) for PO P00114 Pierre Prieur et Fils (BL# 540600022902 Le Havre→Houston). Payment via manual JE `MISC/2026/03/0009` DR 211000 AP / CR 101401 Bank, reconciled → bill paid.
+- **Lot/serial tracking disabled on 17 wine products** (all from Enohance shipment #77) after Nick confirmed he does not track lots/serials anywhere. `WH/OUT/00513` S00343 Uncorked/Altura Wine then validated (15 bottles shipped). 17 existing `stock.lot` rows + 12 lot-linked quants left in place; harmless with tracking=none.
+- **Odoo 19 payment-flow gotcha (reusable for any Odoo 19 Enterprise client):** `account.payment.register` wizard can leave the payment in `state='in_process'` with `move_id=False` — the bill sticks at `payment_state='in_payment'`, residual unchanged, because the cash JE is never created. Root cause in Oenoteca's case: BNK1 outbound methods (Manual/Checks/NACHA) have `payment_account_id=False` (no Outstanding Payments account), and the client's actual workflow is direct bank-statement reconciliation without `account.payment` records (other paid bills have `matched_payment_ids=[]`). Fix that worked: delete the orphan payment + post a manual `account.move` (DR AP / CR Bank) + `account.move.line.reconcile` against the bill AP line. Worth checking for on any Odoo 19 Enterprise client using direct bank-recon.
+- Cross-project impact: Odoo 19 payment pattern applies to every Odoo 19 Enterprise client in the fleet (Obliq, Sahara, Diamond/STIG, Alvi-Dental, Remittance).
+- Canonical facts promoted to Unity: none (local Oenoteca inventory/AP state; no new client / server / credential).
+
 ### 2026-04-22 — D:/ECOSIRE.AI — Red Dead Redemption 2 article published to freepcgames.org
 - New publish script `ai-content-engine/backend/scripts/publish_red_dead_redemption_2.py` (follows the freepcgames.org prompt template: `####` h4 sections, no bold headings, 150–200-word About block, 7 keyword placements with random bolding). Published as WP post ID 110 → https://freepcgames.org/2026/04/22/red-dead-redemption-2-full-pc-game-download/ via `ace-api` Docker container.
 - **Gotcha for future ECOSIRE.AI agents:** the `ace-api` container working dir is `/code` (not `/app`). Scripts live under `/code/scripts/`. One-shot pattern: `scp` to `/tmp/` on prod → `docker cp` into `ace-api:/code/scripts/` → `docker exec -w /code ace-api python -m scripts.<name>`.
