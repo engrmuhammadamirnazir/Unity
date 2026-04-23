@@ -3,7 +3,7 @@ type: log
 tags: [hive-mind, session-log, append-only, cross-project]
 aliases: [Hive Mind Log, Agent Session Journal]
 created: 2026-04-22
-updated: 2026-04-24T22:30Z
+updated: 2026-04-24T23:15Z
 ---
 
 # Hive Mind — Session Log (Append-Only)
@@ -30,6 +30,12 @@ Keep entries tight. Format:
 ---
 
 ## Log (newest first)
+
+### 2026-04-24 — D:/ECOSIRE.AI — repo hygiene sweep (worktrees, branches, 104→0 uncommitted, 27 commits pushed)
+- **Cleanup surface was larger than expected.** Found 10 stranded git worktrees (1 at `D:\ECOSIRE.AI-worktrees\multi-site-dashboard`, 9 at `.claude/worktrees/agent-*`), 17 zombie local branches (16× `worktree-agent-*` + `feat/multi-site-dashboard`), 3 merged remote branches that were never deleted (`feat/multi-site-dashboard`, `feat/i18n-complete-translations-and-fixes`, `claude/project-audit-documentation-vmI3H`), 20 local commits never pushed, and 104 uncommitted working-tree entries (35 Playwright PNGs at repo root, 2 stale commit-helper temp files, 1 duplicate plugin ZIP backup, 10+ ad-hoc `.py` scripts, 13 doc drafts, 3 untracked directories).
+- **All resolved inside `D:\ECOSIRE.AI`.** 27 commits pushed to origin/main (20 pre-existing + 7 new hygiene commits: gitignore additions, root `CLAUDE.md`+`AGENTS.md` agent orientation, platform plans/specs/audits relocated under `docs/audits/` + `docs/plans/` + `docs/superpowers/` + `docs/product/`, 8 roms-games ad-hoc fixers archived to `ai-content-engine/backend/scripts/adhoc/roms-games/` with README, fleet-upgrade skill output applied to 29 agent `.md` files + `.claude/settings.json`). Working tree now `0` entries, local == `origin/main`, single branch (`main`) on both sides, zero open PRs.
+- **Cross-project impact:** *Pattern applies to every workspace on this machine.* (1) **Agent-driven worktrees with `isolation: "worktree"` leave strays** when subagents make changes — always run `git worktree list` + `git worktree prune` + `git branch | grep worktree-agent-` at session end; the auto-cleanup only catches runs with zero changes. (2) **Merged GitHub branches are not auto-deleted** after merge in this org — audit `gh api repos/<org>/<repo>/branches` periodically. (3) **Playwright/visual-debug PNGs pollute repo roots fast**; a `/*.png` repo-root gitignore pattern pays for itself. (4) **`.claude/` being gitignored at the directory level** means `git add .claude/agents/` hits the "paths are ignored" hint even for previously-tracked `M` files — stage by file path, not directory, or use `-f`.
+- **Canonical facts promoted to Unity:** none (no new client/server/credential/price/module). Feedback memory `feedback_workspace_discipline.md` saved to project-local memory under `D--ECOSIRE-AI/memory/` — codifies the "stay in cwd + keep git clean" rule with session-end checklist.
 
 ### 2026-04-24 — D:/ECOSIRE.COM — full SEO/traffic/lead audit + 7-commit growth deploy (signup hotfix, CRM capture, brand etymology, dual-entity LLC, 131 i18n keys, 3 new commercial pages, 5 new blog posts)
 - **Audit first (5 parallel agents + prod DB queries).** Traffic baseline 923 sessions/day, 89.6% bounce, 0.39% desktop CTR, 15 leads total from 18,718+ pages, GSC data frozen 28 days because snapshot cron silently failed on schema drift (already fixed 2026-04-23, resumes tonight). Brand SERP leaking to dissolved UK "ECOSIRE LTD" + ZoomInfo + legacy WP `/hello-world/`. 0 Clutch / G2 / Capterra / LinkedIn Company / Odoo Partners Directory presence. Full plan delivered inline in session.
