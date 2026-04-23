@@ -3,7 +3,7 @@ type: log
 tags: [hive-mind, session-log, append-only, cross-project]
 aliases: [Hive Mind Log, Agent Session Journal]
 created: 2026-04-22
-updated: 2026-04-22
+updated: 2026-04-24
 ---
 
 # Hive Mind — Session Log (Append-Only)
@@ -30,6 +30,14 @@ Keep entries tight. Format:
 ---
 
 ## Log (newest first)
+
+### 2026-04-24 — D:/Development (Track Congo — new prospect via Quicken referral) — USD 6,500 fixed proposal generated, folder scaffolded under ProspectiveClients
+- **New inbound lead via Quicken Accounting** — third deal in April cycle after Airport Taxi Hub and Diamond/STIG. Track Congo is a Central Africa vehicle-tracking SaaS (Kinshasa + Lubumbashi in DRC, Brazzaville in Congo-B), ~1,100 active vehicles, migrating Zoho Books + Excel to Odoo Online Enterprise Custom plan. Owner delivered an unusually clean 17-page integrator brief — firm-priced without paid discovery.
+- **Scope delivered in proposal:** 3 real Odoo companies + full intercompany (stock + pay-on-behalf + due-to/due-from ledgers); 4 Studio master-data models (Vehicle / Device-IMEI / SIM / Fuel-Sensor-MAC) + Assignment history; 6 operational workflows (Deploy / Sell / Fuel Sensor / Replace / Cancel+Retrieve / Lost+Recovery); correct asset accounting via a 'Deployed' stock location (NO zero-value invoice lines — the client's #1 pain point); subscription engine with Enterprise deferred-revenue monthly recognition; two invoice templates (vehicle-wise vs summary+schedule); Zoho+Excel migration in the brief's mandated 11-step sequence, reconciled to Zoho closing balances; per-company + owner-combined dashboards; role-based multi-company access.
+- **Commercials:** USD 6,500 fixed / 10-12 weeks / 6 milestones (20/20/20/20/10/10) + 30-day hypercare; Odoo licence ~USD 1,795/yr billed directly by Odoo S.A. on Custom plan (4 users). Odoo Online Python-addon constraint disclosed upfront (Studio + Automations + Server Actions only); Odoo.sh fallback noted for any future Phase-2 that needs Python.
+- **Artifacts:** `D:/EcosireClients/ProspectiveClients/Track-Congo/` scaffolded (README + `proposal/` with DOCX+PDF+Quicken forwarding email + `reference/` with the original brief). Generator at `D:/Development/scripts/client_docs/trackcongo_proposal.py`. Standard prospect-folder layout matches Airport-Taxi-Hub precedent.
+- Cross-project impact: Quicken referral channel now pipeline-mapped at 3 deals (ATH $4K · Diamond/STIG $4K delivered · Track Congo $6,500 new) — useful for any future Quicken conversation; proposal generator pattern (`ecosire_doc_generator.py` → per-client wrapper saving to the prospect folder) re-validated and ready for the next Quicken forward. Next Ecosire-side action: forward proposal PDF to Quicken contact using the drafted email in `proposal/Quicken_Forwarding_Email_Draft.md`.
+- Canonical facts promoted to Unity: [[Prospective Clients]] README — Track Congo row added as new top entry; pipeline next-action list updated.
 
 ### 2026-04-23 (afternoon) — D:/Development (Sahara Properties) — OB bumped AGAIN to AED 22,934,192.51 (gross/net asset split + AR + Advance Tenant + RE Adj) on both DBs
 - **Second OB update in 24h.** Zahoor re-uploaded `Opening Trial Balance 2026.xlsx` (mtime **2026-04-23 13:36**, 4h after the morning 09:37 pass). Diffed against this morning's draft OB `account.move id=2` (33 lines @ 20,543,270.51); new canonical is 36 lines @ AED **22,934,192.51** (+2,390,922). Applied via guardrailed SQL (`D:/EcosireClients/ActiveClients/Sahara-Properties/scripts/ob_update_2026_04_23c.sql`) with pre/post `DO $$` checks: **7 changes** = (U1) 130000 LHI Dr 10.65M→12.75M gross, (U2) 130100 LAC Dr 1.92M→2.21M gross, (U3) 200220 Advance from Tenant Cr 144,057→146,307 (+2,250 UPG Paper Cutting D1), (U4) 310100 RE Adj Dr 2,040,733.38→2,033,559.13, (I1) 130010 **NEW** Accum Dep LH Improv Cr 2,093,874, (I2) 130110 **NEW** Accum Amort Lease Acq Cr 294,798, (I3) 110000 **NEW** AR line Dr 9,425 for Al Tashkhis Garage D1. New analytics computed from Capital sheet per-project fit-out/broker/depreciation totals.

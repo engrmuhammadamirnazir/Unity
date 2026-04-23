@@ -2,17 +2,18 @@
 type: index
 tags: [clients, prospective, pipeline, index]
 created: 2026-04-22
-updated: 2026-04-22
+updated: 2026-04-24
 ---
 
 # Prospective Clients — Pipeline
 
 Inbound leads and active proposals that haven't yet converted to paid engagements. Promote to `Active Clients/` once a contract is signed OR a first paid milestone lands.
 
-## Active proposals / trials (2026-04-22 snapshot)
+## Active proposals / trials (2026-04-24 snapshot)
 
 | Client | Scope | Status | Memory pointer |
 |--------|-------|--------|----------------|
+| **Track Congo (Central Africa)** | Odoo Online Enterprise Custom-plan · 3 companies (Kinshasa / Lubumbashi / Brazzaville) · ~1,100 vehicles · Zoho+Excel migration · $6,500 fixed / 10-12 wks · **Quicken referral** | Proposal generated 2026-04-24 at `D:/EcosireClients/ProspectiveClients/Track-Congo/proposal/` (DOCX+PDF), awaiting send to Quicken | `trackcongo_client.md` |
 | **Noon Store Management** | MENA 14-day trial on `noon.demo.ecosire.com` · Noon Store Management v19.0.2 (premium $499) | Trial window closes ~2026-05-02 | `noon_client_trial.md` |
 | **Wayfair (Quicken Accounting)** | Wayfair module v3.10.0, SAP B1 integration $1,250 | Proposal sent 2026-03-31 | `quicken_sap_b1_project.md` + `wayfair_client_inquiry.md` |
 | **Gaspar Muhlmann (Argentina)** | MELI module, channel partner (multiple downstream clients) | Phase 1 features urgent | `gaspar_meli_client.md` |
@@ -35,6 +36,7 @@ Move to `Active Clients/` when:
 
 ## Next actions (pipeline)
 
+- [ ] Forward Track Congo proposal PDF to Quicken contact (referral channel); await reply before M1 invoice.
 - [ ] Chase MyFirstTech for acceptance response (quote sent 2026-04-16).
 - [ ] Prepare Noon 14-day trial close-out (~2026-05-02).
 - [ ] RedXpider: clarify 3 pending client decisions before further coding.
