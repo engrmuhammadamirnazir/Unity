@@ -13,7 +13,7 @@ Inbound leads and active proposals that haven't yet converted to paid engagement
 
 | Client | Scope | Status | Memory pointer |
 |--------|-------|--------|----------------|
-| **Track Congo (Central Africa)** | Odoo Online Enterprise Custom-plan · 3 companies (Kinshasa / Lubumbashi / Brazzaville) · ~1,100 vehicles · Zoho+Excel migration · $6,500 fixed / 10-12 wks · **Quicken referral** | Proposal generated 2026-04-24 at `D:/EcosireClients/ProspectiveClients/Track-Congo/proposal/` (DOCX+PDF), awaiting send to Quicken | `trackcongo_client.md` |
+| **Track Congo (Central Africa)** | Odoo Online Enterprise Custom-plan · 3 companies (Kinshasa / Lubumbashi / Brazzaville) · ~1,100 vehicles · Zoho+Excel migration · $6,500 fixed / 10-12 wks · **WHITE-LABEL via Quicken Accounting** (Quicken = contract party, Ecosire = silent delivery; 0 Ecosire mentions in deliverable) | Quicken-branded DOCX+PDF generated 2026-04-24 at `D:/EcosireClients/ProspectiveClients/Track-Congo/proposal/`; awaiting Quicken handoff + back-to-back split | `trackcongo_client.md` |
 | **Noon Store Management** | MENA 14-day trial on `noon.demo.ecosire.com` · Noon Store Management v19.0.2 (premium $499) | Trial window closes ~2026-05-02 | `noon_client_trial.md` |
 | **Wayfair (Quicken Accounting)** | Wayfair module v3.10.0, SAP B1 integration $1,250 | Proposal sent 2026-03-31 | `quicken_sap_b1_project.md` + `wayfair_client_inquiry.md` |
 | **Gaspar Muhlmann (Argentina)** | MELI module, channel partner (multiple downstream clients) | Phase 1 features urgent | `gaspar_meli_client.md` |
