@@ -3,7 +3,7 @@ type: log
 tags: [hive-mind, session-log, append-only, cross-project]
 aliases: [Hive Mind Log, Agent Session Journal]
 created: 2026-04-22
-updated: 2026-04-24
+updated: 2026-04-24T20:05Z
 ---
 
 # Hive Mind — Session Log (Append-Only)
@@ -30,6 +30,15 @@ Keep entries tight. Format:
 ---
 
 ## Log (newest first)
+
+### 2026-04-24 — D:/ECOSIRE.COM — odovation.com outage + ecosire.com 3,700/day error cleanup (two deploys, zero data loss)
+- **odovation `/services/[slug]` + `/integrations/[slug]` were 500 on every request** with redacted `digest: 'DYNAMIC_SERVER_USAGE'`. Root cause (reproducible locally only in prod build, not dev): `generateStaticParams` on these pages made Next.js 16 + Turbopack attempt static prerender, but `[locale]/layout.tsx` calls next-intl `getMessages()` without `setRequestLocale` — reads request-scoped context → throws at build → bundle ships broken. Removed `generateStaticParams` to match sibling muhammadamir. All 9 service slugs + 4 integration slugs now 200.
+- **ecosire.com `/api/products/categories` 500×1,889/day** — Drizzle `select()` expanded column list the prod table couldn't satisfy (missing `organization_id` + `updated_at`) → Postgres 42703 silently swallowed by GlobalExceptionFilter. Fixed out-of-band with additive `ALTER TABLE ADD COLUMN IF NOT EXISTS`, backfilled to real ECOSIRE org UUID. Extended same treatment to 6 more tables with leftover drift from the 2026-04-06 incident: `ga_page_snapshots.property_id`, `ga_aggregate_snapshots.property_id`, `gsc_query/country/device_snapshots.site_url`, `project_tasks` (+13 columns), `project_stages.rotting_threshold_days`. Scheduler crons now run clean.
+- **~3,700 errors/day eliminated:** translator (Google Translate) had mangled ICU variable names inside `{...}` across 9 non-EN locales (`{industry}` → `{الصناعة}` / `{industrias}` / `{行业}` / `{名前}` / etc.) causing next-intl FORMATTING_ERROR at render. Built reusable `apps/web/scripts/fix-broken-icu-placeholders.mjs` (positional rewrite preserving translated surrounding text + ICU plural syntax) — fixed 160 strings. Also 16 Urdu blog posts had typo-truncated `</summar>` → `</summary>` crashing next-mdx-remote with "memory access out of bounds"; `fix-urdu-mdx-straggler-tags.mjs` handles these. Both scripts idempotent.
+- Header CTA "Get Started" → "Sign up free" (English only, other 10 locales unchanged).
+- Deploys: 1fa51b74 (odovation + categories + CTA) and 0368e5f9 (schema batch + placeholders + MDX). Both went via `/tmp/remote-deploy*.sh` through standard backup→maintenance→build→restart→health→maintenance-off sequence. Post-deploy smoke: AR/ZH/ES industries pages, Urdu blog posts, odovation services all 200. Past-3-min error log shows 0 FORMATTING_ERROR (was 1,830/day), 0 MDX RuntimeError (was 1,851/day). **Data floor: Products 215, Licenses 9, Leads 15, Contacts 3, Orders 0 — unchanged.**
+- Cross-project impact: two reusable traps promoted to ECOSIRE project memory that ANY Next.js + next-intl project on this machine should avoid — `feedback_next_intl_static_params_trap.md` (never add `generateStaticParams` inside `[locale]/…/[slug]/page.tsx` if the layout calls `getMessages()`/`getTranslations()` without `setRequestLocale`; the failure mode is invisible — builds succeed, dev works, prod bundle 500s) and `feedback_translator_breaks_icu_placeholders.md` (always chain the placeholder-fixer script after ANY `translate-missing.mjs` run, or the translator silently breaks `{var}` references). Schema-drift repair pattern (upload .sh, `psql … -v ON_ERROR_STOP=1`, `ADD COLUMN IF NOT EXISTS`, backfill org UUID, then `SET NOT NULL` + FK) is now a proven template for any Drizzle ORM workspace that takes a data-loss rollback. Still outstanding (external — Amir's action): top up Anthropic API credits at console.anthropic.com — nightly content-intelligence cron failing with "credit balance too low".
+- Canonical facts promoted to Unity: none (all changes local to ECOSIRE.COM; no clients/servers/credentials touched).
 
 ### 2026-04-24 (correction) — D:/Development (Track Congo) — proposal converted from Ecosire-direct to WHITE-LABEL through Quicken Accounting
 - **Correction to the entry below.** The Track Congo deal is NOT Ecosire-direct like ATH or Diamond/STIG. Quicken Accounting is the contract party to Track Congo; Ecosire is the silent delivery partner on a back-to-back arrangement. Corrected the same evening after the user clarified "use Quicken as the proposing party".
