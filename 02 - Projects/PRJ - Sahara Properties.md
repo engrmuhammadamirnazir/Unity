@@ -4,6 +4,7 @@ tags: [project, ecosire, odoo, real-estate, client]
 status: active
 created: 2026-03-02
 start-date: 2026-02-28
+updated: 2026-04-23
 ---
 
 # PRJ — Sahara Properties
@@ -21,7 +22,7 @@ start-date: 2026-02-28
 | **Service**        | Custom Odoo 19 ERP + Property Management Module |
 | **Server IP**      | 3.232.201.222                                   |
 | **SSH User**       | bitnami                                         |
-| **PEM Key**        | `sharaproperties.pem`                           |
+| **PEM Key**        | `D:/EcosireClients/ActiveClients/Sahara-Properties/sahara.pem` (see [[Server & Key Inventory]]) |
 | **URL**            | https://saharaproperties.ecosire.com            |
 | **Admin Password** | See [[Client Credentials]]                                  |
 | **Started**        | February 28, 2026                               |
@@ -144,8 +145,31 @@ Issues encountered and resolved during this project:
 
 ---
 
+## Opening Balance (draft — pending Zahoor posting approval)
+
+| Field | Value |
+|-------|------:|
+| Move | `account.move id=2` on both `saharaproperties` + `testingsahara` |
+| Date | 2026-01-01 |
+| State | **draft** |
+| Lines | 33 |
+| Total Dr = Cr | **AED 20,543,270.51** |
+| Last updated | 2026-04-23 per `Opening Trial Balance 2026.xlsx` from Zahoor Butt |
+
+Pending for Zahoor (carried from 2026-04-06 notes):
+1. Post the OB (still draft)
+2. Suleman Investment +43,500 over-allocation on D2 (OB 3,868,500 vs Capital sheet 3,825,000 — unchanged in new xlsx)
+3. PDC Receivable per-project variance (DB 5.28M vs Excel 3.20M closing)
+
+---
+
 ## Deployment History
 
+- **2026-04-23**: OB draft updated per Zahoor's revised `Opening Trial Balance 2026.xlsx` — added `200230 Utility Payable` Cr 122,736.51 (FEWA, 5-project analytic split) + bumped Retained Earnings Adjustment Dr to 2,040,733.38; grand total 20.42M → 20.54M; both DBs, still draft. pg_dumps in `/home/bitnami/backups/` timestamped `20260423_045014`.
+- **2026-04-22 (late eve)**: res.partner dedup — 247→184 partners on prod, testingsahara re-cloned from post-merge prod. Reusable pipeline at `D:/EcosireClients/ActiveClients/Sahara-Properties/scripts/partner_dedup/`.
+- **2026-04-22 (late eve)**: PMS v19.0.6.0.5 LIVE on both DBs — span-based narration guard for consolidated invoice lines spanning 12+ months (replaces failed v6.0.4 payment_frequency guard). Published to `github.com/ecosire/Property-Management-System` (main + 19.0 @ `1357c4d`).
+- **2026-04-20 to 04-22**: Sahara PMS v5.23 → v6.0.5 (11 sub-releases) — bulk reading wizard, meter-rent dedup, invoice smart buttons, VAT fallback, discount reconstruction, tenant PDC smart buttons, narration guards.
+- **2026-04-14**: Migrated from shared AWS to isolated AWS Bitnami `3.232.201.222` (decoupled from former shared-server setup with Obliq/Oenoteca).
 - **2026-03-08**: M2/M3 data import -- 577 PDCs, 4 bank journals, 28 new partners
 - **2026-03-06**: Security deposits imported (70 records), new fields (ejari_ref, fewa_account, etc.)
 - **2026-03-04**: PMS v19.0.3.0.0 deployed (landlord accounting features)
