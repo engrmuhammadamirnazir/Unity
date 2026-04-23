@@ -152,20 +152,24 @@ Issues encountered and resolved during this project:
 | Move | `account.move id=2` on both `saharaproperties` + `testingsahara` |
 | Date | 2026-01-01 |
 | State | **draft** |
-| Lines | 33 |
-| Total Dr = Cr | **AED 20,543,270.51** |
-| Last updated | 2026-04-23 per `Opening Trial Balance 2026.xlsx` from Zahoor Butt |
+| Lines | **36** |
+| Total Dr = Cr | **AED 22,934,192.51** |
+| Last updated | 2026-04-23 (afternoon — second pass same day) per `Opening Trial Balance 2026.xlsx` (mtime 13:36) from Zahoor Butt |
 
-Pending for Zahoor (carried from 2026-04-06 notes):
-1. Post the OB (still draft)
+Structure after 2026-04-23 afternoon update: gross/net asset split — Leasehold Improvements at gross 12,746,394 + Accum Dep (130010) Cr 2,093,874 contra-asset; Lease Acquisition Cost at gross 2,211,000 + Accum Amort (130110) Cr 294,798 contra-asset; new AR line 110000 Dr 9,425 for Al Tashkhis Garage (Darmix 1); Advance from Tenant (200220) Cr raised 144,057 → 146,307 (+2,250 UPG Paper Cutting D1); Retained Earnings Adjustment (310100) reduced to 2,033,559.13. Utility Payable (FEWA) Cr 122,736.51 from this morning's pass persists.
+
+Pending for Zahoor (carried forward):
+1. Post the OB (still draft, now at 22,934,192.51 / 36 lines)
 2. Suleman Investment +43,500 over-allocation on D2 (OB 3,868,500 vs Capital sheet 3,825,000 — unchanged in new xlsx)
 3. PDC Receivable per-project variance (DB 5.28M vs Excel 3.20M closing)
+4. Activate the 11 DRAFT asset/depreciation records once OB is posted — the 2 new contra-asset OB lines become the baseline for future depreciation bookings
 
 ---
 
 ## Deployment History
 
-- **2026-04-23**: OB draft updated per Zahoor's revised `Opening Trial Balance 2026.xlsx` — added `200230 Utility Payable` Cr 122,736.51 (FEWA, 5-project analytic split) + bumped Retained Earnings Adjustment Dr to 2,040,733.38; grand total 20.42M → 20.54M; both DBs, still draft. pg_dumps in `/home/bitnami/backups/` timestamped `20260423_045014`.
+- **2026-04-23 (afternoon)**: OB draft updated AGAIN per Zahoor's re-uploaded xlsx (mtime 13:36, 4h after the morning pass). Gross/net asset split applied: LHI 10.65M → 12.75M gross + Accum Dep (130010) Cr 2.09M contra-asset; LAC 1.92M → 2.21M gross + Accum Amort (130110) Cr 294.8K contra-asset; new AR line (110000) Dr 9,425 for Al Tashkhis Garage (D1); Advance Tenant (200220) Cr 144,057 → 146,307; RE Adj (310100) 2,040,733.38 → 2,033,559.13. Grand total 20.54M → **22.93M**, 33 → 36 lines, both DBs still draft. pg_dumps in `/home/bitnami/backups/` timestamped `20260423_084754` (test) / `20260423_084940` (prod). Answers Zahoor's pending question #4 (gross vs net asset presentation).
+- **2026-04-23 (morning)**: OB draft updated per Zahoor's first revised xlsx (mtime 09:37) — added `200230 Utility Payable` Cr 122,736.51 (FEWA, 5-project analytic split) + bumped Retained Earnings Adjustment Dr to 2,040,733.38; grand total 20.42M → 20.54M; both DBs, still draft. pg_dumps in `/home/bitnami/backups/` timestamped `20260423_045014`. SUPERSEDED same day by afternoon pass.
 - **2026-04-22 (late eve)**: res.partner dedup — 247→184 partners on prod, testingsahara re-cloned from post-merge prod. Reusable pipeline at `D:/EcosireClients/ActiveClients/Sahara-Properties/scripts/partner_dedup/`.
 - **2026-04-22 (late eve)**: PMS v19.0.6.0.5 LIVE on both DBs — span-based narration guard for consolidated invoice lines spanning 12+ months (replaces failed v6.0.4 payment_frequency guard). Published to `github.com/ecosire/Property-Management-System` (main + 19.0 @ `1357c4d`).
 - **2026-04-20 to 04-22**: Sahara PMS v5.23 → v6.0.5 (11 sub-releases) — bulk reading wizard, meter-rent dedup, invoice smart buttons, VAT fallback, discount reconstruction, tenant PDC smart buttons, narration guards.
