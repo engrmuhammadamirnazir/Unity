@@ -2,7 +2,7 @@
 type: reference
 category: ecosire, odoo
 tags: [odoo, modules, ecosire, connectors, marketplace]
-updated: 2026-04-24
+updated: 2026-04-25
 ---
 
 # Ecosire — Odoo Module Library
@@ -31,11 +31,22 @@ updated: 2026-04-24
 
 ## Store Module Pricing (App Store USD) — 201 Modules
 
-> **2026-04-24 pump campaign:** 51 modules moved to v19.0.2.x.0 / $499 premium tier in one session across 6 waves. Current distribution: **$249 (18) / $349 (21) / $499 (69) / $599 vinculum (1)**. Below tier tables reflect PRE-PUMP distribution (2026-03-26) — per-module tier reassignment not yet reflected in the tables. See [[Hive Mind - Session Log]] 2026-04-24 entry for the full list of 51 pumped modules.
+> **2026-04-24 + 2026-04-25 pump campaign:** **70 modules** moved to v19.0.2.x.0 / $499 premium tier across Waves 0+A-I. Actual manifest-file distribution: **$249 (56) / $349 (63) / $499 (81) / $599 vinculum (1)**. Below tier tables reflect PRE-PUMP distribution (2026-03-26) — per-module tier reassignment not yet reflected in the tables. See [[Hive Mind - Session Log]] 2026-04-24 + 2026-04-25 entries for the full list of pumped modules.
 
-**Pumped to $499 on 2026-04-24:** shopee · shein · temu · coupang · jumia · aliexpress · walmart · bolcom · salla · vinted · etsy · bigcommerce · prestashop · opencart · wix · emag · allegro · kaufland · ozon · instagram · rakuten · xiaohongshu · meesho · manomano · hepsiburada · printful · printify · pinterest · whatsapp · snapchat · tiktok · faire · takealot · mirakl (feature pump) · backmarket · spocket · trademe · naver · kogan · myntra · tokopedia · woocommerce (feature pump) · magento (feature pump) · ebay (feature pump) · snapdeal · cdiscount · stockx · zid · youtube · poshmark · (+noon from 2026-04-18).
+**Pumped to $499 on 2026-04-24 (Waves 0+A-G, 60 modules):** noon · shopee · shein · temu · coupang · jumia · aliexpress · walmart · bolcom · salla · vinted · etsy · bigcommerce · prestashop · opencart · wix · emag · allegro · kaufland · ozon · instagram · rakuten · xiaohongshu · meesho · manomano · hepsiburada · printful · printify · pinterest · whatsapp · snapchat · tiktok · faire · takealot · mirakl · backmarket · spocket · trademe · naver · kogan · myntra · tokopedia · woocommerce · magento · ebay · snapdeal · cdiscount · stockx · zid · youtube · poshmark · zalando · flipkart($249→$499) · taobao · line($349→$499) · pinduoduo · wechat · kakao($349→$499) · tmall · jdcom.
+
+**Pumped 2026-04-24 late + 2026-04-25 (Waves H+I, 10 flagships — all $499 feature pumps):** facebook · googleshopping · otto · bestbuy · instacart · farfetch · grab · douyin · kuaishou · meituan.
 
 **Client-LIVE modules NOT pumped (production-safety):** wayfair, trendyol, lazada, daraz, mercadolibre.
+
+**Fleet P0 pattern captured (~15 silent-401 auth fixes across Waves C-I):** Many v19.0.1 tools.py files were sending `Authorization: Bearer <app_id>` (raw client_id as bearer) which silently 401'd every call. Real auth flows required per platform:
+- **OAuth2 client_credentials exchange** — zalando / flipkart / farfetch / bigcommerce
+- **MD5-signed canonical request** — kuaishou + future Taobao/Tmall/JD/Pinduoduo family
+- **HMAC-SHA256 v2 signed request** — meituan (reusable _sign() template)
+- **Platform-specific raw key (not Bearer)** — bestbuy + takealot (Mirakl convention — applies to carrefour/darty/galeries lafayette/la redoute/el corte ingles when those are pumped)
+- **Multi-surface auth per platform** — wechat (Mini Program access_token + Pay v3 RSA-SHA256 + OAuth2 code2session) + facebook (app-scoped + page-scoped + user-scoped + Graph v20/v21)
+
+**Reusable verifier + sweep scripts at `D:/Development/scripts/publishing/_wave_audit_sweep.py`** — 57-module-in-90s GitHub-state audit with remediation pattern for partial-agent-completion sweeps.
 
 ### Tier 1 — $249 (40 Modules — Regional/Niche)
 
