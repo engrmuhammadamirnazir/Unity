@@ -3,7 +3,7 @@ type: log
 tags: [hive-mind, session-log, append-only, cross-project]
 aliases: [Hive Mind Log, Agent Session Journal]
 created: 2026-04-22
-updated: 2026-04-24T19:45Z
+updated: 2026-04-25T02:00Z
 ---
 
 # Hive Mind — Session Log (Append-Only)
@@ -30,6 +30,15 @@ Keep entries tight. Format:
 ---
 
 ## Log (newest first)
+
+### 2026-04-25 — D:/Development — Obliq bank-statement audit + cleanup, new `obliq_statement_auto_import v19.0.1.0.0` module LIVE, AED 353K P&L correction
+- **Books fixed on Obliq prod (Hetzner 23.88.13.113, DB `obliq`).** Three corrective JEs posted: **SO 0106** (id 15972) reclasses 42 CC payoffs previously booked as Owner Draws + phantom Office Expense → AED 310,500 removed from both; **SO 0107** (id 15973) reconciles 2 Solved6 LLC vendor bills (AED 42,866) that had been double-expensed as CC charges too; **SO 0108** (id 15974) reverses 20 BUCKET A manual J16 "Transfer from ADCB Bank to ADCB CC" duplicates (AED 172,500). P&L improves by **+AED 353,366** (fake Office Expense removed). Ziad Current Account, ADCB CC liability, and ADCB Studio Obliq bank all now reflect true economic position. Full pre-fix DB dump held at `/tmp/obliq_pre_audit_fix_20260424.dump` + local mirror.
+- **New module `obliq_statement_auto_import v19.0.1.0.0`** deployed to Hetzner. 2,128 LOC. 5 parsers (ADCB Bank .xls, ADCB CC .xls, Paymob Merchant .xlsx, Paymob Transfers CSV, Paymob Transactions CSV) + sniffer routing by account number + **5-layer dedup** (SHA-256 file hash log + per-line `unique_import_id` + near-miss detector + overlap summary + post-install backfill wizard) + **CC-payoff auto-tag** (bank-side 5592…7510 beneficiary match OR CC-side `PAYMENT RECEIVED` → `is_cc_payoff=True` + matching `cc_payoff_match_key`). Backfill tagged all 1,257 existing BSLs, 84 CC payoffs flagged. Kamal can now drop raw .xls/.xlsx/.csv files via Accounting → ⋮ → New → Import File — no manual mapping, auto-dedup on re-upload.
+- **Journal 24 renamed** `BNK1 "RAK Bank"` → `BNK1 "ADCB Bank"` (was misnamed — 281 lines were always ADCB `14260925920001`). Empty BNK3 journal archived. Account `BC.003` renamed to match. No data moved.
+- **Two branded PDFs delivered for Kamal**: `ECOSIRE_Obliq_Bank_Upload_SOP_Kamal_2026-04-25.pdf` (3 pages, 1.35 MB — upload procedure) + `ECOSIRE_Obliq_Bank_Cleanup_Handoff_Kamal_2026-04-25.pdf` (5 pages, 2.24 MB — audit summary + 10-point verification checklist + 4 open items). Both on ECOSIRE letterhead, unsigned per fleet rule for user guides. Generators reusable at `D:/EcosireClients/ActiveClients/Obliq/internal/generate_{bank_upload_sop,kamal_handoff}.py`.
+- **Cross-project impact (fleet-wide lesson for ALL client-facing PDF generators):** reportlab `Table` cells with long text OR HTML entities (`&quot;` `&amp;` `&rarr;` etc.) MUST be wrapped in `Paragraph(text, style)`. Plain strings do NOT word-wrap AND do NOT decode entities — they overflow into sibling cells AND render entities literally. First version of Kamal handoff PDF shipped with 5 corrupted tables; user caught immediately. Fix: `_p()` helper + `_wrap_rows()` sweep that Paragraph-wraps every cell before passing to `Table()`. Applies across Diamond, Sahara, Oenoteca, Remittance, Alvi, Amalfi, Quicken, and all future client generators. Diamond's `generate_m2_user_guide.py` is the canonical reference (already does it right).
+- **Cross-project impact (lesson on audit scripts):** three of my seven audit findings were false positives because the audit matched on text substrings / loose (date, amount) tuples without triangulation. Domain specialists (accountant, database-engineer, functional-consultant) triangulated each from 3 independent sources (file / DB / counter-account) and disproved them. Saved ~8 hours of wasted reversal work. Pattern: always triangulate before concluding on accounting data; a text-search audit is a candidate-finder, not a verdict.
+- **Canonical facts promoted to Unity:** [[Ecosire - Private Modules]] (+1 module row, obliq_statement_auto_import v19.0.1.0.0), [[Ecosire - Client Portfolio]] (Obliq block updated with Hetzner IP, Kamal contact, new module, AED 353K correction state).
 
 ### 2026-04-25 — D:/Development — Waves G+H+I continuation: +19 modules pumped to v19.0.2.x.0 / $499 (cumulative 70/70 PUSHED_OK across all pump waves)
 - **Headline:** 19 more store-management modules pumped across Waves G (9), H (5), I (5). Combined with the 51-module Apr 24 campaign + noon = **70 total at v19.0.2.x.0 / $499 tier**. All committed + pushed to per-module GitHub repos with 4 branches (main / 19.0 / 18.0 / 17.0) + 3 version tags (v19.0.2.0.0 / v18.0.2.0.0 / v17.0.2.0.0) each. Verified via reusable `D:/Development/scripts/publishing/_wave_audit_sweep.py`: **70/70 PUSHED_OK, 0 NEEDS_PUSH**.
