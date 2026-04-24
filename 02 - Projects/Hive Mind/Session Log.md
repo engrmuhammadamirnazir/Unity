@@ -31,6 +31,13 @@ Keep entries tight. Format:
 
 ## Log (newest first)
 
+### 2026-04-24 — D:/ECOSIRE.AI — 15 Mac software listing drafts published to macbuddy.net (IDs 221–235)
+- Shipped 15 editorial software-listing drafts to `macbuddy.net` (connected WP site), all `status=draft` so the team can review/adjust before publish. Titles cover Scrutiny, Wirecast Pro, Infuse Pro 6, Cisdem DVDBurner, Dropshare, Valentina Studio Pro, CorelDRAW Graphics Suite, ACDSee Photo Studio, Movist Pro, SoundSource, Cisdem PDF Converter, Swift Publisher, Deckset, PhotoSweeper, Viper FTP. Source list: `C:/Users/Amir Nazir/OneDrive/Documents/Mac softwares.xlsx` (first 15 rows, 988 total remaining).
+- Template used: MacUpdate/Softpedia-style info box + 150–200 word About section + 4–6 Key Features + Min/Recommended sys req + 5-step install. Keyword set spread per brief (download for Mac, full version, direct download, Apple Silicon compatible, DMG download, macOS X compatible). Banned words + em dashes + Oxford comma avoided.
+- Piracy-adjacent entries from the source list (Movist Pro, SoundSource — the Excel included "crack" terms) rewritten as legitimate editorial for the real apps with "crack" stripped. Five more "crack"-named rows (Scherlokk, Tipard, Capture One, Aiseesoft, Photosweeper variants) remain in the queue and should get the same treatment on the next batch.
+- Script `ai-content-engine/backend/scripts/publish_macbuddy_drafts.py` reuses the `publish_sample_posts.py` pattern (DB-stored WP creds, `WordPressClient.create_post(status="draft")`). Minor gotcha: `WPPostResult` attribute is `post_id` not `id` — cosmetic log error but posts were still created cleanly. Script is currently uncommitted; user deferred commit decision.
+- Cross-project impact: none. Canonical facts promoted to Unity: none.
+
 ### 2026-04-24 — D:/Development — 51-Module Single-Session Pump Campaign → 52 modules now at v19.0.2.x.0 / $499 premium tier
 - **Headline:** 51 store-management modules pumped from $249/$349/$499-no-feature to v19.0.2.x.0 / $499 in one session via 51 parallel module-developer agents + 1 orchestrator-direct lean pump, organized as 6 waves (A+B / C / D / E / F) of 10. Plus noon from Apr 18 = **52 total at $499 tier**.
 - **Modules touched (51):** A+B — shopee/shein/temu/coupang/jumia/aliexpress/walmart/bolcom/salla/vinted · C — etsy/bigcommerce/prestashop/opencart/wix/emag/allegro/kaufland/ozon/instagram · D — rakuten/xiaohongshu/meesho/manomano/hepsiburada/printful/printify/pinterest/whatsapp/snapchat · E — tiktok/faire/takealot/mirakl/backmarket/spocket/trademe/naver/kogan/myntra · F — tokopedia/woocommerce/magento/ebay/snapdeal/cdiscount/stockx/zid/youtube/poshmark.
