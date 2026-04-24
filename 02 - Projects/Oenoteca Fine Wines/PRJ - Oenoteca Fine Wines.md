@@ -43,6 +43,24 @@ Ecosire provides accounting support to Oenoteca Fine Wines (legally A&N Fine Win
 
 ---
 
+## Latest Milestone — 2025 Year-End Restatement (2026-04-24/25)
+
+Full ex-post 2025 restatement executed per Niccolò's CPA ex-post BS PDF (A&N Fine Wines LLC).
+
+- **11 restatement JEs** at 2025-12-31 (MISC/2025/12/0004–0014, ~$544K gross movement) — Lincoln Corsair + Nissan NV Cargo capitalized + $23,847.77 Lincoln Financial Services note payable booked + $30,000 opening capital contribution + Inventory pegged to $59,780.87 + AP peg (clear $181K vendor DEBIT balances + book Sobovi/Bondonio/Enohance target creditor balances) + Simon Faure $5,024.95 advance
+- **2 Rossa credit notes**: RINV/2026/00005 $441.75 + RINV/2026/00006 $1,524 — eliminates $1,965.75 revenue double-count (Enoteca Rossa → Gelato Rossa LLC sister-entity re-invoicing)
+- **$348 THE POST check** reconciled (BSL 798 → INV/2026/00215)
+- **5 BS lines match CPA target exactly**; 4 residual variances documented (AR $266K unapplied-cash hangover + cash timing + AP retained 4 non-PDF partners + RE algebraic)
+- **TB balanced**: DR = CR = $1,703,150.52 at 2025-12-31
+- **3 rollback snapshots** at `/var/backups/` (server) + local mirror; all 11 JEs reversible via Odoo UI
+- **Fiscal year 2025 NOT locked** — pending Niccolò sign-off on variances
+- **Deliverables**: `D:/EcosireClients/ActiveClients/Oenoteca/Reports/2025_Restatement/` → 13_Combined_Nick_Report_2026-04-24.pdf (primary) + 12_Q1_2026_Financial_Statements_RESTATED.pdf + supporting xlsx + 14_Final_Email_to_Nick.md (draft, not sent)
+- **Open items for Niccolò** (all non-blocking): Lincoln Financial source docs + 2025-12-31 physical inventory per-SKU + missing 2025 vendor bills + 4 disputed AP partners + capital contribution date confirm + Gelato Rossa entity status
+
+Project-local detail: `D:/Development/memory/session_2026_04_24_oenoteca_2025_restatement.md`.
+
+---
+
 ## Current Status (COMPLETE as of 2026-03-08)
 
 | Item | Value |
