@@ -3,7 +3,7 @@ type: log
 tags: [hive-mind, session-log, append-only, cross-project]
 aliases: [Hive Mind Log, Agent Session Journal]
 created: 2026-04-22
-updated: 2026-04-24T16:30Z
+updated: 2026-04-24T19:45Z
 ---
 
 # Hive Mind — Session Log (Append-Only)
@@ -30,6 +30,17 @@ Keep entries tight. Format:
 ---
 
 ## Log (newest first)
+
+### 2026-04-24 — D:/Development — Diamond/STIG M2 inventory scope expansion LIVE (serialized diamonds + inter-company stock + buyback reversal + GMV dashboard for IPO / SEC)
+- Eddy emailed confirming M2 must add **physical-goods tracking with GIA-certificate-as-serial + FZCO central warehouse + inter-company stock chain on SO confirm + buyback reverse chain + GMV KPI**, driven by STIG International Corp.'s IPO / SEC S-1 filing (needs full provenance + GMV as a reported metric). Scope absorbed into existing $4K M2 budget — no change order.
+- Built new LGPL-3 module `stig_inventory v19.0.1.0.0` (24 files, ~1,582 LOC) depending on `stock`, `sale_stock`, `purchase_stock`, `stig_invoice_chain`, `stig_buyback`. Deployed to `stig_prod` on `91.99.75.227`. Post-init hook idempotently provisions 4 warehouses (FZC / USA / AUT / PHI), shared inter-company Transit location, master `Diamond (STIG Certified)` product template (`tracking='serial'`), and seeds 5 GIA sample certificates into FZCO stock. `sale.order.action_confirm()` now auto-fires FZCO→Transit→Sub stock chain ahead of the customer delivery. `stig.buyback.contract.action_trigger_buyback()` extended (via inheritance inside stig_inventory) to also create the reverse chain Customer→Sub→Transit→FZCO. Certificate Provenance QWeb PDF + GMV Dashboard (pivot/graph/list on confirmed SOs, XLSX export) added.
+- 3 inspectable demo scenarios seeded on stig_prod for Amir + Eddy to click through: Scenario 1 Vienna Boutique EUR 30K SHIPPED end-to-end (reference), Scenario 2 NYC Diamond House USD 22.5K with USA customer delivery left in READY state for UAT to validate, Scenario 3 BBK/00009 active buyback for UAT to trigger. 6-page letterhead UAT Guide PDF delivered unsigned at `03-Deployment/ECOSIRE_Diamond_M2_Inventory_UAT_Guide_2026-04-24.pdf` with 10-item sign-off checklist + signature block. Generator `deployment/generate_m2_inventory_uat_guide.py` reusable for future client UAT docs.
+- 2 commits pushed to `github.com/ecosire/diamond-investment-group-odoo`: `82fe83c` (module) + `a5eab23` (PDF + seed + generator scripts). `$2K M2 invoice still on hold` pending UAT sign-off.
+- **Cross-project impact — 2 fleet-wide Odoo 19 lessons captured:**
+  1. **Stock module field renames in v19** — `stock.picking.move_ids_without_package`→`move_ids`, `stock.move.name`→removed (use `description_picking`), `sale.order.line.product_uom`→`product_uom_id`, `product.category.property_valuation='manual_periodic'`→invalid Selection value, search view `group_by` no longer accepts dotted paths. Fleet-wide audit needed for every connector / custom module that creates pickings/moves/SO lines via ORM (Sahara/Obliq/Oenoteca/Amalfi/Diamond/Remittance/Alvi/Quicken). Full pattern in new feedback `feedback_odoo19_stock_module_field_renames.md`.
+  2. **Cross-company serialized inventory** — when the SAME serial must travel across multiple companies (inter-company hand-off for SEC-audited unique items: diamonds, art, serialized machines), set `stock.lot.company_id=False` (shared). `move_line.company_id` still NOT NULL, set to the picking owner. Enterprise's `sale_purchase_stock_inter_company_rules` duplicates serials at the receiving side which breaks unique-identity audit trails — don't copy. New feedback `feedback_stock_lot_cross_company_shared.md` captures the pattern.
+- **Cross-project impact — GMV as an SEC-reportable KPI** — reusable pattern for any future multi-entity client approaching a capital raise or public listing: pivot/graph on `sale.order` filtered to confirmed, grouped by company/customer/period with native XLSX export for S-1 / 10-Q exhibits. Implementation is ~40 lines of XML; can be cloned into Amalfi Foods (5-co Bahrain), Obliq (Dubai furniture), or any future IPO-candidate client.
+- **Canonical facts promoted to Unity:** [[Diamond Investment Group (STIG)]] updated (M2 inventory LIVE, 3 demo scenarios, letterhead UAT guide delivered, GitHub commits `82fe83c`+`a5eab23`, stock catalogue state, open invoice status).
 
 ### 2026-04-24 — D:/Development — Sulaman Standard: new vanilla Odoo 19 DB on Sahara's shared Bitnami (3rd subdomain on the same box)
 - Provisioned `suleman` DB on the existing AWS Bitnami at 3.232.201.222 — live at https://suleman.ecosire.com (Cloudflare orange-cloud, LE cert SAN expanded sahara→sahara+testing+suleman, expiry 2026-07-23). Admin = `sulearifuae@gmail.com` (same Suleman Arif as the Remittance client + Sahara CEO contact, password matched to Sahara admin per user instruction). Apps installed via XML-RPC: sales / purchase / account_accountant / stock / crm / hr / project / contacts / mail / website / l10n_ae (UAE/AED/Asia-Dubai). DB created via POST `/web/database/create` with master_pwd. New client folder `D:/EcosireClients/ActiveClients/Sulaman-Standard/` with CLAUDE.md + reusable `scripts/install_apps.py` + `scripts/verify_public.py`.
