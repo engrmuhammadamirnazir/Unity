@@ -6,7 +6,7 @@ platform: Odoo 19 Enterprise
 start-date: 2025-10-08
 tags: [project, oenoteca, odoo, accounting]
 created: 2025-10-08
-updated: 2026-03-09
+updated: 2026-04-25
 ---
 
 # PRJ — Oenoteca Fine Wines
