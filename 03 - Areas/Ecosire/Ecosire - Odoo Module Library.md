@@ -2,7 +2,7 @@
 type: reference
 category: ecosire, odoo
 tags: [odoo, modules, ecosire, connectors, marketplace]
-updated: 2026-04-10
+updated: 2026-04-24
 ---
 
 # Ecosire — Odoo Module Library
@@ -30,6 +30,12 @@ updated: 2026-04-10
 ---
 
 ## Store Module Pricing (App Store USD) — 201 Modules
+
+> **2026-04-24 pump campaign:** 51 modules moved to v19.0.2.x.0 / $499 premium tier in one session across 6 waves. Current distribution: **$249 (18) / $349 (21) / $499 (69) / $599 vinculum (1)**. Below tier tables reflect PRE-PUMP distribution (2026-03-26) — per-module tier reassignment not yet reflected in the tables. See [[Hive Mind - Session Log]] 2026-04-24 entry for the full list of 51 pumped modules.
+
+**Pumped to $499 on 2026-04-24:** shopee · shein · temu · coupang · jumia · aliexpress · walmart · bolcom · salla · vinted · etsy · bigcommerce · prestashop · opencart · wix · emag · allegro · kaufland · ozon · instagram · rakuten · xiaohongshu · meesho · manomano · hepsiburada · printful · printify · pinterest · whatsapp · snapchat · tiktok · faire · takealot · mirakl (feature pump) · backmarket · spocket · trademe · naver · kogan · myntra · tokopedia · woocommerce (feature pump) · magento (feature pump) · ebay (feature pump) · snapdeal · cdiscount · stockx · zid · youtube · poshmark · (+noon from 2026-04-18).
+
+**Client-LIVE modules NOT pumped (production-safety):** wayfair, trendyol, lazada, daraz, mercadolibre.
 
 ### Tier 1 — $249 (40 Modules — Regional/Niche)
 
