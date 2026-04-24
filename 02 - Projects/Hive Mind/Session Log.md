@@ -3,7 +3,7 @@ type: log
 tags: [hive-mind, session-log, append-only, cross-project]
 aliases: [Hive Mind Log, Agent Session Journal]
 created: 2026-04-22
-updated: 2026-04-24T23:15Z
+updated: 2026-04-24T04:30Z
 ---
 
 # Hive Mind — Session Log (Append-Only)
@@ -30,6 +30,19 @@ Keep entries tight. Format:
 ---
 
 ## Log (newest first)
+
+### 2026-04-24 — D:/Ad Network Website — platform built end-to-end + deployed to adsnetwork.ecosire.com (new server, new product line)
+- **Zero to live in one session.** 215 files, 10K+ LOC across Turborepo monorepo (8 packages, 3 apps, 5 workers) forked from ECOSIRE.COM's proven NestJS 11 + Next.js 15 + Drizzle + PG16 + Redis 7 + Fastify 5 stack. Whitelabel from day 1 via root `tenant.config.ts` — any client clone needs only a fork, one file edit, and 5 `openssl rand -base64 32` rotations to launch under their own brand.
+- **Deployed live** at https://adsnetwork.ecosire.com (new AWS EC2 `50.16.169.132`, Cloudflare proxied, Let's Encrypt HTTP-01 cert — works with CF Full-Strict). 8 PM2 processes (web, api, tracking, + 5 workers), Postgres 16 with 36 tables via `drizzle-kit push`, Redis 7 for BullMQ + sessions, Nginx with Cloudflare IP ranges + shared `/etc/nginx/adnet-proxy.conf` include. All 18 public routes return 200; API health reports db+redis green. Swagger live at `/docs`.
+- **Cross-project impact (reusable patterns promoted fleet-wide):**
+  1. **Whitelabel via root config + override file** — `tenant.config.ts` at repo root with deep-merge of optional `tenant.override.config.ts` (gitignored) lets client clones pull upstream forever without merge conflicts. Better than env vars because the config is typed + versioned with the code. Pattern applies to every SaaS-style workspace (ECOSIRE.IO already whitelabels Odoo hosting — candidate for the same approach).
+  2. **Fastify 5 migrations** — `reply.redirect(url, code)` argument order flipped from v4. Any workspace on Fastify 4 upgrading needs the rewrite.
+  3. **Let's Encrypt HTTP-01 works behind Cloudflare Full-Strict** with `certbot --nginx --no-redirect` — NO DNS-01 challenge needed. ISRG servers successfully fetch the ACME challenge through CF's proxy on port 80. This means any Cloudflare-proxied workspace can get a real origin cert without touching CF API keys. Applies to ECOSIRE.COM, ECOSIRE.IO, future clones.
+  4. **Husky-free pre-commit hook** (from ECOSIRE.COM 2026-04-24) SHIPPED in the new repo from commit 1 — `.githooks/pre-commit` + `"prepare": "git config core.hooksPath .githooks"` in root package.json. Validates the pattern scales to fresh projects, not just retrofit.
+  5. **Fleet TypeScript gotchas re-confirmed and logged:** (a) packages extending `config-tsconfig/node.json` inherit `types: ["node"]` — every such package MUST list `@types/node` in devDeps or add `types: []` override; (b) `import.meta.url` breaks in CommonJS packages even if tsc compiles — use `__dirname` for Node scripts; (c) NestJS ValidationPipe crashes at boot if `class-validator` isn't installed, even if you only use Zod — drop the global pipe entirely when using Zod; (d) Next.js 15 `useSearchParams()` in a `"use client"` page MUST be wrapped in Suspense or static prerender fails.
+- **Canonical facts promoted to Unity:** [[MOC - Hive Mind]] (Ad Network Website row updated from "no code yet" → full stack deployed + server row added), [[Ecosire - Production Servers]] (if present — new 50.16.169.132 entry added if the note exists, otherwise referenced via MOC). New deploy key at `D:\Ad Network Website\adsnetwork.pem` — file path only, value never quoted; `.gitignore` now blocks `*.pem`/`*.key` repo-wide.
+- **Open follow-ups** (documented in CLAUDE.md, not blocking): (1) Add `trk.adsnetwork.ecosire.com` grey-cloud DNS for MMPs that reject path-based tracking URLs (`/r/*` currently lives on main domain); (2) Cloudflare page rule "Cache Level: Bypass" on `/r/*` to prevent redirect caching; (3) Switch to Cloudflare Origin CA cert so LE rate limits don't apply long-term.
+- GitHub: `github.com/engrmuhammadamirnazir/ad-network-platform` (private) — 3 commits this session: `3350250` (monorepo foundation + schema), `31ee688` (full platform — api + web + tracking + workers + agents), `12bf688` (deploy fixes — 22 files tightened during live bring-up).
 
 ### 2026-04-24 — D:/ECOSIRE.COM — blog i18n hotfix + Husky-free pre-commit hook prevents 4th recurrence
 - **Bug surfaced from screenshot.** `/blog` listing page 1/85 was rendering raw key paths (`blog.posts.power-bi-vs-tableau-2026.title` etc.) for 6 cards in every locale — the 6 newly-merged posts from the earlier `6dec0442` deploy shipped without their `blog.posts.{slug}.{title,description}` entries in `apps/web/messages/en.json`. Third recurrence (prior 2026-03-15, 2026-03-17). The pre-deploy / pre-push gate scripts (`scripts/pre-deploy-check.sh`, `scripts/pre-push-check.sh`) that catch this both *exist and pass* — but no one ran them, and there was no enforced Git pre-commit hook. Parallel-agent merges keep slipping past the manual gate.
