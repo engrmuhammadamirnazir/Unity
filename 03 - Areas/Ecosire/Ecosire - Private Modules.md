@@ -36,6 +36,7 @@ updated: 2026-04-10
 | Module | Technical Name | Client | Purpose | Version |
 |--------|---------------|--------|---------|---------|
 | Obliq Automation | `obliq_automation` | Obliq Furniture | BOM cost breakdown (PDF + view), HC customer display, Operations Hub, pricing waterfall | v19.0.7.0.0 |
+| Obliq Statement Auto-Import | `obliq_statement_auto_import` | Obliq Furniture | Direct-upload ADCB Bank/CC + Paymob (.xls/.xlsx/.csv) w/ 5-layer dedup, CC-payoff auto-tag, SHA-256 upload log, post-install backfill wizard. LIVE on Hetzner 2026-04-25; 1,257 BSLs tagged. | v19.0.1.0.0 |
 | Remittance Management | `remittance_management` | Salueman Arif | Cross-company consolidation, compliance, rate-lock, counterparty validation | v19.0.5.0.2 |
 | Material Purchase Requisitions | `ecosire_material_purchase_requisitions` | Internal | Clean-room v19 rebuild of Probuse module, schema-compatible with 3,549 legacy records | 19 |
 

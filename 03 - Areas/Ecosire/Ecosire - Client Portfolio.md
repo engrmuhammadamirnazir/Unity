@@ -17,12 +17,13 @@ updated: 2026-04-10
 - **Industry**: Contemporary furniture design & manufacturing
 - **Location**: Al Quoz Industrial Area 1, Dubai, UAE
 - **Platform**: Odoo 19 Enterprise
-- **Services**: ERP cleanup, inventory fix, AR/AP reconciliation, Shopify integration, BOM cost breakdown
-- **Contact**: Ziad Al-Haffar (ziad@homefigures.com)
+- **Services**: ERP cleanup, inventory fix, AR/AP reconciliation, Shopify integration, BOM cost breakdown, bank-statement automation
+- **Contact**: Ziad Al-Haffar (ziad@homefigures.com); Kamal Nath (Accounts)
 - **Fee**: USD 2,500 (confirmed, $1K advance received)
-- **Production**: 52.206.177.34 (SHARED with Oenoteca — CRITICAL)
-- **Module**: obliq_automation v19.0.7.0.0 (BOM cost PDF, HC customer display, Operations Hub, pricing waterfall)
-- **Key Data**: 585 products, 1,042 BOMs, 619 SOs, AED 1.43M revenue
+- **Production**: Hetzner 23.88.13.113 (migrated from AWS 2026-04-14; isolated, not shared)
+- **Modules**: obliq_automation v19.0.7.0.0; **obliq_statement_auto_import v19.0.1.0.0** (LIVE 2026-04-25 — ADCB/Paymob direct-upload with 5-layer dedup + CC-payoff auto-tag)
+- **Key Data**: 585 products, 1,042 BOMs, 619 SOs, AED 1.43M revenue; 1,257 bank-statement lines backfilled with dedup fingerprints
+- **Latest bookkeeping state**: 2026-04-25 audit posted 3 correcting JEs (SO 0106/0107/0108) removing AED 353,366 of fake Office Expense; Ziad Current Account, ADCB CC liability, ADCB Studio Obliq bank all reflect true economic position
 - **Project**: [[PRJ - Obliq Furniture]]
 
 ### Sahara Properties
