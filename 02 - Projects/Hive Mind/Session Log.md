@@ -3,7 +3,7 @@ type: log
 tags: [hive-mind, session-log, append-only, cross-project]
 aliases: [Hive Mind Log, Agent Session Journal]
 created: 2026-04-22
-updated: 2026-04-24T09:30Z
+updated: 2026-04-24T16:30Z
 ---
 
 # Hive Mind — Session Log (Append-Only)
@@ -30,6 +30,15 @@ Keep entries tight. Format:
 ---
 
 ## Log (newest first)
+
+### 2026-04-24 — D:/Development — Sulaman Standard: new vanilla Odoo 19 DB on Sahara's shared Bitnami (3rd subdomain on the same box)
+- Provisioned `suleman` DB on the existing AWS Bitnami at 3.232.201.222 — live at https://suleman.ecosire.com (Cloudflare orange-cloud, LE cert SAN expanded sahara→sahara+testing+suleman, expiry 2026-07-23). Admin = `sulearifuae@gmail.com` (same Suleman Arif as the Remittance client + Sahara CEO contact, password matched to Sahara admin per user instruction). Apps installed via XML-RPC: sales / purchase / account_accountant / stock / crm / hr / project / contacts / mail / website / l10n_ae (UAE/AED/Asia-Dubai). DB created via POST `/web/database/create` with master_pwd. New client folder `D:/EcosireClients/ActiveClients/Sulaman-Standard/` with CLAUDE.md + reusable `scripts/install_apps.py` + `scripts/verify_public.py`.
+- **Cross-project impact (reusable patterns for any Bitnami Odoo box on this fleet):**
+  1. **Catch-all-vhost trick** — Bitnami's stock `odoo-https-vhost.conf` uses `ServerAlias *` and Odoo's `dbfilter = ^%d$` does the rest. Adding a new tenant subdomain to ANY existing Bitnami Odoo (Sahara / Remittance / Wayfair-on-Quicken-style boxes) requires ONLY (a) DNS to origin + (b) `certbot certonly --standalone --expand` to add the SAN. No per-DB vhost file, no `Include` shuffles, no `a2ensite`. Pattern works behind Cloudflare orange-cloud — re-confirms the 2026-04-24 ADNET finding that LE HTTP-01 succeeds through CF Full-Strict without DNS-01.
+  2. **Master-password URL-encoding gotcha** — `r04uU1E+gekv` contains `+`, which curl form-encodes as a literal space. Use `--data-urlencode` (not raw `-d`) when scripting `/web/database/create`. A typo (`gekV` capital V) returns HTTP 200 with the DB-manager HTML re-rendered (no error JSON), which can be misread as success. Watch the Odoo log for `Registry changed, signaling through the database` to confirm actual creation.
+  3. **/web/database/list returns `[]` from localhost** when `dbfilter=^%d$` is in play — the regex fails on `Host: 127.0.0.1`. Don't interpret empty list as "creation failed"; query Postgres directly or hit the endpoint with a matching Host header.
+- **Cross-project impact (entity):** Suleman Arif now has THREE Odoo systems on two different servers — Sahara PMS (`saharaproperties` + `testingsahara` on 3.232.201.222) for property work, Remittance (`remittanceaccounting` + `remtest` on 52.28.45.137) for the European remittance entity, and now this vanilla `suleman` DB on the Sahara box for general/personal use. Future agents asking "where's Suleman's data?" should disambiguate by use case before SSH-ing.
+- **Canonical facts promoted to Unity:** [[Ecosire - Production Servers]] — Server 3 row updated (3 SANs on cert, 3 DBs on box, catch-all-vhost trick documented).
 
 ### 2026-04-24 — D:/Ad Network Website — ADNET prod seeded with 4 role-spanning demo accounts (admin + ops + advertiser + publisher)
 - **Problem surfaced:** the flagship `adsnetwork.ecosire.com` admin row was unusable — `pnpm db:seed` (`packages/db/src/seed.ts`) deliberately writes a `$seed$`-prefixed sentinel into `users.password_hash` and `verifyPassword()` short-circuits to `false` on that prefix. Intended flow is password reset via email, but no SMTP is wired in prod yet. Resolved by SSH-ing in with `adsnetwork.pem`, bcrypt-hashing a 16-char `base64url` secret using the repo's own `bcrypt@5.1.1` + `postgres@3.4.9` resolved from `node_modules/.pnpm/` (pnpm doesn't hoist, so direct `require("bcrypt")` at the app root fails with `MODULE_NOT_FOUND`), and running a single `UPDATE users SET password_hash=$1` + `DELETE FROM sessions WHERE user_id=$1` against `$DATABASE_URL` from `/opt/adsnetwork/app/.env.production`. Verified round-trip with `bcrypt.compare`; hash prefix now `$2b$` length 60, 0 stray sessions. Then inserted 3 more rows (advertiser + publisher + ops) with `ON CONFLICT (organization_id, email_lower) DO UPDATE` so the script is idempotent.

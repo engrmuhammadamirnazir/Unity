@@ -2,7 +2,7 @@
 type: reference
 tags: [ecosire, servers, production, aws, hetzner, infrastructure]
 created: 2026-03-02
-updated: 2026-04-10
+updated: 2026-04-24
 ---
 
 # Ecosire — Production Servers
@@ -17,7 +17,7 @@ updated: 2026-04-10
 |---|--------|----|--------|---------|-------|--------|
 | 1 | ECOSIRE.COM | 13.223.116.181 | ecosire.com | Main SaaS Platform | EC2 t3.large, Ubuntu 24.04 | LIVE |
 | 2 | ECOSIRE.AI | 54.197.92.23 | ecosire.ai | AI Content Engine | EC2 t3.large, Ubuntu 24.04 | LIVE |
-| 3 | Sahara Properties | 3.232.201.222 | saharaproperties.ecosire.com | Client Odoo 19 | Bitnami | LIVE |
+| 3 | Sahara Properties (+ Suleman) | 3.232.201.222 | saharaproperties.ecosire.com / testingsahara.ecosire.com / suleman.ecosire.com | Client Odoo 19 (3 DBs) | Bitnami | LIVE |
 | 4 | Obliq + Oenoteca | 52.206.177.34 | — | Client Odoo 19 (SHARED) | Bitnami | LIVE |
 | 5 | Demo Server | 37.27.2.10 | demo.ecosire.com | Product showcase (201 modules) | Hetzner CPX42 | LIVE |
 | 6 | Remittance | 52.28.45.137 | remittanceaccounting.ecosire.com | Financial services | Bitnami Odoo 19 Enterprise | LIVE |
@@ -123,10 +123,20 @@ ssh -i "sahara.pem" bitnami@3.232.201.222
 
 ### Architecture: Bitnami Odoo 19
 - Stack: Bitnami Odoo 19, 8 GB RAM, 60 GB disk
-- SSL: Let's Encrypt (auto-renew)
+- SSL: Let's Encrypt (auto-renew, **3-SAN as of 2026-04-24**: saharaproperties + testingsahara + suleman)
 - Enterprise Modules: 1,423
 - Custom addons: `/bitnami/odoo/addons`
 - Module: property_management_system v19.0.3.10.0
+- **Catch-all vhost trick** — `/opt/bitnami/apache2/conf/vhosts/odoo-https-vhost.conf` has `ServerAlias *`; combined with Odoo `dbfilter = ^%d$`, **adding a new subdomain DB on this box requires only DNS + cert-SAN-expand. No new vhost needed.**
+
+### Databases on this box (3, all routed by subdomain)
+| Subdomain | DB | Purpose |
+|---|---|---|
+| saharaproperties.ecosire.com | `saharaproperties` | Sahara Properties prod (PMS) |
+| testingsahara.ecosire.com | `testingsahara` | Sahara Properties UAT clone |
+| suleman.ecosire.com | `suleman` | Suleman Arif vanilla Odoo (added 2026-04-24, see [[PRJ - Sahara Properties]] / D:/EcosireClients/ActiveClients/Sulaman-Standard/) |
+
+> **Shared-box reminder:** Apache/Odoo restart hits all 3 DBs simultaneously. Batch maintenance.
 
 ---
 
