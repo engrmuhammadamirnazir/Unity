@@ -11,10 +11,14 @@
             "id": "2d8c37705ac7f0a9",
             "type": "leaf",
             "state": {
-              "type": "graph",
-              "state": {},
-              "icon": "lucide-git-fork",
-              "title": "Graph view"
+              "type": "markdown",
+              "state": {
+                "file": "03 - Areas/Credentials & Access/Demo Server SSH Key.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Demo Server SSH Key"
             }
           }
         ]
