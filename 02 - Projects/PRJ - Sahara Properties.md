@@ -149,25 +149,42 @@ Issues encountered and resolved during this project:
 
 | Field | Value |
 |-------|------:|
-| Move | `account.move id=2` on both `saharaproperties` + `testingsahara` |
+| Move | `account.move id=2` on `saharaproperties` (prod). `testingsahara` not yet synced for this pass. |
 | Date | 2026-01-01 |
 | State | **draft** |
-| Lines | **36** |
-| Total Dr = Cr | **AED 22,934,192.51** |
-| Last updated | 2026-04-23 (afternoon — second pass same day) per `Opening Trial Balance 2026.xlsx` (mtime 13:36) from Zahoor Butt |
+| Lines | **90** (was 36; 36 - 1 PDC lump + 55 tenant AR lines) |
+| Total Dr = Cr | **AED 22,934,192.51** (unchanged) |
+| Last updated | 2026-04-29 (PDC→AR per-tenant reclass + 5 new related-party accts) |
 
-Structure after 2026-04-23 afternoon update: gross/net asset split — Leasehold Improvements at gross 12,746,394 + Accum Dep (130010) Cr 2,093,874 contra-asset; Lease Acquisition Cost at gross 2,211,000 + Accum Amort (130110) Cr 294,798 contra-asset; new AR line 110000 Dr 9,425 for Al Tashkhis Garage (Darmix 1); Advance from Tenant (200220) Cr raised 144,057 → 146,307 (+2,250 UPG Paper Cutting D1); Retained Earnings Adjustment (310100) reduced to 2,033,559.13. Utility Payable (FEWA) Cr 122,736.51 from this morning's pass persists.
+Structure after 2026-04-29 reclass: AR account 110000 now holds **56 partner-tagged Dr lines totaling AED 3,205,492** (3,196,067 reclass across 55 tenants + 9,425 Tashkhis tagged with partner_id=33). The unpartnered `PDC Receivable Dr 3,196,067` lump line is removed. Per-project tenant subtotals: D1 14×667,570 / D2 7×849,750 / Taxi 9×825,184 / BO 17×713,153 / ASAS 4×110,000 / Sajaa 3×30,410. 144 Project decided as "Not Included" — Tashkhis 9,425 is its sole residual. Earlier 2026-04-23 afternoon structure (gross/net asset split, Utility Payable FEWA, Advance Tenant +2,250) all persists.
+
+5 new related-party collection accounts (`asset_current`, `reconcile=True`) — Sahara also receives tenant rent into these:
+| Code | Name | id | Journal |
+|---|---|---|---|
+| 110700 | Due from CEO Mansoor | 301 | CMAN (id=20) |
+| 110710 | Due from Tasrie ADCB Account | 302 | CTAB (id=21) |
+| 110720 | Due from Tasrie HR and Business Consultancy | 303 | CTHR (id=22) |
+| 110730 | Due from Al Maraem General Maint. LLC | 304 | CALM (id=23) |
+| 110740 | Due from Daleel General Trading LLC | 305 | CDAL (id=24) |
+
+All 5 journals are **cash-type** (not bank — no IBAN forced since Sahara doesn't own them). Receipts flow `Dr 110xxx Due from X / Cr 110000 AR (tenant)`; subsequent remittance to a real Sahara bank closes with `Dr 100001 ENBD / Cr 110xxx`.
+
+3 new `res.partner`: Al Maraem General Maint. LLC (id=259), Daleel General Trading LLC (id=260), Al Qazal Tailoring & Classic Tailoring (id=261, tenant Taxi WH11 AED 56,250).
+
+Backup: `Sahara-Properties/backups/pre_opening_tb_reclass_2026_04_29.dump` (8.8 MB pg_dump custom). Rollback (only safe before any other writes hit prod after 02:03 Asia/Karachi 2026-04-29): `pg_restore -U bn_odoo -d saharaproperties --clean --if-exists <dump>` from prod server.
 
 Pending for Zahoor (carried forward):
-1. Post the OB (still draft, now at 22,934,192.51 / 36 lines)
-2. Suleman Investment +43,500 over-allocation on D2 (OB 3,868,500 vs Capital sheet 3,825,000 — unchanged in new xlsx)
-3. PDC Receivable per-project variance (DB 5.28M vs Excel 3.20M closing)
-4. Activate the 11 DRAFT asset/depreciation records once OB is posted — the 2 new contra-asset OB lines become the baseline for future depreciation bookings
+1. **Click Post** on `move_id=2` (still draft after reclass — agent did NOT auto-post per safety rule)
+2. Suleman Investment +43,500 over-allocation on D2 (OB 3,868,500 vs Capital sheet 3,825,000)
+3. PDC Receivable per-project variance (DB 5.28M vs Excel 3.20M closing — likely state mismatch / dup imports, needs per-tenant pass)
+4. Activate the 11 DRAFT asset/depreciation records once OB is posted — the 2 contra-asset OB lines become the baseline for future depreciation bookings
+5. Replicate today's reclass on `testingsahara` once prod is signed off
 
 ---
 
 ## Deployment History
 
+- **2026-04-29 (night, ~02:00–02:03 Asia/Karachi)**: Zahoor's WhatsApp update implemented on `saharaproperties` prod via accountant agent (delegated under "use best judgment / assign codes yourself"). **5 new asset accounts** 110700–110740 + **5 cash journals** CMAN/CTAB/CTHR/CALM/CDAL + **3 new partners** (Al Maraem 259, Daleel 260, Al Qazal Tailoring 261). **Opening JE `move_id=2` mutated in place** (lucky break — still draft from 2026-04-23, no separate adjustment JE needed): removed unpartnered `PDC Receivable Dr 3,196,067` lump, added 55 partner-tagged tenant AR lines on 110000 (D1×14 / D2×7 / Taxi×9 / BO×17 / ASAS×4 / Sajaa×3 = 3,196,067), tagged Tashkhis line partner_id=33. AR 110000 sum after = AED 3,205,492.00 across 56 partner-tagged lines, 100% partner-tagged. Move balance unchanged AED 22,934,192.51 Dr=Cr, 90 lines, still **draft**. 144 Project decided unilaterally as "Not Included" per PDC sheet label — Tashkhis 9,425 is sole residual. Pre-write backup at `pre_opening_tb_reclass_2026_04_29.dump`. Plan + posted reports at `Sahara-Properties/docs/Opening_TB_Reclass_{Plan,Posted}_2026_04_29.md`. Scripts at `Sahara-Properties/scripts/opening_tb_reclass_2026_04_29/`. Reusable patterns captured: **Atomic Draft-JE Mutation Pattern** (line_ids commands on draft move) + **In-line Partner Creation via Override Manifest** (CREATE: directive). `testingsahara` not synced for this pass — to replicate after Zahoor signs off.
 - **2026-04-23 (afternoon)**: OB draft updated AGAIN per Zahoor's re-uploaded xlsx (mtime 13:36, 4h after the morning pass). Gross/net asset split applied: LHI 10.65M → 12.75M gross + Accum Dep (130010) Cr 2.09M contra-asset; LAC 1.92M → 2.21M gross + Accum Amort (130110) Cr 294.8K contra-asset; new AR line (110000) Dr 9,425 for Al Tashkhis Garage (D1); Advance Tenant (200220) Cr 144,057 → 146,307; RE Adj (310100) 2,040,733.38 → 2,033,559.13. Grand total 20.54M → **22.93M**, 33 → 36 lines, both DBs still draft. pg_dumps in `/home/bitnami/backups/` timestamped `20260423_084754` (test) / `20260423_084940` (prod). Answers Zahoor's pending question #4 (gross vs net asset presentation).
 - **2026-04-23 (morning)**: OB draft updated per Zahoor's first revised xlsx (mtime 09:37) — added `200230 Utility Payable` Cr 122,736.51 (FEWA, 5-project analytic split) + bumped Retained Earnings Adjustment Dr to 2,040,733.38; grand total 20.42M → 20.54M; both DBs, still draft. pg_dumps in `/home/bitnami/backups/` timestamped `20260423_045014`. SUPERSEDED same day by afternoon pass.
 - **2026-04-22 (late eve)**: res.partner dedup — 247→184 partners on prod, testingsahara re-cloned from post-merge prod. Reusable pipeline at `D:/EcosireClients/ActiveClients/Sahara-Properties/scripts/partner_dedup/`.
