@@ -7,6 +7,7 @@ start-date: 2025-10-08
 tags: [project, oenoteca, odoo, accounting]
 created: 2025-10-08
 updated: 2026-04-29
+milestone: v4 Q1+Apr P&L PDF delivered 2026-04-29 — Q1 NI $72,407 (29.5%), Q1+Apr NI $101,117 (33.3%), BS balances $0.00
 ---
 
 # PRJ — Oenoteca Fine Wines
