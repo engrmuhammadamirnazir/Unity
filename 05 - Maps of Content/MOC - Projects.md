@@ -1,7 +1,7 @@
 ---
 type: moc
 tags: [moc, projects]
-updated: 2026-04-22
+updated: 2026-04-29
 ---
 
 # MOC — Projects
@@ -29,6 +29,7 @@ updated: 2026-04-22
 - PSL Premium Sports Lighting — Custom ERP + Google OAuth
 - Dynasty Tahiti — Odoo ERP (French Polynesia)
 - [[PRJ - Sahara Properties]] — Odoo 19 property management (Bitnami)
+- Future Vision Est. For Custom Clearance — ZATCA Phase 2+3 fix-and-harden on Waredat ERP (Flask SaaS, Replit, `waredaterp.com`); $750 fixed-fee, code-complete 2026-04-29 awaiting sandbox cert + Replit deploy (Jeddah, KSA) **NEW**
 - DTS Connector — Custom integration project
 - ERPSAP.IN (Shree Group) — Odoo implementation (India)
 - Dr Muneera — Healthcare ERP
