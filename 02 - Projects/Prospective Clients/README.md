@@ -2,7 +2,7 @@
 type: index
 tags: [clients, prospective, pipeline, index]
 created: 2026-04-22
-updated: 2026-04-24
+updated: 2026-04-28
 ---
 
 # Prospective Clients — Pipeline
@@ -24,6 +24,7 @@ Inbound leads and active proposals that haven't yet converted to paid engagement
 | **Texas Closeout (Houston)** | 3PL WMS custom module via Mastero · $1,999 | Proposal sent 2026-03-26 | `texas_closeout_client.md` |
 | **Airport Taxi Hub (ATH)** | Odoo ERP for airport transfers marketplace · $4K · Quicken referral | Proposal sent 2026-04-03 | `ath_client.md` |
 | **RedXpider (Netherlands)** | v2 PreDev delivered · M1 scope (milestone 1) PR open at joelmeijering2/odoo#1 | Awaiting 3 client decisions (tooling / 3PL recon / incident module) | `redxpider_client.md` + `session_2026_04_20i_redxpider_m1_delivered.md` |
+| **Future Vision Est. For Custom Clearance (KSA)** | ZATCA Phase 2 + Phase 3 e-invoicing integration on **client's custom (non-Odoo) system** · $750 fixed | Invoice INV-2026-04-FVCC-001 issued 2026-04-28 to Mr. Hussam Saleh Almohaimeed (alsaleh.fcco@gmail.com, +966 547 792 429); awaiting payment + screenshot before kickoff | `future_vision_zatca_client.md` (project-local, D:/Development) |
 
 ## Convention
 
