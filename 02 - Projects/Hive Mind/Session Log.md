@@ -3,7 +3,7 @@ type: log
 tags: [hive-mind, session-log, append-only, cross-project]
 aliases: [Hive Mind Log, Agent Session Journal]
 created: 2026-04-22
-updated: 2026-04-25T02:00Z
+updated: 2026-04-29T21:30Z
 ---
 
 # Hive Mind — Session Log (Append-Only)
@@ -30,6 +30,15 @@ Keep entries tight. Format:
 ---
 
 ## Log (newest first)
+
+### 2026-04-29 — D:/Development — Sahara OB PDC→AR per-tenant reclass POSTED on prod (still DRAFT for Zahoor); 5 new related-party collection accounts/journals
+- **Sahara prod (AWS Bitnami `3.232.201.222`, DB `saharaproperties`):** Zahoor Butt's WhatsApp update implemented via accountant agent under "use best judgment / assign codes yourself" delegation, dry-run-then-GO cycle. Opening JE `account.move id=2` mutated in place (lucky break — still draft from 2026-04-23, atomic `line_ids` commands instead of separate adjustment JE). Removed unpartnered `PDC Receivable Dr 3,196,067` lump, added 55 partner-tagged tenant AR lines on account 110000 (D1×14 / D2×7 / Taxi×9 / BO×17 / ASAS×4 / Sajaa×3 = 3,196,067), tagged 9,425 Tashkhis line partner_id=33. Net 36→90 lines, AR 110000 = AED 3,205,492 across 56 partner-tagged lines (100%). Move balance unchanged AED 22,934,192.51 Dr=Cr, still **draft**.
+- **5 new asset_current accounts + 5 cash journals + 3 partners:** codes 110700/110710/110720/110730/110740 (Mansoor / Tasrie ADCB / Tasrie HR / Al Maraem / Daleel) — Sahara also receives tenant rent into these related-party accounts; cash-type journals avoid IBAN/SWIFT forcing. Partners Al Maraem (259), Daleel (260), Al Qazal Tailoring (261, missing tenant Taxi WH11 created in-line via override manifest).
+- **144 Project disposition decided unilaterally** per user authority: PDC sheet labels "Not Included"; the 9,425 Tashkhis line on existing draft OB is its sole residual. No new 144 entries.
+- **Reusable patterns promoted:** [[feedback_delegate_with_full_authority]] (delegate to specialist agent + grant code/category authority + dry-run-then-GO gate on prod) + Atomic Draft-JE Mutation Pattern (mutate `state='draft'` move via `line_ids` commands instead of stacking adjustment JEs — pre-flight MUST re-check state, fail-closed if posted) + In-line Partner Creation via Override Manifest (`CREATE:` directive in `_manual_tenant_overrides.json` so missing tenants land in same transaction as JE mutation).
+- **Cross-project impact:** Atomic-draft-JE pattern applies to ANY accounting-engagement OB cleanup where the move hasn't been posted yet — saves writing reverse+repost stacks. Delegation-with-authority feedback applies to ANY production task where the user has explicitly granted judgment.
+- **Canonical facts promoted to Unity:** [[PRJ - Sahara Properties]] (head + Opening Balance + Deployment History updated, frontmatter `updated: 2026-04-29`).
+- **Pending Zahoor:** click Post on `move_id=2`. Then activate 11 DRAFT asset/depreciation records. Suleman +43,500 D2 over-allocation + PDC per-project variance still open from 2026-04-23. `testingsahara` not synced for this pass — replicate after sign-off.
 
 ### 2026-04-29 — D:/ECOSIRE.AI — Bulk PC-game drafts v2 module shipped + first 139 of 2000 drafts published
 - **What was done:** Brainstormed → spec → 16-task TDD plan → implemented + 61/61 tests passing on branch `bulk-pc-game-drafts-v2` (24 commits). Built 200-game catalog (Steam Storefront + Wikipedia verification + Claude AI fill). Live run: 139 WordPress drafts published (121 on freepcgames.org with FitGirl-repack angle, 18 on pcgamestore.net with DODI angle). Two SEO-differentiation axes: repack release + ancillary section sets (cheats/mods/errors vs features/tips/graphics).
