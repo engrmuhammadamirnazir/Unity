@@ -4,7 +4,7 @@ tags: [project, ecosire, odoo, real-estate, client]
 status: active
 created: 2026-03-02
 start-date: 2026-02-28
-updated: 2026-04-23
+updated: 2026-04-29
 ---
 
 # PRJ — Sahara Properties
