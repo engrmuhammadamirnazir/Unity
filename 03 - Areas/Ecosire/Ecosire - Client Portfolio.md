@@ -2,7 +2,7 @@
 type: reference
 category: ecosire, clients
 tags: [clients, portfolio, ecosire]
-updated: 2026-04-10
+updated: 2026-04-29
 ---
 
 # Ecosire — Client Portfolio
@@ -97,9 +97,10 @@ updated: 2026-04-10
 - **Industry**: Accounting / E-commerce
 - **Domain**: odoo.soovah.com (5.78.207.108)
 - **Platform**: Docker Odoo 19
-- **Module**: Wayfair Store Management v3.7.0
-- **Status**: LIVE — EDI 820 payout import, settlement CSV wizard, reconciliation, payment registration
-- **Data**: 2,110 orders synced, payout reconciled
+- **Module**: Wayfair Store Management **v19.0.3.12.1** (deployed 2026-04-29 — backlog stranding fix + date_order pin)
+- **Status**: LIVE — EDI 820 payout import, settlement CSV wizard, reconciliation, payment registration, backlog-recovery cron self-healing
+- **Data**: 5,567 wayfair_order mappings; CS=4,515 / CA=235 / DS=0
+- **2026-04-29 incident**: 1,470 missing CS/CA POs Feb 19 – Apr 2 recovered to prod (root cause = v3.11.0 backlog stranding bug, fixed in v3.12.0 + cosmetic date_order side-effect fixed in v3.12.1). Invoices: Feb 295 / Mar 1,114 / Apr 62 all `posted` with correct invoice_date.
 - **Additional**: SAP B1 ↔ Odoo integration proposal sent ($1,250, 2 weeks)
 
 ### Gaspar Muhlmann

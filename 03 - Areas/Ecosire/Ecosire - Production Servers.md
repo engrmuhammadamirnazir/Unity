@@ -2,7 +2,7 @@
 type: reference
 tags: [ecosire, servers, production, aws, hetzner, infrastructure]
 created: 2026-03-02
-updated: 2026-04-24
+updated: 2026-04-29
 ---
 
 # Ecosire — Production Servers
@@ -228,10 +228,11 @@ ssh -i remittance.pem bitnami@52.28.45.137
 ## Server 7: Quicken/Soovah (5.78.207.108)
 
 - **Domain**: odoo.soovah.com
-- **Stack**: Docker Odoo 19
-- **Module**: wayfair_store_management v3.7.0
-- **Data**: 2,110 orders, payout reconciled
-- **Known Issue**: Docker resets web.base.url to localhost — MUST fix+freeze for license
+- **Stack**: Docker Odoo 19 (`odoo-one-odoo19-1` + `odoo-one-db-1` postgres:18)
+- **Module**: wayfair_store_management **v19.0.3.12.1** (deployed 2026-04-29, was v3.11.0 → v3.12.0 → v3.12.1 same day)
+- **Data**: 5,567 wayfair_order mappings (was 3,261 pre-recovery); CS=4,515 + CA=235 + DS=0
+- **2026-04-29 backlog recovery**: 1,470 missing CS/CA POs (Feb 19 – Apr 2) recovered to prod; invoices Feb 295 / Mar 1,114 / Apr 62 all `posted` in correct months. Pre-recovery DB backup (54.6 MB pg_dump) at `D:/Development/EcosireClients/ProspectiveClients/Soovah-Wayfair/backups/soovah1_pre_v3.12.0_20260428_202956.dump` + Dropbox-synced copy at `Dropbox/Backups/Soovah-Wayfair/`.
+- **Known Issues**: (1) Docker resets web.base.url to localhost — MUST fix+freeze for license (already frozen 2026-04-05). (2) SSH key `ecosire_main` de-authorized 2026-04-22 — server accepts password only (use Quicken row of [[Server & Key Inventory]]).
 
 ---
 
