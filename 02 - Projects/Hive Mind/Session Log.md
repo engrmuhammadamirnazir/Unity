@@ -31,6 +31,13 @@ Keep entries tight. Format:
 
 ## Log (newest first)
 
+### 2026-04-29 — Hive Mind — Created [[Agent Rules]] note with 4 cross-project policies (R-001 through R-004)
+- Captured 4 rules that apply to every Claude session in any workspace: R-001 no Claude attribution in client-owned repos (Future Vision intercept origin); R-002 never share secrets via chat/email/WhatsApp (Replit deployment prep origin); R-003 convert relative dates to absolute when persisting; R-004 verify before recommending from memory.
+- Format defined for future rule additions — R-NNN short imperative title with Origin / Rule / Why / How to apply sections, ≤25 lines each.
+- Lives at `Unity/02 - Projects/Hive Mind/Agent Rules.md`. Cross-references project-local feedback files for full detail.
+- Cross-project impact: every workspace agent should read this file when working on client-owned repos. Originating concrete cases were Future Vision Waredat (R-001, R-002) but pattern applies to Soovah/Quicken, Diamond/STIG, Obliq deployments, any future client.
+- Canonical facts promoted to Unity: [[Agent Rules]] (NEW)
+
 ### 2026-04-29 — D:/EcosireClients/Future-Vision-Waredat — ZATCA Compliance Sandbox CERTIFIED 9/9 for tenant ABIR ALMANAFETH; 7 production-blocker bugs found via live FATOORA round-trips
 - **Live cert PASS 9/9** for Future Vision tenant ABIR ALMANAFETH Establishment Ltd (VAT `300832422400003` / CR `7006925437` / Logistics / Jeddah 22233) on `https://gw-fatoora.zatca.gov.sa/e-invoicing/developer-portal/compliance/invoices`. Compliance CSID issued (`requestID=1234567890123` `dispositionMessage=ISSUED`). All 9 official ZATCA scenarios — Standard B2B Invoice/Credit/Debit, Simplified B2C Invoice/Credit/Debit, Standard with Line Discount / Mixed VAT / Exempt — passed XSD + Schematron + XAdES + QR validation. OTP `705386` from Hussam reusable in sandbox window.
 - **7 production-blocker bugs found that 21 unit tests missed** — captured in `feedback_zatca_phase2_canonicalization.md` (UPDATED, this is canonical ZATCA Phase 2 knowledge for the fleet): (1) `binarySecurityToken` is `base64(base64-of-DER)` not `base64(PEM)`; (2) QR field 9 = `cert.signature` REQUIRED for Simplified, FORBIDDEN for Standard; (3) `0.0 or default` Python footgun mis-rated all Z/E lines at 15%; (4) VATEX-SA-OOS misused for Z/E (it's for cat=O only); (5) `<cac:AccountingCustomerParty>` must be empty for B2C; (6) QR timestamp must be local Riyadh `%Y-%m-%dT%H:%M:%S` no `Z` no offset; (7) BR-KSA-15 supply date defaults to issue_date.
