@@ -125,6 +125,8 @@ updated: 2026-04-29
 | Ximplifika | Import/Trading | Mexico | $3,500 ERP | Sent 2026-03-26 |
 | Texas Closeout | 3PL WMS | Houston, TX | $1,999 (via Mastero) | Sent 2026-03-26 |
 | Airport Taxi Hub | Airport transfers marketplace | Delaware/UK | $4,000 ERP | Sent 2026-04-03 (Quicken referral) |
+| Clube de Literatura Clássica (Editora Literatura Classica Ltda., CNPJ 34.071.390/0001-02) | B2C subscription book club, 15k+ assinantes, ~37 employees | Dois Irmãos, RS, Brazil | Odoo 19 + l10n_br pitch (subscriptions + NF-e/ICMS/PIS-COFINS + monthly box fulfillment) — 4 prep questions + meeting slot proposed | Inbound 2026-04-29; reply sent in PT-BR; meeting proposed 05/05 or 06/05 14h00 BRT — awaiting confirmation. Contact: Lisandra Spohr (Financeiro) financeiro@literaturaclassica.com.br / +55 51 98064-4101 |
+| OTRA Technology Co., Ltd. (又一科技; Reg #83038170) | Official Odoo Partner Taiwan — partner-eval, not end-user | Taipei, Taiwan | ECOSIRE Shopee Store Management module — $499 App Store license, 13 regions, partner-volume conversation opened | Inbound 2026-04-29 from Odoo App Store; reply sent (demo URL + docs + pricing + 3 Taipei call slots Mon/Tue/Wed May 4-6); demo creds follow-up + ecosire.com price drift fix ($249→$499) still open. Contact: Iris Chau 周雨婷 irischau@otra-technology.com / +886-2-7729-6651 #11 |
 
 ---
 
