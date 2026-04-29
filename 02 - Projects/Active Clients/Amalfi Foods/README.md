@@ -51,7 +51,7 @@ updated: 2026-04-30
 - **AWAITING** Amir to review + click-send Ecosire response to Yehia's Master Blueprint.
 - 90-min working session proposed Sun 4 May / Mon 5 / Tue 6 / Wed 7 May, 09:00-17:00 Bahrain.
 - v19 upgrade plan still parked (now folded into Phase 1 of the Revised Proposal).
-- Ghitha SWF expansion realised — Yehia's blueprint = $30-60K+ scope was right; pricing band moved to $28K-58K 5-phase implementation.
+- Ghitha SWF expansion realised — Yehia's blueprint = $30-60K+ scope was right; pricing band moved to **$18K-38K 5-phase implementation** (cut from initial $28-58K draft per Amir's call — sales-friendly anchor for price-sensitive Fiverr-origin client + protects Ghitha follow-on).
 
 ## Next actions
 
@@ -72,7 +72,7 @@ updated: 2026-04-30
 - Reply email body draft at project-local `02-Discovery/08_Reply_to_Yehia_Blueprint_Review_2026-04-30.md`.
 - Two reusable generators at `D:/Development/scripts/client_docs/generators/Amalfi_Blueprint_Review.py` and `Amalfi_Revised_Proposal.py`.
 
-**Pricing band shift (CANONICAL):** $4-7K Phase 1-3 indicative (per 2026-04-20 Hosting Recommendation Rev 2) → **$28K-58K 5-phase implementation** (this session). Three tiers: Lean USD 28,000 / Standard USD 42,000 [recommended] / Comprehensive USD 58,000. Recurring fees separate (Managed Hosting $100/mo + Odoo Enterprise pass-through ~$697/mo + IoT hardware cost-plus).
+**Pricing band shift (CANONICAL):** $4-7K Phase 1-3 indicative (per 2026-04-20 Hosting Recommendation Rev 2) → **$18K-38K 5-phase implementation** (this session). Three tiers: Lean USD 18,000 / Standard USD 28,000 [recommended] / Comprehensive USD 38,000. Phase 1 first invoice on Standard = USD 1,400 (5%). Recurring fees separate (Managed Hosting $100/mo + Odoo Enterprise pass-through ~$697/mo + IoT hardware cost-plus). Pricing cut from initial draft ($28K/$42K/$58K) to final tiers per Amir's mid-session call — Yehia's Fiverr origin + Mast IT incumbent anchor + Ecosire's strategic interest in the Ghitha follow-on > maximizing first engagement.
 
 **5 critical scope-locking questions for working session:**
 1. KSA Commercial Registration timing — within 12 weeks (single-stage rollout) or longer (two-stage rollout: Bahrain go-live first at week 22, KSA at +6-8 weeks on CR issue).
