@@ -2,7 +2,7 @@
 type: reference
 category: ecosire, clients
 tags: [clients, portfolio, ecosire]
-updated: 2026-04-29
+updated: 2026-04-29T22:30Z
 ---
 
 # Ecosire — Client Portfolio
@@ -80,6 +80,20 @@ updated: 2026-04-29
 - **Location**: Pakistan
 - **Platform**: Odoo (custom development)
 - **Services**: Custom store development (patient management, invoicing, scan tracking)
+
+### Future Vision Est. for Custom Clearance (Waredat ERP)
+- **Industry**: Customs Clearance + Multi-tenant ERP SaaS platform (Waredat ERP)
+- **Location**: Jeddah, Saudi Arabia
+- **Platform**: Custom Flask app on Replit (`https://replit.com/@hussamalmohaime/Customs-Flow`) — production at `waredaterp.com`
+- **Services**: ZATCA Phase 2 + Phase 3 fix/harden (NOT greenfield — fixing existing implementation)
+- **Contact**: Hussam Saleh Almohaimeed (CEO) — `hussam.almohaimeed@cports.sa`
+- **Fee**: USD 750 (paid up-front via Meezan Bank PK)
+- **Engagement**: `INV-2026-04-FVCC-001`
+- **Status**: ZATCA Compliance Sandbox CERTIFIED 9/9 (2026-04-29 evening) for first tenant ABIR ALMANAFETH; deployment to production pending tomorrow (2026-04-30)
+- **Sub-tenant cert state**: ABIR ALMANAFETH Establishment Ltd (VAT `300832422400003` / CR `7006925437` / Logistics / Jeddah 22233) — Compliance CSID issued (`requestID=1234567890123`, dispositionMessage=ISSUED), 9/9 official scenarios passed against `https://gw-fatoora.zatca.gov.sa/e-invoicing/developer-portal/compliance/invoices`
+- **GitHub**: `https://github.com/hussamalmohaimeed-a11y/waredat-erp` (collaborator access); PR #1 at `/pull/1` open with 5 commits, NOT merged
+- **Phase 4 (NEW SCOPE — out of $750 contract)**: Hussam introduced architectural request to move ALL ZATCA settings to admin/developer surface and reduce tenant frontend to "Link with ZATCA" + OTP only. To be quoted separately ($500 lean / $850 standard / $1,500 comprehensive). Don't start without contract.
+- **Project**: [[PRJ - Future Vision Waredat]] (TBD)
 
 ---
 
