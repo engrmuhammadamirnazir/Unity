@@ -4,12 +4,19 @@ tags: [project, ecosire, odoo, manufacturing, client, dubai]
 status: active
 created: 2026-03-09
 start-date: 2026-03-09
+updated: 2026-04-29
 ---
 
 # PRJ — Obliq Furniture Manufacturing LLC
 
 > Odoo 19 ERP cleanup and optimization for Studio Obliq, a Dubai-based furniture manufacturer.
-> Source: `D:\Ecosire Customer Service\Active Clients\Obliq\`
+> Source: `D:\EcosireClients\ActiveClients\Obliq\`
+
+> **2026-04-29 update (P0 fixed + new module shipped):**
+> - "Invalid Operation: must have exactly one journal item involving the bank/cash account" error on partner-set + Feb statement upload **FIXED** — root cause was `account.payment.method.line.payment_account_id` on J24 + J29 pointing back at the bank/CC account itself. Created 2 new transit accounts on company 2 (`1422 Outstanding Receipts CA.111`, `1423 Outstanding Payments CL.111`) and repointed 4 payment_method_line rows. Self-test confirmed.
+> - **New module `obliq_reconciliation_lock` v19.0.1.0.0** deployed per Kamal's other ask. Per-journal lock window for ADCB Bank / ADCB CC / Paymob / Petty Cash. Once a period is locked, entries can't be edited unless explicitly unlocked. Kamal + Ziad granted Admin group. UI at Accounting → Configuration → Reconciliation Locks.
+> - Audit memo for BC.006 wipe + 4 supplier issues + Aged Payables "unknown account" delivered (`Reply_to_Kamal_2026-04-29_Issues_Diagnosis.md`). Awaiting Kamal's A/B/C on BC.006, canonical Al Quoz pick, and green-light for Landmark `supplier_rank=0` reset.
+> - Cross-project pattern captured: [[feedback_odoo19_payment_method_line_outstanding_account]] applies to ANY Odoo 19 client with hand-built CoA — fleet sweep recommended.
 
 ---
 
