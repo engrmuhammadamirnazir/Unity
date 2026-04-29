@@ -3,7 +3,7 @@ type: log
 tags: [hive-mind, session-log, append-only, cross-project]
 aliases: [Hive Mind Log, Agent Session Journal]
 created: 2026-04-22
-updated: 2026-04-29T23:50Z
+updated: 2026-04-30T22:00Z
 ---
 
 # Hive Mind — Session Log (Append-Only)
@@ -30,6 +30,14 @@ Keep entries tight. Format:
 ---
 
 ## Log (newest first)
+
+### 2026-04-30 — D:/Development — Amalfi Foods Master Blueprint reviewed; Ecosire response drafted (not yet sent); fleet-wide letterhead bug found and fixed
+- Yehia Natout (Group COO) shared an 18-chapter Master Blueprint on 2026-04-27 (BH WLL + KSA, 5 sites, ZATCA Phase 2, IoT, Dawmt HR, 28-week roadmap). Ecosire produced two letterhead PDFs in response — `AmalfiFoods_2026-04-30_Blueprint_Technical_Review.pdf` (12 pp, 8 cross-cutting findings + 15 open questions) and `AmalfiFoods_2026-04-30_Revised_Phased_Proposal.pdf` (13 pp, 5-phase implementation, 3 tiers Lean USD 28,000 / Standard USD 42,000 [recommended] / Comprehensive USD 58,000, milestone billing) — plus reply email body draft proposing 90-min working session 4-7 May 2026. **NOT YET SENT** — awaiting Amir review + click-send.
+- **Pricing band shifted CANONICALLY:** Amalfi engagement moved from $4-7K Phase 1-3 indicative (2026-04-20 Hosting Recommendation) to **$28K-58K 5-phase implementation** (this session). Driven by blueprint scope expansion (KSA entity + ZATCA Phase 2 + 28-week roadmap), not Ecosire repricing. ZATCA Phase 2 capability evidenced by Future Vision Waredat sandbox certification of 2026-04-29 (9/9 PASS); reusable canonical pattern means no re-discovery for Amalfi KSA.
+- 5 critical scope-locking questions for the working session: KSA CR timing (single-stage vs two-stage rollout), Mettler Toledo scale model conflict (blueprint says Ariva-S retail-class; Yehia's 2026-04-19 update says ICS429+ICS449 industrial), Hidd Bread Factory existence (new / existing-off-tenant / re-labelled), 5-co tenant fate (default = drop Swabbs/Motivate/Event Fab to dormant), Mast IT continuation (default = decommission at BH go-live).
+- **Mid-session bug found and fixed:** `D:/Development/scripts/client_docs/ecosire_doc_generator.py:27` had stale `LETTERHEAD_DIR` pointing at `C:/Users/Amir Nazir/Dropbox/ECOSIRE (PRIVATE) LIMITED/Letter Head` (no `Company` parent) — that path no longer exists. Letterhead PNG migrated to `D:/Company/ECOSIRE (PRIVATE) LIMITED/05 - Brand & Identity/Letterhead/`. Bug is silent: `os.path.exists()` returns False inside `_add_header()`, no error raised, generated DOCX/PDFs emerge un-letterheaded. Fixed canonical generator with absolute D:/Company path; the newer `ecosire_invoice_template.py:68` already had the correct path. Both Amalfi PDFs regenerated; DOCX 50KB→83KB and PDF 313KB→362KB confirms watermark embedded.
+- **Cross-project impact:** every recent client document generated via `ecosire_doc_generator.py` between when the path drifted and 2026-04-30 was un-letterheaded. Most exposed candidates (already sent to clients, may need Rev 3 re-send): 2026-04-20 Amalfi Hosting Recommendation Rev 2, 2026-04-20 Amalfi Tenant Analysis. Fleet sweep recommended on all 2026-04 client deliverables. Signal of failure: client-facing DOCX <50KB or PDF <250KB on a 10+ page doc. Reusable rule captured at `~/.claude/projects/D--Development/memory/feedback_ecosire_doc_generator_letterhead_path.md`. Future fleet-engineering work: refactor LETTERHEAD_DIR into a shared constants module so it cannot drift again.
+- Canonical facts promoted to Unity: [[Amalfi Foods]] — frontmatter status updated to "blueprint-review", pricing band shifted to $28K-58K, 2026-04-30 update section appended summarising deliverables + 5 scope questions + ZATCA capability hook.
 
 ### 2026-04-30 — D:/ECOSIRE.COM — Four-bug rescue: dashboard/projects 500, lockout-everyone, contacts auto-link, observability black hole
 - `/dashboard/projects` "Internal Server Error" had a layered cause across web + api: React 19 hooks-after-early-return on the page (caused client crash → `error.tsx`), AND silent 500s from the API behind a `GlobalExceptionFilter` that only sent 5xx to Sentry (DSN unset → black hole). Filter now logs every 5xx with stack to console (commit `002d5e88`). Surfaced `column "privacy_visibility" does not exist` — schema drift on `projects` table (missing 3 cols: `privacy_visibility`, `alias_email`, `task_properties_definition`); fixed via direct ALTER + migration `0007`. **Pattern lesson: never let an exception filter fail silently — always Logger.error stack to PM2 for any status ≥ 500.**

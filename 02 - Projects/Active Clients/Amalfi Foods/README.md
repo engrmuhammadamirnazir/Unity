@@ -1,11 +1,11 @@
 ---
 type: client
-tags: [client, active, amalfi, foods, bahrain, odoo-17, discovery]
+tags: [client, active, amalfi, foods, bahrain, ksa, odoo-17, blueprint-review, zatca-phase-2]
 client: Amalfi Foods / Farhoud Ventures
-status: discovery — awaiting Yehia's reply + call booking
-location: Bahrain
+status: blueprint-review — Master Blueprint received 2026-04-27 from Yehia; Ecosire response (Technical Review + Revised Phased Proposal) drafted 2026-04-30, awaiting send + working session 4-7 May
+location: Bahrain (BH WLL) + planned KSA entity (CR pending)
 created: 2026-04-22
-updated: 2026-04-22
+updated: 2026-04-30
 ---
 
 # Amalfi Foods / Farhoud Ventures
@@ -48,12 +48,37 @@ updated: 2026-04-22
 
 ## Open threads
 
-- **AWAITING** Yehia's reply + Discovery call booking.
-- v19 upgrade plan written, execution not started.
-- Ghitha SWF = $30-60K group-ERP upside (long-term).
+- **AWAITING** Amir to review + click-send Ecosire response to Yehia's Master Blueprint.
+- 90-min working session proposed Sun 4 May / Mon 5 / Tue 6 / Wed 7 May, 09:00-17:00 Bahrain.
+- v19 upgrade plan still parked (now folded into Phase 1 of the Revised Proposal).
+- Ghitha SWF expansion realised — Yehia's blueprint = $30-60K+ scope was right; pricing band moved to $28K-58K 5-phase implementation.
 
 ## Next actions
 
-- [ ] Chase Yehia if no reply within 7 days of 2026-04-20 email.
-- [ ] Once call booked: choose execution mode for the 15-task v19 upgrade plan.
-- [ ] Prepare Approvals app demo tailored to Yehia's priority-1.
+- [ ] Amir reviews regenerated PDFs (letterhead applied after fix); confirms Cc list (m.abdellatif, Manan, Zouheir Farhoud).
+- [ ] Send email to Yehia with both PDFs.
+- [ ] On working-session slot confirmed: send video conf invite + agenda.
+- [ ] Within 3 business days post-session: issue final SoW; on countersign, mv ProspectiveClients → ActiveClients + Phase 1 invoice (5% of agreed tier).
+
+---
+
+## 2026-04-30 update — Master Blueprint review session
+
+**Trigger:** Yehia Natout (Group COO) emailed 2026-04-27 18:34 BST sharing `Amalfi-Foods-Odoo-ERP-Master-Blueprint_compressed.pdf` (2.1 MB, 18 chapters covering BH WLL + KSA entities, 5 sites, 24/7 multi-shift production, ZATCA Phase 2, IoT, Dawmt HR, full CoA + 25 analytic cost centres, 14-KPI COO dashboard, 15 non-negotiable system rules, 28-week phased roadmap). Ask: "how can we collaborate to build something similar."
+
+**Ecosire response drafted (NOT YET SENT):**
+- `AmalfiFoods_2026-04-30_Blueprint_Technical_Review.{docx,pdf}` (12 pp letterhead — exec summary with top-5 strengths and top-5 risks → 8 cross-cutting findings → 16 chapter-by-chapter reviews → 15 numbered open questions → recommended next steps with 4 working-session slots).
+- `AmalfiFoods_2026-04-30_Revised_Phased_Proposal.{docx,pdf}` (13 pp letterhead — 5-phase implementation aligned to blueprint roadmap, two timeline scenarios, three commercial tiers, milestone billing schedule, assumptions tied to open questions, exclusions).
+- Reply email body draft at project-local `02-Discovery/08_Reply_to_Yehia_Blueprint_Review_2026-04-30.md`.
+- Two reusable generators at `D:/Development/scripts/client_docs/generators/Amalfi_Blueprint_Review.py` and `Amalfi_Revised_Proposal.py`.
+
+**Pricing band shift (CANONICAL):** $4-7K Phase 1-3 indicative (per 2026-04-20 Hosting Recommendation Rev 2) → **$28K-58K 5-phase implementation** (this session). Three tiers: Lean USD 28,000 / Standard USD 42,000 [recommended] / Comprehensive USD 58,000. Recurring fees separate (Managed Hosting $100/mo + Odoo Enterprise pass-through ~$697/mo + IoT hardware cost-plus).
+
+**5 critical scope-locking questions for working session:**
+1. KSA Commercial Registration timing — within 12 weeks (single-stage rollout) or longer (two-stage rollout: Bahrain go-live first at week 22, KSA at +6-8 weeks on CR issue).
+2. Mettler Toledo scale model conflict — blueprint Chapter 14 specifies Ariva-S (retail-class), but Yehia's 2026-04-19 written update confirmed actual scales are ICS429 + ICS449 (industrial). Different IoT integration paths.
+3. Hidd Bread Factory existence — new (greenfield commissioning, +2-4 weeks), existing-off-tenant (on-board, +1-2 weeks), or re-labelled (rezoning, +3-5 days).
+4. 5-co tenant fate (Amalfi / Swabbs / Motivate / Event Fab / Holding) — blueprint reduces to 2 entities (Amalfi BH + Amalfi KSA); other 3 default to dormant.
+5. Mast IT continuation — decommission default at Bahrain go-live, hybrid (named modules retained), or continue.
+
+**ZATCA Phase 2 capability:** proven canonical pattern from Future Vision Waredat sandbox certification of 2026-04-29 (9 of 9 official scenarios passed, Compliance CSID issued). Reusable for Amalfi KSA without re-discovery; configuration plus targeted adapter work, not greenfield development.
