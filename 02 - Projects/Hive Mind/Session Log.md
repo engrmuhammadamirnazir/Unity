@@ -3,7 +3,7 @@ type: log
 tags: [hive-mind, session-log, append-only, cross-project]
 aliases: [Hive Mind Log, Agent Session Journal]
 created: 2026-04-22
-updated: 2026-05-01T19:50Z
+updated: 2026-05-01T20:15Z
 ---
 
 # Hive Mind — Session Log (Append-Only)
@@ -30,6 +30,13 @@ Keep entries tight. Format:
 ---
 
 ## Log (newest first)
+
+### 2026-05-01 — D:/Development — May 2026 monthly invoices + ecosire_app letterhead PDF background (v19.0.1→19.0.3 in 3 iterations)
+- **Invoices generated:** Oenoteca Fine Wines INV-2026-05-001 ($150 USD via Wise) + Alvi Dental Hospital INV-2026-05-002 (PKR 25,000 via Meezan Bank). Files at `D:/Development/Quotations/` and mirrored to `D:/EcosireClients/ActiveClients/{Oenoteca,Alvi-Dental}/`. Obliq SKIPPED — no monthly plan decision yet from Ziad/Kamal (Starter $499 or Professional $1,499, support proposal sent 2026-04-02).
+- **app.ecosire.com letterhead background fixed:** `ecosire_app` module v19.0.1.0.0 → v19.0.3.0.0 across 3 in-session iterations. v19.0.2.0.0 added `custom_background` (BizzAppDev) to depends + bundled letterhead_full.PNG — failed because the module's PyPDF2.mergePage expects PDF, not PNG. v19.0.3.0.0 bundled an A4-rendered letterhead_full.PDF + new custom blank `external_layout_letterhead_only` (registered as `report.layout`, body-only — stock layouts all collide with the letterhead's top-left logo). post_init now writes the company background image idempotently + opts each invoice/SO/PO/quotation report into `custom_report_background=True, custom_report_type='company'`. Pushed to PRIVATE `github.com/ecosire/ecosire_app` (commits 5bc8275 + 71c17e6). Side-fix: company info on app.ecosire.com corrected (Bahawalpur not Lahore, real phone +923130168262, cleared NTN-9999999 placeholder) so even if a future layout text-renders, it matches the letterhead.
+- **Email-by-method rule encoded fleet-wide** (`feedback_invoice_payment_email_by_currency.md`): USD/Wise → `engr.mohammadamirnazir@gmail.com` (Wise account email, not company); PKR/Meezan → `info@ecosire.com` (official, not personal). Triggered when April Alvi invoice used stale `ecosire@gmail.com`; Amir flagged on May invoice; reference at `invoice_template.md` updated.
+- **Cross-project takeaways:** (1) any Odoo 19 workspace using `custom_background` or planning to: it's PDF-only, post_init only fires on first install (need migration scripts for upgrades), per-report opt-in is mandatory beyond company-level field. (2) `shutil.rmtree` on Windows can corrupt `.git` folders in ECOSIRE.COM/.AI/Solutions repos — walk-and-copy with SKIP_DIRS `{.git, __pycache__}` instead. (3) Stock Odoo 19 layouts (standard/boxed/bold/bubble/folder/striped/wave) all render company name+address header — any letterhead-as-background design needs a custom blank layout, not a stock one.
+- **Canonical facts promoted to Unity:** none new (no new clients/servers/credentials/prices/modules). All updates are config + module versioning on the existing app.ecosire.com — captured in project-local `ecosire_app_internal.md` v19.0.3.0.0 + `session_2026_05_01e_invoices_letterhead_bg.md`.
 
 ### 2026-05-01 — D:/Development — Obliq Raw Material Usage dashboard expanded (drilldown modals + finished-product breakdown + page-scroll CSS fix)
 - After backfill landed and Amir confirmed page rendering, user requested "product-wise raw material consumption" → shipped v19.0.8.2.0 (Top 30 Finished Products section: qty produced + cost/unit + total cost + top-3 raw-material pills; clickable raw-material rows opening drilldown modal: 4 KPIs + monthly trend chart + finished products that consumed it). Then "particular raw material usage" was already covered by raw-detail. Then mirror request "click finished product to see all raws" → shipped v19.0.8.3.0 (clickable finished-product rows opening mirror modal with KPIs + monthly chart + ALL raw materials consumed no LIMIT; kind-badge differentiates raw/finished; cross-navigation lets user pivot freely between modals). Then user reported "no scroll down" → CSS hot-fix v19.0.8.3.1 (`min-height: 100vh` was fighting Odoo client-action container, switched to `height: 100%; overflow-y: auto`). User confirmed working.
