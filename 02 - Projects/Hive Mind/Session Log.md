@@ -3,7 +3,7 @@ type: log
 tags: [hive-mind, session-log, append-only, cross-project]
 aliases: [Hive Mind Log, Agent Session Journal]
 created: 2026-04-22
-updated: 2026-05-01T20:15Z
+updated: 2026-05-01T22:00Z
 ---
 
 # Hive Mind — Session Log (Append-Only)
@@ -30,6 +30,13 @@ Keep entries tight. Format:
 ---
 
 ## Log (newest first)
+
+### 2026-05-01 — D:/ECOSIRE.AI — LLM provider migration plan locked (3-pass research, 5-lane LiteLLM stack, ~$5-15/mo steady-state vs $200-500/mo Claude)
+- Three sequential researcher passes (specialty providers → long-tail/cheap → hyperscalers + NVIDIA) priced **every** hosted open-source LLM provider in early-2026 market. **DeepInfra wins as primary** at $0.10/$0.32 per 1M tokens (Llama 3.3 70B); 3–10× cheaper than Together/Fireworks specialty tier; 3.6–7× cheaper than Bedrock/Vertex/Foundry hyperscaler managed; 6–13× cheaper than self-hosted on AWS p5 spot at our 45M tok/mo volume (break-even ~2.5–5B/mo, we're 50× below). **Hetzner rejected** — GPU ceiling RTX 4000 Ada 20GB forces 14B downgrade for 13–40× the cost.
+- **Final 5-lane stack behind LiteLLM proxy:** (1) DeepInfra L3.3 70B primary, (2) Groq L3.3 70B speed-tier for tool-calling assistant at 300–1000 t/s, (3) DeepSeek-V3 1st-party off-peak+cache for non-customer batch (~$0.05/$0.15 effective), (4) Cloudflare Workers AI L3.1 8B FREE 10k neurons/day → DeepInfra 8B overflow for classification, (5) Together AI fallback. Vertex Gemini 2.5 Flash unlocked as credit-window lane (user relaxed open-source-only constraint).
+- **Migration approved** — big-bang via LiteLLM with override-header rollback (instant per-request or global revert). 6 phases queued: Phase 0 quality benchmark (pending) → Phase 1 LiteLLM container → Phase 2 free-credit applications → Phase 3a/b 24h soak + cutover → Phase 4 credit-window lanes. Multi-session execution; phase tracker live in `D:/ECOSIRE.AI/docs/research/2026-05-01-llm-provider-evaluation.md` §17.
+- **Cross-project impact:** the LiteLLM proxy + 5-lane routing pattern is **reusable in every workspace** that calls Claude/GPT — D:/Development (agent fleet), D:/ECOSIRE.COM (Turborepo backend), D:/ECOSIRE.IO (managed-hosting AI features), D:/OpenClaw/openclaw (agent-swarm). When Phase 1 ships the LiteLLM container in ECOSIRE.AI, the same recipe transplants with one DNS line. The **free-credits play** (NVIDIA Inception + Microsoft Founders Hub + AWS Activate AI + GCP Startup AI-First, plausible $50k–$150k stacked) is a **company-wide subsidy** — credits in any of those programs apply across ALL Ecosire workspaces, not just ECOSIRE.AI; Amir to apply this week. **Hard "do not use" providers** propagated fleet-wide: Lambda Inference (winding down), OctoAI (dead), Anyscale Endpoints (no public per-token), Awan/Targon/Featherless for prod (no SLA), Fireworks for L3.3 70B tool-calling (broken docs).
+- **Canonical facts promoted to Unity:** none yet — LLM provider matrix is not currently a canonical Unity note. Will create [[Ecosire - LLM Provider Stack]] under `04 - Resources/AI Infrastructure/` if/when the stack is in production post-Phase 3b. Today's artifact is a 720-line decision doc inside ECOSIRE.AI repo + project-local memory entry `project_llm_provider_research_2026_05_01.md`.
 
 ### 2026-05-01 — D:/Development — Brad & Brad fine-dine demo built end-to-end at restaurant.demo.ecosire.com for 2026-05-02 meeting
 - New `restaurant_demo` DB on Hetzner CPX42 demo server (37.27.2.10) — total demo DBs now **204** (was 203). Wildcard SSL + nginx + dbfilter `^%d_demo$` auto-handled the new subdomain with zero infra changes. Odoo 19 Enterprise stack installed: `pos_restaurant` + `pos_self_order` + `pos_hr_restaurant` + `pos_restaurant_preparation_display` (kitchen display screens) + `pos_loyalty` + `account_accountant` + `stock` + `sale_management` + `purchase` + `hr` + `ecosire_demo_bypass` (12 explicit + 132 deps = 144 modules). Branded "Brad & Brad Fine Dining" with **3 floors / 18 tables / 54 French-Mediterranean menu items / 6 employees / 4 suppliers + open POs / 25 ingredient SKUs / 191 backdated POS orders = $83,277 revenue across 14 days** (13 closed sessions POS/0001-0013 + 1 OPEN today's session POS/0014 with 14 orders for live demo). Demo-server gotchas applied (Publisher cron disabled, expiration 2026-05-30). Visually verified via Playwright (5 screenshots).
