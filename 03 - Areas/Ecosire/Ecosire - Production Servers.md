@@ -169,7 +169,7 @@ See [[Demo Server SSH Key]] for the raw key material (private — contained in t
 - **Hardware**: Hetzner CPX42 (8 vCPU / 16 GB RAM / 320 GB NVMe, Ubuntu 24.04)
 - **Hostname**: `ubuntu-16gb-hel1-4`
 - **Domain**: demo.ecosire.com (wildcard `*.demo.ecosire.com` → same IP)
-- **Databases**: 202 (201 store modules + powerbi_connector + noon_demo running v19.0.2.0.0 premium as of 2026-04-18)
+- **Databases**: 204 (201 store modules + powerbi_demo + branding_demo + restaurant_demo as of 2026-05-01). `restaurant_demo` was added 2026-05-01 for Brad & Brad fine-dine prospect demo at https://restaurant.demo.ecosire.com (POS Restaurant + Kitchen Display + Loyalty + 3 floors / 18 tables / 54 menu items / 191 backdated orders).
 - **Architecture**: Subdomain-per-platform, `dbfilter=^%d_demo$`
 - **Addons path** (actual, per config): `/opt/odoo19/addons,/opt/ecosire/enterprise,/opt/ecosire/addons` — NOT `/opt/odoo/extra-addons/` as older docs claimed
 - **Odoo binary**: `/opt/odoo19/odoo-bin` with **system python3.12** (NO venv — `#!/usr/bin/env python3`)
