@@ -3,7 +3,7 @@ type: log
 tags: [hive-mind, session-log, append-only, cross-project]
 aliases: [Hive Mind Log, Agent Session Journal]
 created: 2026-04-22
-updated: 2026-05-01T22:00Z
+updated: 2026-05-01T23:30Z
 ---
 
 # Hive Mind — Session Log (Append-Only)
@@ -30,6 +30,13 @@ Keep entries tight. Format:
 ---
 
 ## Log (newest first)
+
+### 2026-05-01 — D:/ECOSIRE.AI — LLM migration session 2: 3 phases progressed (Phase 0 harness built, Phase 1 LiteLLM proxy scaffolded, Phase 2 credit-app narratives drafted)
+- **Phase 0** [~] partial — benchmark harness at `ai-content-engine/scripts/llm_benchmark_phase0/` (5 files, ~770 LOC, smoke-tested clean with all-skipped). Compares Claude Sonnet 4.6 baseline vs 5 candidate providers (DeepInfra L3.3 70B, Groq, DeepSeek-V3, Vertex Gemini 2.5 Flash, Together) across 3 prompts (long-form blog, strategy-assistant tool calls, niche classification). Blocked on user obtaining 5 provider API keys (~30 min sign-ups). Re-run cmd in README. Cost $0.20–0.50 to fully execute.
+- **Phase 1** [x] DONE — LiteLLM proxy scaffolded. `docker/litellm/config.yaml` (12 model aliases + 6 fallback chains + master-key auth), `docker/litellm/README.md` (operational runbook with start/test/flip/rollback), `litellm-proxy` service added to BOTH `docker-compose.dev.yml` (port 127.0.0.1:4000) and `docker-compose.prod.yml` (internal-only, 0.5 CPU / 512M mem limits), `.env.example` updated with LITELLM_MASTER_KEY + 7 provider key placeholders. **Application code NOT modified** — `default` alias initially points to Anthropic Claude (zero behavior change). Phase 3b cutover = single-line edit. All YAML validates.
+- **Phase 2** [~] partial — narratives drafted at `docs/research/2026-05-01-credit-application-narratives.md` (275 lines, 7 sections). Per-program 200–300 word answers for NVIDIA Inception, Microsoft Founders Hub ($25k unconditional), AWS Activate, GCP Startup AI-First ($350k AI ceiling). Submission order, pre-submission checklist, post-approval LiteLLM config additions. 6 fields marked `[VERIFY]` need user confirmation (legal entity, founding date, HQ country, co-founders, team size, funding/revenue). Plausible stacked total $56k–$160k of 12-month subsidy. Pro tip: apply from `@ecosire.ai` email not gmail for faster approval.
+- **Cross-project impact:** the **LiteLLM 5-lane proxy pattern** (config.yaml + docker compose service + master-key auth + per-lane fallback chains + override-header rollback) is **directly reusable** in every Ecosire workspace that calls Claude/GPT — D:/Development (agent fleet, 215+ Odoo modules with AI features), D:/ECOSIRE.COM (Turborepo backend with Drizzle), D:/ECOSIRE.IO (managed-hosting AI features), D:/OpenClaw/openclaw (agent-swarm). When ECOSIRE.AI completes Phase 3b, the same `docker/litellm/` directory transplants with one DNS line change. The **credit-application narratives** are also reusable — same Microsoft Founders Hub / AWS Activate / GCP Startup / NVIDIA Inception programs apply to ECOSIRE.IO and ECOSIRE.COM if those need their own credit pools (each program allows multiple submissions for separate legal entities, or one umbrella entity covering multiple products).
+- **Canonical facts promoted to Unity:** none yet — the LiteLLM stack is scaffolding (not in production until Phase 3b), and credit applications are pre-submission. Will create [[Ecosire - LLM Provider Stack]] under `04 - Resources/AI Infrastructure/` once Phase 3b ships AND at least one credit pool lands. Until then, all detail lives in `D:/ECOSIRE.AI/docs/research/2026-05-01-llm-provider-evaluation.md` + per-phase artifacts inside that repo.
 
 ### 2026-05-01 — D:/ECOSIRE.AI — LLM provider migration plan locked (3-pass research, 5-lane LiteLLM stack, ~$5-15/mo steady-state vs $200-500/mo Claude)
 - Three sequential researcher passes (specialty providers → long-tail/cheap → hyperscalers + NVIDIA) priced **every** hosted open-source LLM provider in early-2026 market. **DeepInfra wins as primary** at $0.10/$0.32 per 1M tokens (Llama 3.3 70B); 3–10× cheaper than Together/Fireworks specialty tier; 3.6–7× cheaper than Bedrock/Vertex/Foundry hyperscaler managed; 6–13× cheaper than self-hosted on AWS p5 spot at our 45M tok/mo volume (break-even ~2.5–5B/mo, we're 50× below). **Hetzner rejected** — GPU ceiling RTX 4000 Ada 20GB forces 14B downgrade for 13–40× the cost.
