@@ -3,7 +3,7 @@ type: log
 tags: [hive-mind, session-log, append-only, cross-project]
 aliases: [Hive Mind Log, Agent Session Journal]
 created: 2026-04-22
-updated: 2026-04-30T22:00Z
+updated: 2026-04-30T23:30Z
 ---
 
 # Hive Mind — Session Log (Append-Only)
@@ -30,6 +30,14 @@ Keep entries tight. Format:
 ---
 
 ## Log (newest first)
+
+### 2026-04-30 — D:/Development — Benjamin Hebette (Shoppingfeed FR) async PDF + demo DB drift gotcha
+- French prospect declined live video call AND recorded video; pivoted to 8-page FR PDF walkthrough at `D:/Development/Quotations/Shoppingfeed_Demo_Walkthrough_FR.pdf` (608 KB, Ecosire letterhead-embedded). Reusable generator at `D:/Development/scripts/client_docs/generate_shoppingfeed_walkthrough_fr.py` — template usable for any future FR-language EU prospect.
+- Diagnosed `https://shoppingfeed.demo.ecosire.com/web/login` 502 = transient `odoo-demo.service` auto-restart window (~2-3 min recovery). Single multi-tenant Odoo instance serves ~200 platform demos via subdomain dbfilter. **Future signal:** 502 right after a wave-pump deploy is not a real outage, wait 2-3 min before deeper diagnosis.
+- **Discovered fleet-wide gotcha:** demo deploys refresh module CODE only — per-DB `-u` does not run, so e.g. `shoppingfeed_demo` DB is at v19.0.1 while on-disk module is v19.0.2 (channels/SLA/repricing/feed-quality tables don't exist). Likely affects all 94 modules pumped in 2026-04-24/25/29 Wave A-M sessions. Captured in project-local `feedback_demo_module_db_version_drift.md` with detection-script template + per-DB upgrade procedure.
+- **Cross-project impact:** the demo-server pattern (single multi-tenant Odoo, dbfilter routing, 200+ subdomains) means CLI `-u` upgrades during business hours risk every other prospect — defer to low-traffic windows. Affects any agent working on `*_store_management` modules across D:/Development.
+- **Pending:** Amir to review PDF + send via WhatsApp (no Unity action needed). Fleet-wide demo DB version-drift sweep recommended as a scheduled low-traffic-window agent run.
+- **Canonical facts promoted to Unity:** none — Benjamin already in prospect ledger from 2026-04-29 night session, no new servers / credentials / prices / modules.
 
 ### 2026-04-30 — D:/ECOSIRE.AI — Bulk PC-game drafts v2 — +115 published (139→254/2000); subscription-limit gap in generator surfaced and recovered manually
 - **What ran:** Resumed `bulk-pc-game-drafts-v2` branch on `freepcgames.org` + `pcgamestore.net`. Block 2 (pcgs) closed clean: 93 successes / 7 failures / 13 banned-word retries. Block 3 (freepc) launched and reached 22 successes before 56 consecutive `unhandled: Exception: Command failed with exit code 1` rows pushed the run past the 10-failure auto-abort threshold. Final ledger: freepc 143 DONE / 1 FAILED / 56 PENDING; pcgs 111 DONE / 9 FAILED / 80 PENDING. **Total drafts: 254/2000.**
