@@ -3,7 +3,7 @@ type: log
 tags: [hive-mind, session-log, append-only, cross-project]
 aliases: [Hive Mind Log, Agent Session Journal]
 created: 2026-04-22
-updated: 2026-05-01T23:30Z
+updated: 2026-05-02T00:10Z
 ---
 
 # Hive Mind — Session Log (Append-Only)
@@ -30,6 +30,12 @@ Keep entries tight. Format:
 ---
 
 ## Log (newest first)
+
+### 2026-05-01 — D:/Development — Invoice rules pump (3 canonical rules) + Obliq Apr+May hosting invoice ($70 Meezan) + 3 May invoices regenerated
+- **3 canonical Ecosire invoice rules established** (apply to every workspace generating client invoices): (1) `due_date="Due on receipt"` on monthly recurring invoices — never calendar +14/+15-day; (2) **Obliq + Sahara are USD-billed Meezan-only exceptions** — no Wise mention even though `currency="$"`; (3) hosting line items always `"ECOSIRE Managed Hosting - {Month} {Year}"` — never "Amazon AWS Hosting".
+- **3 May invoices regenerated under new rules**: Oenoteca INV-2026-05-001 ($150 Wise), Alvi INV-2026-05-002 (PKR 25K Meezan), and **NEW Obliq INV-2026-05-003 ($70 USD/Meezan, Apr+May hosting on one invoice with 2 lines)**. Generator created: `generate_obliq_hosting_invoice_may_2026.py`. None sent yet — Amir to review + dispatch.
+- Cross-project impact: rules apply fleet-wide. Future Sahara invoice = clone Obliq generator (Meezan-only USD pattern). app.ecosire.com Odoo subscriptions (D:/Development) eventually need `payment_term_id`=Immediate Payment to mirror "Due on receipt" on auto-generated invoices.
+- Canonical facts promoted to Unity: [[Ecosire - Client Portfolio]] (Recurring Revenue table expanded with Obliq + Sahara, plus 4-rule canonical block).
 
 ### 2026-05-01 — D:/ECOSIRE.AI — LLM migration session 2: 3 phases progressed (Phase 0 harness built, Phase 1 LiteLLM proxy scaffolded, Phase 2 credit-app narratives drafted)
 - **Phase 0** [~] partial — benchmark harness at `ai-content-engine/scripts/llm_benchmark_phase0/` (5 files, ~770 LOC, smoke-tested clean with all-skipped). Compares Claude Sonnet 4.6 baseline vs 5 candidate providers (DeepInfra L3.3 70B, Groq, DeepSeek-V3, Vertex Gemini 2.5 Flash, Together) across 3 prompts (long-form blog, strategy-assistant tool calls, niche classification). Blocked on user obtaining 5 provider API keys (~30 min sign-ups). Re-run cmd in README. Cost $0.20–0.50 to fully execute.

@@ -2,7 +2,7 @@
 type: reference
 category: ecosire, clients
 tags: [clients, portfolio, ecosire]
-updated: 2026-04-29T22:30Z
+updated: 2026-05-01T23:55Z
 ---
 
 # Ecosire — Client Portfolio
@@ -168,6 +168,14 @@ updated: 2026-04-29T22:30Z
 |--------|--------|--------|
 | Oenoteca Fine Wines | $150 USD/mo | Wise transfer |
 | Alvi Dental | PKR 25,000/mo | Meezan Bank |
+| Obliq Furniture | $35 USD/mo (ECOSIRE Managed Hosting) | **Meezan Bank** (USD-billed exception — pays via Meezan, NOT Wise) |
+| Sahara Properties | TBD USD/mo | **Meezan Bank** (USD-billed exception — pays via Meezan, NOT Wise) |
+
+**Invoice rules (canonical, established 2026-05-01 — applies to ALL Ecosire client invoices regardless of which workspace generates them):**
+1. **Due date** on monthly recurring invoices = `"Due on receipt"` — never a +14/+15-day calendar date.
+2. **Hosting line items** = `"ECOSIRE Managed Hosting - {Month} {Year}"` — never "Amazon AWS Hosting", "AWS Hosting", or "Hosting Charges". Reinforces managed-service positioning.
+3. **Payment rail** by default: USD → Wise (Amir's Wise email). PKR → Meezan (`info@ecosire.com`). **Exceptions:** Obliq + Sahara are USD-billed but pay via **Meezan only** — do NOT list Wise on their invoices. Single rail per invoice; no dual listing.
+4. Canonical generator at `D:/Development/scripts/client_docs/ecosire_invoice_template.py` — never re-implement. Reference invoice: Obliq INV-2026-05-003 (Apr+May 2026 hosting, $70 USD/Meezan).
 
 ### Module Sales (App Store)
 - 201 modules at $249-$599 each
