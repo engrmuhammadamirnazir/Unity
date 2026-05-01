@@ -5,7 +5,7 @@ client: Salueman Arif — Remittance
 status: live
 location: TBD (Pakistani bridge-remittance operator)
 created: 2026-04-22
-updated: 2026-04-26
+updated: 2026-05-02
 ---
 
 # Remittance — Salueman Arif
