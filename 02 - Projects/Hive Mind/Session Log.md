@@ -3,7 +3,7 @@ type: log
 tags: [hive-mind, session-log, append-only, cross-project]
 aliases: [Hive Mind Log, Agent Session Journal]
 created: 2026-04-22
-updated: 2026-05-02T00:10Z
+updated: 2026-05-02T00:55Z
 ---
 
 # Hive Mind — Session Log (Append-Only)
@@ -30,6 +30,13 @@ Keep entries tight. Format:
 ---
 
 ## Log (newest first)
+
+### 2026-05-01 — D:/Development (Oenoteca client) — Q1 revenue $636k vs $403k bridge on letterhead + Wise supplier-payment booking BLOCKED on 2 Niccolò questions
+- **Niccolò asked twice:** first "why does the dashboard show $636k Q1 revenue", then follow-up "why does the financial report show $403k". Both numbers are correct and refer to different things. Probed live Oenoteca prod read-only and bridge-reconciled exactly: 395 confirmed SOs by `date_order` × $1,610.71 avg = $636,231.70 (dashboard) → 375 invoiced ($581k) + 10 nothing-to-invoice ($23k samples/promo) + 8 partial-invoice tail ($8.2k) + 3 cancelled excluded; ~$201k Q1 SOs were invoiced in early April so they fall in Q2 by `invoice_date`; net Q1 P&L Product Sales = $403,065.73. Two letterhead PDFs delivered (Dashboard Explanation 304 KB + Report-vs-Dashboard 345 KB with line-by-line bridge). 2 reusable generators saved at `scripts/client_docs/generate_oenoteca_q1_revenue_*.py`.
+- **Separately, Niccolò paying via Wise today:** Falchetto EUR 1,846.65 (with EUR 630.15 credit) + Sordo EUR 8,140.40. Probed → Wise journal pattern confirmed (NO separate Wise journal in Oenoteca CoA — payments go from BNK1 'Bank' = Chase USD id=14, Wise pulls USD via ACH; 15+ months of Wise Inc ACH debits in BNK1 confirm). **2 blockers stalled execution:** Falchetto EUR 630.15 credit not in system (need origin/account); Sordo EUR 8,140.40 matches NEITHER open bill (closest `BILL/2026/03/0005` short by 267.40). Questions out to Niccolò; payments NOT YET booked. Zero server changes.
+- **New canonical Ecosire-wide rule (cross-workspace):** when drafting WhatsApp/email/SMS/voice-note text for Amir to copy-paste, output the prose RAW — never wrap in `---` separator lines, `>` blockquotes, or "Here's the draft:" headers. Recurring agent habit caught and corrected fleet-wide; applies to every workspace generating client-facing message drafts. Saved as `feedback_no_horizontal_rules_around_drafts.md` in D:/Development memory.
+- **Cross-project impact:** (1) the Bookings-vs-Invoiced timing gap is a recurring question owners ask in any Odoo workspace with sales orders → reusable pattern: dashboard Revenue tile counts confirmed SOs by order_date; P&L Revenue counts posted invoices net of credit notes by invoice_date; gap is timing + non-billables + open tail. Worth building a "Bookings vs Invoiced" reconciliation tile into any standard analytics dashboard for client deliverables. (2) The Wise USD pattern (no synthetic Wise journal, payments from primary USD bank with Wise Inc ACH BSL reconciliation) likely applies to any future US client paying foreign suppliers via Wise — not Oenoteca-unique.
+- **Canonical facts promoted to Unity:** none new (no new clients/servers/credentials/prices/modules; Oenoteca already canonical). Operational detail stays in project-local `session_2026_05_01h_oenoteca_q1_revenue_explanation.md` + `oenoteca_client.md`. Feedback rule lives in project-local memory only — applies to all workspaces but doesn't need a Unity note.
 
 ### 2026-05-01 — D:/Development — Invoice rules pump (3 canonical rules) + Obliq Apr+May hosting invoice ($70 Meezan) + 3 May invoices regenerated
 - **3 canonical Ecosire invoice rules established** (apply to every workspace generating client invoices): (1) `due_date="Due on receipt"` on monthly recurring invoices — never calendar +14/+15-day; (2) **Obliq + Sahara are USD-billed Meezan-only exceptions** — no Wise mention even though `currency="$"`; (3) hosting line items always `"ECOSIRE Managed Hosting - {Month} {Year}"` — never "Amazon AWS Hosting".
