@@ -19,14 +19,38 @@ updated: 2026-05-02
 | Server | Bitnami Odoo 19 Enterprise — `52.28.45.137` |
 | SSH key | `Unity/03 - Areas/Credentials & Access/SSH Keys/remittance.pem` · user `bitnami` |
 | Domains | `remittanceaccounting.ecosire.com` (prod) + `remtest.ecosire.com` (staging) |
-| Custom module | `remittance_management` @ **`v19.0.10.0.7`** (LIVE on both DBs 2026-05-02 — UX flagship + report hotfix wave) |
-| Last pre-deploy backup | `20260502_0030` — both DB dumps + module folder tarball at `/home/bitnami/backups/` (also stamps for v10.0.4/5/6 retained) |
-| GitHub | `engrmuhammadamirnazir/remittance_management` (PRIVATE) — main `675bef6` + tags `v19.0.10.0.4` `v19.0.10.0.5` `v19.0.10.0.6` `v19.0.10.0.7` |
+| Custom module | `remittance_management` @ **`v19.0.10.0.10`** (LIVE on both DBs 2026-05-02 — UX flagship + report hotfix wave + NEW Partner Balance Detail drill-down) |
+| Last pre-deploy backup | `20260502_0200` — both DB dumps + module folder tarball at `/home/bitnami/backups/` (also stamps for v10.0.4 through v10.0.9 retained) |
+| GitHub | `engrmuhammadamirnazir/remittance_management` (PRIVATE) — main `cd42724` + tags `v19.0.10.0.4` `v19.0.10.0.5` `v19.0.10.0.6` `v19.0.10.0.7` `v19.0.10.0.8` `v19.0.10.0.9` `v19.0.10.0.10` |
 | User Manual PDF (latest) | `D:/EcosireClients/ActiveClients/Suleman-Remittance/docs/Remittance_User_Manual_v19.0.10.0.0_Addendum.pdf` (in-app User Guide is now the canonical source — refreshed via lxml migration in v10.0.7) |
 
-## Current state (2026-05-02)
+## Current state (2026-05-02 — UPDATED)
 
-**v19.0.10.0.7 LIVE both DBs.** Module is in the strongest shape since v9 launched. UX flagship release (v10.0.4) + 3 back-to-back report-system P0 hotfix waves (v10.0.5/6/7) + knowledge articles refreshed.
+**v19.0.10.0.10 LIVE both DBs.** Module is in the strongest shape since v9 launched. UX flagship release (v10.0.4) + 3 back-to-back report-system P0 hotfix waves (v10.0.5/6/7) + knowledge articles refreshed + NEW Partner Balance Detail drill-down (v10.0.8) + 2 follow-on P0 hotfixes (v10.0.9 XLSX 502, v10.0.10 Dashboard alert xmlids).
+
+### What v10.0.8 added (NEW FEATURE — Partner Balance Detail drill-down)
+- Click any partner row's "View Details" button in the Balances list → opens single-page OWL drill-down at `remittance_partner_balance_detail` client action.
+- **Top bar:** back-link to Balances grid, partner avatar (navy gradient), name + type pill, KYC + Sanctions pills, smart-action toolbar (Print Statement / Export XLSX / Export CSV / Open Partner Form / View Open Flows).
+- **3 hero balance cards** (EUR / USD / AED) with positive/negative/zero color coding + In/Out totals per currency.
+- **Stats strip (5):** Transactions count, First Tx, Last Tx, Biggest Line (clickable → opens that tx), Open Flows.
+- **SVG Running Balance line chart** (3-currency layered, last 6 months, no external dep).
+- **Transaction Ledger table** with running balance per currency, period chips (7d/30d/90d/YTD/All), currency tabs (All/EUR/USD/AED), each row clickable → opens source `remittance.transaction`.
+- Backed by single round-trip `remittance.partner.balance.get_breakdown(partner_id, period)` server method, multi-company aware via `env.companies`. Read-only.
+- Files added: `models/remittance_partner_balance.py` +220 lines (`action_open_breakdown`, `get_breakdown`); `models/res_partner.py` +8 lines (`action_print_remittance_statement`); `static/src/balance_detail/{js,xml,scss}` 1100+ lines combined; `views/remittance_partner_balance_views.xml` (View Details button column + client-action registration).
+
+### What v10.0.9 fixed (P0 — XLSX/CSV download 502 Proxy Error)
+- Root cause: WSGI/werkzeug encodes HTTP headers as **latin-1**; em-dash (`—`, U+2014) in 3 XLSX builder titles crashed `Content-Disposition: filename="..."` mid-response with `UnicodeEncodeError: 'latin-1' codec can't encode character '—'`.
+- Fix: em-dashes → hyphens in `partner_ledger_detailed.py` + `partner_statement.py` + `flow_statement.py`. Plus defense-in-depth: new `_safe_ascii_filename()` and `_rfc5987_filename()` helpers in `controllers/exports.py` emit dual `filename` + `filename*=UTF-8''…` directives per RFC 5987.
+- Validated: `curl /remittance/export?...&format=xlsx → HTTP 200, 6251 bytes, file type "Microsoft Excel 2007+"`.
+
+### What v10.0.10 fixed (P0 — Dashboard alerts "Missing Action")
+- Root cause: 3 alert rows in Dashboard's Compliance & Operations panel referenced `ir.actions` xmlids that don't exist in the module (informed-guess strings, never verified).
+- Fix: corrected 3 references in `models/remittance_dashboard.py`:
+  - `action_partner_remittance` → `action_partner_remittance_all`
+  - `action_remittance_suspense_item` → `action_suspense`
+  - `action_remittance_shipment` → `remittance_shipment_action`
+
+## Prior state (2026-05-02 morning) — v19.0.10.0.7
 
 ### What v10.0.4 added (UX flagship)
 - **`Remittance → Dashboard`** top-menu (sequence 5, default landing) — Business KPI command centre. Hero KPI cards (Volume Processed / Outstanding Balances / Open Transactions with embedded stage funnel / Open Invoices), mini-strip (Active Shipments / KYC Pending / Suspense Items / Top Partner), 4 SVG charts (Monthly Volume area · Kind Mix pie · Currency Mix pie · Stage Funnel), Top-10 Partners table, Compliance & Operations alerts panel, Recent Activity feed, time-range chips (Today / Last 7d / This Month / YTD / All), quick-action toolbar. Hand-rolled SVG charts (no Chart.js dep), Ecosire navy + amber palette, dark-mode support. Backed by single `remittance.dashboard.get_kpis(period)` AbstractModel server method.
