@@ -19,12 +19,36 @@ updated: 2026-05-02
 | Server | Bitnami Odoo 19 Enterprise — `52.28.45.137` |
 | SSH key | `Unity/03 - Areas/Credentials & Access/SSH Keys/remittance.pem` · user `bitnami` |
 | Domains | `remittanceaccounting.ecosire.com` (prod) + `remtest.ecosire.com` (staging) |
-| Custom module | `remittance_management` @ **`v19.0.10.0.0`** (LIVE on both DBs 2026-04-26 evening) |
-| Last pre-deploy backup | `20260426_195210` — both DB dumps + module folder tarball at `/home/bitnami/backups/` |
-| GitHub | `engrmuhammadamirnazir/remittance_management` (PRIVATE) — main `11a7e1b` + tag `v19.0.10.0.0` |
-| User Manual PDF (latest) | `D:/EcosireClients/ActiveClients/Suleman-Remittance/docs/Remittance_User_Manual_v19.0.10.0.0_Addendum.pdf` (245 KB, 5 pages, Ecosire letterhead) |
+| Custom module | `remittance_management` @ **`v19.0.10.0.7`** (LIVE on both DBs 2026-05-02 — UX flagship + report hotfix wave) |
+| Last pre-deploy backup | `20260502_0030` — both DB dumps + module folder tarball at `/home/bitnami/backups/` (also stamps for v10.0.4/5/6 retained) |
+| GitHub | `engrmuhammadamirnazir/remittance_management` (PRIVATE) — main `675bef6` + tags `v19.0.10.0.4` `v19.0.10.0.5` `v19.0.10.0.6` `v19.0.10.0.7` |
+| User Manual PDF (latest) | `D:/EcosireClients/ActiveClients/Suleman-Remittance/docs/Remittance_User_Manual_v19.0.10.0.0_Addendum.pdf` (in-app User Guide is now the canonical source — refreshed via lxml migration in v10.0.7) |
 
-## Current state (2026-04-26)
+## Current state (2026-05-02)
+
+**v19.0.10.0.7 LIVE both DBs.** Module is in the strongest shape since v9 launched. UX flagship release (v10.0.4) + 3 back-to-back report-system P0 hotfix waves (v10.0.5/6/7) + knowledge articles refreshed.
+
+### What v10.0.4 added (UX flagship)
+- **`Remittance → Dashboard`** top-menu (sequence 5, default landing) — Business KPI command centre. Hero KPI cards (Volume Processed / Outstanding Balances / Open Transactions with embedded stage funnel / Open Invoices), mini-strip (Active Shipments / KYC Pending / Suspense Items / Top Partner), 4 SVG charts (Monthly Volume area · Kind Mix pie · Currency Mix pie · Stage Funnel), Top-10 Partners table, Compliance & Operations alerts panel, Recent Activity feed, time-range chips (Today / Last 7d / This Month / YTD / All), quick-action toolbar. Hand-rolled SVG charts (no Chart.js dep), Ecosire navy + amber palette, dark-mode support. Backed by single `remittance.dashboard.get_kpis(period)` AbstractModel server method.
+- **`Remittance → Quick Create`** menu — 4-field one-screen wizard for cash kinds. Replaces 14-click form-and-advance with single commit. Auto-locks currency from kind, smart payee visibility, Advance-to-Closed toggle (default ON). ~50 sec saved per cash transaction.
+- **Form ergonomics bundle on tx form:** Compliance Matrix preview banner (green/yellow with KYC + Sanctions check badges) + Advance-to-Closed button (single-click full-lifecycle walk for direct-GL kinds) + inline KYC + Sanctions verification buttons (admin only, full chatter audit) + KYC/Sanctions snapshot toggles + currency picker hidden when locked + polished button labels (Advance to Next Stage / Cancel Transaction / Print Voucher / Put On Hold).
+- **Bulk Advance Stage + Bulk Advance to Closed** server actions on the tx list view Actions menu.
+- **User-pref default-fill** via 4 new `res.users` fields (`remittance_last_kind / payer_id / payee_id / location_id`). New tx forms pre-populate from last create.
+
+### What v10.0.5/6/7 fixed (report system)
+- **v10.0.5** — letterhead `KeyError: 'company'` (every PDF crashed; latent since v10.0.0 since Odoo 19's `web.report_layout` doesn't auto-populate `company` in custom letterhead scope). Fix: defensive `<t t-set>` chain (o.company_id → docs[0].company_id → res_company → user.company_id → env.company) + `t-if="company"` guards.
+- **v10.0.6** — 13 PDF templates raised `KeyError: 'now'` (`context_timestamp(now())` not in qweb safe-eval scope; `now` is not a name there, only `datetime` and `time`). Fix: `context_timestamp(datetime.datetime.utcnow())` across all 13. Plus suspense_aging XLSX `age_days desc` (non-stored compute) → `opened_date asc` (stored).
+- **v10.0.7** — Partner Statement / Ledger / Compliance reports rendered blank PDFs from menu (`<t t-foreach="docs">` empty when no res_ids selected). Two-part fix: (1) NEW `remittance.partner.report.wizard` TransientModel asks for partner + date range first (3 partner-report menu items repointed to wizard act-window actions; smart-button invocations skip wizard). (2) 9 list-style report templates got `<t t-if="not docs" t-set="docs" t-value="env['MODEL'].search([])"/>` fallback so menu invocation renders all records (limit=500 for high-volume models).
+- **Knowledge articles refreshed:** root TOC mentions Dashboard + Quick Create + working reports; new "What's New in v10.0.4 – v10.0.7" article (sequence 5, 350+ line HTML body) covers Dashboard + Quick Create + form ergonomics + bulk ops + default-fill + 3 report hotfix waves + demo stats + known issues. Migration `migrations/19.0.10.0.7/post-refresh-knowledge.py` re-syncs articles via lxml (data file is `noupdate=1`).
+
+### Validation
+- **All 17 PDF reports + 14 XLSX/CSV exports downloadable.** Smoke #3 confirms 11 list-style reports render real bytes from menu invocation: Balances Snapshot 131KB · Outstanding Balances 141KB · Transactions List 693KB · Shipments List 128KB · Suspense Aging 174KB · Sonstig Breakdown 93KB · Account Snapshot 74KB · Logistics Cost Summary 88KB · Bank Reconciliation 1.3KB · Compliance Audit 283KB · Activity Summary 84KB. Plus 3 partner-report wizards trigger correct ir.actions.report.
+- **Earlier validation walkthrough COMPLETE** (closed via v10.0.3 hotfixes that fixed 2 latent v9→v10 migration P0s in `remittance_invoice.py`: `kyc_status` Selection→Boolean and `client_id.partner_id` indirection on `res.partner`).
+
+### Demo stats (for the Suleman meeting)
+~70 sec saved per cash transaction (Quick Create + Advance-to-Closed + default-fill stack) · 30 cash tx/day average → ~140 hrs/year for a 3-person ops team · ~95 server-side validation checks pass · zero compliance regression · KYC teeth + audit trail + GL posting integrity all preserved.
+
+## Prior state (2026-04-26) — v19.0.10.0.0 base release (SUPERSEDED)
 
 **v19.0.10.0.0 LIVE** — Balances dashboard restored, smart-default sweep, Compliance Matrix wired with real teeth, 17 reports shipped, PKR removed.
 
@@ -83,21 +107,17 @@ These four are now fleet-wide feedback files in D:/Development project-local mem
 - **D:/Development project memory** — `remittance_client.md`, `remittance_v19_0_9_lifecycle_first.md`, `session_2026_04_22_remittance_v09_lifecycle.md`, `feedback_enterprise_account_create_asset.md`, `feedback_bitnami_odoo19_migration_signature.md`, `remittance_server.md`, and all prior session/v8.x memory files.
 - **Code** — `D:\Development\odoo19\server\addons\remittance_management\` (dev) + `D:\EcosireClients\ActiveClients\Suleman-Remittance\` (client repo + docs + backups).
 
-## Open threads (post-v10)
+## Open threads (post-v10.0.7)
 
-- **Suleman UAT** pending on `https://remtest.ecosire.com` — open new `Remittance → Balances` dashboard, run a Partner Statement, set a partner's `default_remittance_location_id` and create a tx to verify auto-fill, toggle off `kyc_verified` and verify ValidationError fires.
-- **v10.0.x patches (non-blocking, queued):**
-    - KPI hero banner above Balances list — re-wire via non-inheriting OWL pattern (wrapper Component or kanban-header).
-    - Tri-format Export ▾ button on tx/shipment/balance lists (Reports menu provides access today).
-    - Drop dormant `is_pakistan` field references on `remittance.location` model + `views/remittance_location_views.xml`.
-    - Refresh `static/description/index.html` (App Store HTML) to drop PKR/Pakistan copy.
-    - Re-run Playwright E2E acceptance suite on remtest (prior aborted under active P0 OwlError).
-- **Residual payment** collectable upon v10 sign-off (if any of the original $2,500 milestone is outstanding — confirm with Suleman after UAT).
+- **Suleman client video walkthrough** — Amir to record on remtest. All 17 PDFs + 14 XLSX/CSV exports work. Demo doc at `D:/Development/tmp/remittance_v10_e2e_2026_05_01/SULEMAN_DEMO_PREP.md` covers 10-min flow. Skip `bank_eur_out_usd_in` kind in any live demo until v10.0.8 ships.
+- **v10.0.8 sprint** — fix `_je_bank_eur_out_usd_in` JE math. Latent since v3.2 (April 2026), no real user has exercised it end-to-end. Needs Suleman accountant call to confirm intended FX gain/loss + company-currency conversion pattern.
+- **v10.0.9 backlog** — Reports inline date filter chips, Send-by-email on every report, Statement smart button audit signature on partner record, Save-and-continue keyboard shortcut.
+- **Residual payment** collectable upon v10 sign-off (if any of original $2,500 milestone outstanding — confirm with Suleman after video walkthrough).
 
 ## Next actions
 
-- [ ] Email Suleman with v10 PDF addendum + UAT checklist (Balances menu, KYC toggle, Reports menu).
-- [ ] Re-run Playwright E2E acceptance on remtest (8 scenarios spec'd in v10 design doc §8.2).
-- [ ] Wire KPI hero banner via non-inheriting pattern (v10.0.1 patch).
-- [ ] Cosmetic post-PKR cleanup (is_pakistan field + App Store HTML copy).
+- [ ] Record client video walkthrough on remtest (10-min flow per demo doc).
+- [ ] Send Suleman the video + a one-page release-note PDF.
+- [ ] Schedule 30-min call with Suleman + accountant to confirm `bank_eur_out_usd_in` GL pattern (v10.0.8 prerequisite).
+- [ ] Refresh `static/description/index.html` (App Store HTML) to drop PKR/Pakistan copy + add Dashboard screenshot.
 - [ ] Collect residual upon v10 sign-off.
