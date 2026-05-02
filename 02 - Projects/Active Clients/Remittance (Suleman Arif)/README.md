@@ -5,7 +5,7 @@ client: Salueman Arif — Remittance
 status: live
 location: TBD (Pakistani bridge-remittance operator)
 created: 2026-04-22
-updated: 2026-05-02
+updated: 2026-05-02-afternoon
 ---
 
 # Remittance — Salueman Arif
@@ -19,14 +19,47 @@ updated: 2026-05-02
 | Server | Bitnami Odoo 19 Enterprise — `52.28.45.137` |
 | SSH key | `Unity/03 - Areas/Credentials & Access/SSH Keys/remittance.pem` · user `bitnami` |
 | Domains | `remittanceaccounting.ecosire.com` (prod) + `remtest.ecosire.com` (staging) |
-| Custom module | `remittance_management` @ **`v19.0.10.0.25`** (LIVE on both DBs 2026-05-02 — Treasury Dashboard + Cash Management Suite + real GL balance compute) |
-| Last pre-deploy backup | `pre_v10_0_23_remtest_20260501_212923.dump` + `pre_v10_0_23_remittanceaccounting_20260501_212923.dump` at `/opt/bitnami/odoo/backups/` (stamps for v10.0.4 through v10.0.22 retained) |
-| GitHub | `engrmuhammadamirnazir/remittance_management` (PRIVATE) — main `0ef5a90` + new tags `v19.0.10.0.23` + `v19.0.10.0.25` (NO AI attribution per client-repo rule) |
+| Custom module | `remittance_management` @ **`v19.0.10.0.27`** (LIVE on both DBs 2026-05-02 afternoon — bridge between `remittance.transaction` ↔ `remittance.invoice` + hawala posting convention: principal → Customer Liability, fees → Income) |
+| Last pre-deploy backup | `pre_v10_0_27_remtest_20260502_085359.dump` + `pre_v10_0_27_remittanceaccounting_20260502_091142.dump` (also v10.0.26 stamps `_082542` retained at `/tmp/`) |
+| GitHub | `engrmuhammadamirnazir/remittance_management` (PRIVATE) — main `13b887d` + new tags `v19.0.10.0.26` + `v19.0.10.0.27` (NO AI attribution per client-repo rule) |
 | User Manual PDF (latest) | `D:/EcosireClients/ActiveClients/Suleman-Remittance/docs/Remittance_User_Manual_v19.0.10.0.0_Addendum.pdf` (in-app User Guide is now the canonical source — refreshed via lxml migration in v10.0.7) |
 
-## Current state (2026-05-02 evening — UPDATED)
+## Current state (2026-05-02 afternoon — UPDATED — v10.0.27 hawala convention)
 
-**v19.0.10.0.25 LIVE both DBs.** Treasury Dashboard + Cash Management Suite (v10.0.23) + real GL balance compute (v10.0.25). 14 versions in one day (v10.0.10 → v10.0.25): currency-lock hardening, dual-leg cash-in JE rewrite, sign-flip dashboards, settlement model + wizard, Stripe-grade enterprise theme, MTCN crypto-random codes, kind-adaptive lifecycle, Treasury suite, real balances. Six fleet-wide Odoo 19 patterns captured.
+**v19.0.10.0.27 LIVE both DBs.** Bridge between `remittance.transaction` ↔ `remittance.invoice` (v10.0.26) + hawala posting convention (v10.0.27). On the v10.0.25 foundation (Treasury Dashboard + Cash Management Suite + real GL balance compute). Sender's partner balance now reflects funds held for onward remittance instead of netting to zero — the user's clarifying request was decisive: *"hawala Business this invoice is for record purposes and balance management is for remittance management purposes, so make sure your design intelligently does both parts."*
+
+### What v10.0.26 + v10.0.27 added (bridge + hawala convention)
+
+**v10.0.26 — Bridge.** Three new fields wire the two models together: `remittance.transaction.remittance_invoice_id` (m2o), `remittance.invoice.transaction_id` (m2o, domain-filtered to bank_eur_in + invoice mode), `remittance.transaction.direct_gl` (Boolean — toggle to skip the invoice flow and post a cash-style JE for casual bank receipts). UI: 2 header buttons ("✚ Create Invoice" pre-fills client/currency/amount/date, "📄 Open Linked Invoice" for already-linked), "Invoice Workflow" group on the form, stage-advance guard (closing bank_eur_in invoice-mode requires linked invoice in `paid` or `handed_over`), bidirectional auto-stamp (when invoice posts step-4 GL move, transaction's `odoo_move_id` auto-populates + AML rows tagged with `remittance_tx_id` for partner-ledger drill-downs).
+
+**v10.0.27 — Hawala posting convention.** `remittance.invoice._create_odoo_payment` (step 6 — Money Arrived) rewritten as ONE atomic 4-line journal entry:
+
+```
+DR Bank                       (total = principal + fees)
+CR Customer AR                (total)              ← clears the step-4 invoice
+DR Service Income             (principal only — NO partner_id)
+CR Customer Deposit Liability (principal only)    ← partner=sender (operational balance)
+```
+
+Net effect after the full 7-step flow:
+- Bank: +total (asset received)
+- AR (sender): cleared (technical billing closed — customer invoice still exists for the client's records)
+- Service Income: +fees only (proper hawala revenue recognition — principal is passthrough not income)
+- Customer Liability (sender): +principal partner-tagged (operational balance reflects funds held for onward remittance)
+
+Reuses existing `res.company.remittance_client_payable_account_id` (account 489 / code 210100, `account_type=liability_payable` — already configured on Suleman's chart from v9 setup, no new setting needed). Service Income account resolved by reading from POSTED out_invoice's `invoice_line_ids` (Odoo's chart default fills in at posting time even when product property is empty).
+
+**Critical implementation detail:** Income reclassification line MUST NOT carry `partner_id` — would offset Liability in `remittance.balance.line` aggregator (which sums `debit - credit` GROUPED BY `partner_id × currency_id`, regardless of `account_id`). Pattern: PARTNER ACTIVITY lines (AR, AP, Customer Liability per sender) get partner_id; COMPANY ACTIVITY lines (Bank, Income, Expense, Suspense) leave it empty.
+
+### Verification — TXN/2026/00008
+
+User's original report: "TXN/2026/00008 i did this bank euro in transaction and its not reflecting in muhammad amir balance and also no invoice was created and linked." This was caused by `bank_eur_in` walking from draft to closed without ever creating a linked `remittance.invoice` (zero existed on remtest — the parallel system had never been used). Fixed: TXN/2026/00008 walked end-to-end through the v10.0.27 flow → **Muhammad Amir's EUR partner balance reads +25,000.00** (was 0 under v10.0.25/26 AR-netting). New payment move `BNK1/2026/00004` posted with the 4-line atomic JE as designed.
+
+### Pending v10.0.28 (Suleman accountant call required)
+
+**Outbound side asymmetry.** When a sender's deposit is paid out via `cash_eur_out` / `bank_usd_out`, the existing `_je_cash_out` posts `DR Payee AR / CR Cash` — leaving the sender's Liability uncleared. Books temporarily asymmetric (sender Liability +X, beneficiary AR +X) until v10.0.28 adds settlement-driven clearing JE: `DR Customer Liability(sender) / CR Payee AR(beneficiary)`. The settle wizard already creates `remittance.tx.settlement` link records — v10.0.28 will hang the clearing JE off that link. Sister to the v9-era `bank_eur_out_usd_in` JE math fix (pending since April). Both should be discussed in the same Suleman accountant call. Operations team can post the clearing JE manually via `account.move` form for now.
+
+### What v10.0.23 added (Treasury Dashboard + Cash Management Suite — Suleman's biggest UX win since v10.0.4)
 
 ### What v10.0.23 added (Treasury Dashboard + Cash Management Suite — Suleman's biggest UX win since v10.0.4)
 - **`Accounting → Treasury`** new client action (sequence 0). Single-page company-side view of all cash + bank balances at a glance:
