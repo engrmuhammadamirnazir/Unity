@@ -3,7 +3,7 @@ type: log
 tags: [hive-mind, session-log, append-only, cross-project]
 aliases: [Hive Mind Log, Agent Session Journal]
 created: 2026-04-22
-updated: 2026-05-02T03:30Z
+updated: 2026-05-02T08:30Z
 ---
 
 # Hive Mind — Session Log (Append-Only)
@@ -30,6 +30,14 @@ Keep entries tight. Format:
 ---
 
 ## Log (newest first)
+
+### 2026-05-02 (demo server — shoppingfeed_demo HTTP 500 fix + 204-subdomain audit) — D:/Development → Hetzner CPX42 37.27.2.10 — all 204 demos verified live
+- User: "https://shoppingfeed.demo.ecosire.com/web check why demo is not live" → expanded to "make sure all demos are live". Surface said HTTP 200 but POST login crashed: `ValueError: Wrong @depends on '_compute_feed_quality' (compute method of field shoppingfeed.product.feed_quality_score). Dependency field 'product_brand_id' not found in model product.product`. Root cause: `shoppingfeed_store_management/models/shoppingfeed_feed_quality.py:60` had `'odoo_product_id.product_brand_id'` in `@api.depends` even though the runtime body guards with `if 'product_brand_id' in product._fields:` — Odoo's `Registry._field_triggers` is lazy and `resolve_depends` parses the path on the FIRST write to ANY model in the database. Login specifically because login creates `res.users.log` → `modified()` → trigger-tree build → crash. **Option A fix:** removed that one line, bumped manifest 19.0.2.0.0 → 19.0.2.0.1, file backups stamped `*.bak_20260502_081613`, `systemctl restart odoo-demo` clean.
+- **204-demo audit via parallel HTTPS POST-login probe** (`/tmp/audit_demos_https.py`, 12-thread pool, ~90 sec) → **204/204 return post=303 → /odoo** (full auth success). False-positive caveat caught: internal-port probes (`127.0.0.1:8069` with `Host:` header) miss `X-Forwarded-Proto: https` and falsely 400 on website-themed modules like `branding`; public-HTTPS path is ground truth.
+- **Cross-project hard rule** captured at `D:/Development/.../memory/feedback_api_depends_optional_field.md` — sister to `feedback_module_pump_static_validation_insufficient` from earlier today. ANY `@api.depends('rel.field_provided_by_optional_module')` will lazy-crash the entire database on first write even with runtime hasattr guards. Three fix paths: (A) drop the optional-field path from depends, (B) hard-add the optional module to manifest depends, (C) dynamic depends via `_setup_complete` override. Static validation (`py_compile` + `ET.parse` + `ast.literal_eval`) does NOT catch this — only `odoo-bin -i <module> --stop-after-init` + a triggering write does. Reusable in any Odoo workspace where modules cross-reference fields from other modules.
+- **Pending — not yet acted on:** (1) local `D:/Development/odoo19/server/addons/shoppingfeed_store_management/models/` is empty (only `__pycache__`) — same `git filter-branch --msg-filter` damage that hit Remittance this morning per session_2026_05_02e. Demo server is the only intact copy. Needs `scp`-back recovery + EcosireSolutions mirror create + GitHub repo sync of v19.0.2.0.1 fix to all 4 branches. (2) `/var/log/odoo/odoo-demo.log` is 2.4 GB (logrotate not trimming). (3) Fleet-wide grep for `@api.depends('rel.optional_field')` pattern across 215 modules.
+- Cross-project impact: the new `feedback_api_depends_optional_field` rule applies to module-developer pumps in any workspace and to any future client module that conditionally enriches behavior when an optional Odoo app is installed.
+- Canonical facts promoted to Unity: **none** (server inventory, client portfolio, credentials, pricing — all unchanged).
 
 ### 2026-05-02 (Suleman Remittance v10.0.26 + v10.0.27 — bridge between remittance.transaction ↔ remittance.invoice + hawala posting convention) — D:/Development — sender's partner balance now reflects deposit instead of netting to zero
 - **User reported "TXN/2026/00008 i did this bank euro in transaction and its not reflecting in muhammad amir balance and also no invoice was created and linked"** — diagnosis: the `bank_eur_in` kind was designed to delegate posting to a parallel `remittance.invoice` record (7-step compliance flow: doc check → compliance → invoiced → TT upload → bank notified → paid → handed over), but the two models had NO link between them, no UX surfaced the second half from the transaction form, and nothing prevented closing a transaction without its invoice. Zero `remittance.invoice` records existed on remtest — the parallel system had never been used. TXN/2026/00008 walked from draft to closed with `odoo_move_id=NULL` → no JE → no balance change → no invoice document.
