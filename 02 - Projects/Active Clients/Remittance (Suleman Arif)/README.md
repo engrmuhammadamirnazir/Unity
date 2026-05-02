@@ -5,7 +5,7 @@ client: Salueman Arif — Remittance
 status: live
 location: TBD (Pakistani bridge-remittance operator)
 created: 2026-04-22
-updated: 2026-05-02-afternoon
+updated: 2026-05-02-night
 ---
 
 # Remittance — Salueman Arif
@@ -19,14 +19,55 @@ updated: 2026-05-02-afternoon
 | Server | Bitnami Odoo 19 Enterprise — `52.28.45.137` |
 | SSH key | `Unity/03 - Areas/Credentials & Access/SSH Keys/remittance.pem` · user `bitnami` |
 | Domains | `remittanceaccounting.ecosire.com` (prod) + `remtest.ecosire.com` (staging) |
-| Custom module | `remittance_management` @ **`v19.0.10.0.27`** (LIVE on both DBs 2026-05-02 afternoon — bridge between `remittance.transaction` ↔ `remittance.invoice` + hawala posting convention: principal → Customer Liability, fees → Income) |
-| Last pre-deploy backup | `pre_v10_0_27_remtest_20260502_085359.dump` + `pre_v10_0_27_remittanceaccounting_20260502_091142.dump` (also v10.0.26 stamps `_082542` retained at `/tmp/`) |
-| GitHub | `engrmuhammadamirnazir/remittance_management` (PRIVATE) — main `13b887d` + new tags `v19.0.10.0.26` + `v19.0.10.0.27` (NO AI attribution per client-repo rule) |
+| Custom module | `remittance_management` @ **`v19.0.10.0.31`** (LIVE on both DBs 2026-05-02 night — full hawala outbound posting convention shipped, including cross-currency FX bridge with FATF-aligned compliance guards, two-tier rate guardrails, and immutable audit snapshots) |
+| Last pre-deploy backup | `pre_v10_0_31_remtest_20260502_121046.dump` + `pre_v10_0_31_remittanceaccounting_20260502_121046.dump` (plus `_v10_0_30_*_112831` and `_v10_0_28_*_143703` retained at `/tmp/`) |
+| GitHub | `engrmuhammadamirnazir/remittance_management` (PRIVATE) — main `90635e8` + new tags `v19.0.10.0.28/29/30/31` (NO AI attribution per client-repo rule) |
 | User Manual PDF (latest) | `D:/EcosireClients/ActiveClients/Suleman-Remittance/docs/Remittance_User_Manual_v19.0.10.0.0_Addendum.pdf` (in-app User Guide is now the canonical source — refreshed via lxml migration in v10.0.7) |
 
-## Current state (2026-05-02 afternoon — UPDATED — v10.0.27 hawala convention)
+## Current state (2026-05-02 night — UPDATED — v10.0.31 cross-currency hawala outbound)
 
-**v19.0.10.0.27 LIVE both DBs.** Bridge between `remittance.transaction` ↔ `remittance.invoice` (v10.0.26) + hawala posting convention (v10.0.27). On the v10.0.25 foundation (Treasury Dashboard + Cash Management Suite + real GL balance compute). Sender's partner balance now reflects funds held for onward remittance instead of netting to zero — the user's clarifying request was decisive: *"hawala Business this invoice is for record purposes and balance management is for remittance management purposes, so make sure your design intelligently does both parts."*
+**v19.0.10.0.31 LIVE both DBs.** Full hawala posting convention complete: inbound (v10.0.27 — sender deposit posts to Customer Liability + only fees to Income) + same-currency outbound (v10.0.30 — sender Liability drawdown) + cross-currency outbound (v10.0.31 — FX bridge with operator-quoted rate, audit snapshots, two-tier guardrails, FATF-aligned KYC threshold + per-tx cap). Plus v10.0.28 P0 hotfixes (bank journal currency-routing bug + Treasury Dashboard JS error + Treasury KPI on main dashboard) and v10.0.29 dashboard layout cleanup (Pipeline card promoted out of orphan row).
+
+### What v10.0.28 → v10.0.31 added (this session, 2026-05-02 evening/night)
+
+**v10.0.28 P0 wave** — bank journal currency-routing fix (TXN/2026/00008's EUR 25k was routing to USD bank journal id=6 instead of EUR id=22 because `_create_odoo_payment` used an OR-domain `currency_id=invoice.currency OR currency_id=False` with no ordering — PostgreSQL's id-asc returned the lowest-id bank journal regardless of actual currency); Treasury Dashboard `openLedger` JS error (`Cannot read properties of undefined (reading 'map')` on Odoo 19's `_preprocessAction` — 5 OWL `act_window` calls were missing explicit `views: [[id, type]]` arrays); Treasury KPI added to main Operations Dashboard hero grid; TXN/2026/00008 reversed-and-replayed under fixed routing → Amir's EUR balance now correctly +25,000 with EUR Bank Account showing the cash, USD Bank phantom cleared. **Also surfaced and captured the Bitnami filestore-ownership lesson** — running `odoo-bin -u` as `sudo -u daemon` creates filestore objects daemon-owned that runtime workers (running as `odoo`) can't read, causing HTTPS 500 on every CSS/JS asset post-upgrade. Fix: `chown -R odoo:odoo` on the filestore + all subsequent upgrades as `sudo -u odoo`.
+
+**v10.0.29 dashboard layout cleanup** — user pushback on v10.0.28's 5-card hero grid orphaning Open Transactions on its own row ("empty space has been introduced again that makes dashboard un sexy"). Restored balanced 4-card hero (Treasury / Sent / Paid / Outstanding); promoted Open Transactions + Stage Funnel to a dedicated full-width Pipeline card with auto-fit chip layout (`grid-template-columns: repeat(auto-fit, minmax(120px, 1fr))`). Same trap that bit v10.0.19 (Open Invoices) — captured as fleet-wide hard rule.
+
+**v10.0.30 same-currency hawala outbound** — mirror of the v10.0.27 inbound convention. New `_je_outbound_hawala()` builder used by both `_je_cash_out` (cash kinds) and `_je_bank_usd_out` (bank kinds): when `partner_payer_id` is set AND has Liability balance ≥ amount+fees in the transaction currency, JE draws down sender's Liability (`DR Customer Liability / CR Cash / CR Service Income`); end beneficiary (`partner_payee_id`) is recorded on the operational `remittance.transaction` for audit but does NOT appear on any GL line — they're a recipient, not a counterparty (per hawala convention). Three-mode dispatch in the outbound builders: hawala drawdown (NEW) → settlement-mode (v10.0.13 legacy AR-based) → standalone fallback (`DR Payee AR / CR Cash`).
+
+**v10.0.31 cross-currency hawala outbound** — the FX bridge that closes the loop. When sender's same-currency liability is insufficient AND sender holds liability in another currency, the JE auto-dispatches to `_je_outbound_hawala_cross_ccy()`:
+
+```
+DR Customer Liability (partner=sender, ccy=DEPOSIT)   drawdown_deposit  (= total_payout / fx_rate)
+CR Cash / Funds-in-Transit (no partner, ccy=PAYOUT)   amount
+CR Service Income (no partner, ccy=PAYOUT)            fees             [if > 0]
++/- FX Margin (no partner, ccy=COMPANY)               |delta|          (balances company-currency side)
+```
+
+`fx_rate` is operator-quoted (units of payout_ccy per 1 deposit_ccy); falls back to Odoo's `res.currency.rate` spot if 0. Two-tier guardrails on `fx_rate` vs spot, calibrated to World Bank Remittance Prices Worldwide:
+- **Soft warning at ±5%** (`remittance_fx_max_spread_pct`, default 5.0) — JE posts, mail.thread warning logged for compliance review
+- **Hard block at ±15%** (`remittance_fx_extreme_spread_pct`, default 15.0) — UserError raised pre-build, operator must correct or raise threshold
+
+Pre-post compliance guards (apply uniformly to BOTH same-currency and cross-currency):
+- **Beneficiary KYC threshold** (`remittance_max_unverified_payout_usd`, default $1,000) — FATF Recommendation 16 + EU AMLD baseline
+- **Per-tx cap** (`remittance_max_payout_usd`, default $100,000) — catastrophic-typo safety net
+
+FX margin lands on dedicated `remittance_fx_margin_account_id` (per IAS 21 / ASC 830 — operator's quoted spread is REVENUE not generic FX gain/loss), keeping hawala spread visible as its own P&L line. 5 new fields including `fx_rate` + 4 immutable post-post snapshots (`fx_rate_at_post`, `fx_spot_rate_at_post`, `fx_rate_locked_at`, `fx_rate_source`); `write()` guard refuses post-post snapshot mutation; mail.thread audit log on every cross-currency post documents sender, beneficiary, amounts, rate, source, spot, spread %, and company-currency P&L.
+
+### Research integrated (tech-researcher agent ran in parallel)
+
+1000-word brief on hawala / WU / MoneyGram / Wise / Remitly conventions + FATF Recommendations 14 & 16 + EU TFR 2023/1113 + IAS 21 / ASC 830 cross-currency JE patterns + CFPB Reg E refund window + World Bank Remittance Prices Worldwide threshold calibration. Findings integrated: tightened thresholds 5%/15% from 10%/25% draft, preferred dedicated `remittance_fx_margin_account_id`, added `fx_rate_source` snapshot enum, added `write()` immutability guard.
+
+### Deferred to v10.0.32 (workflow features, ~2-4h work each)
+
+1. **Multi-tier maker-checker approval** — ≥ EUR 1k single-user post, ≥ 10k dual signoff, ≥ 50k 3-eyes + EDD documented (per FATF + industry research)
+2. **Sanctions list integration on outbound posting path** — currently relies on `compliance.matrix` at draft-cleared; should also screen at posting
+3. **Rate-lock at `kyc_cleared` stage** — research recommends locking earlier (when slip becomes printable); currently locks at JE post
+4. **Travel Rule data presence check** — originator + beneficiary fields per FATF Rec 16 above EUR 1k threshold
+5. **Daily structuring detection cron** — split-below-threshold scan (reporting layer, not posting hot path)
+
+### Earlier in session (v10.0.27 — hawala posting convention introduction)
 
 ### What v10.0.26 + v10.0.27 added (bridge + hawala convention)
 
