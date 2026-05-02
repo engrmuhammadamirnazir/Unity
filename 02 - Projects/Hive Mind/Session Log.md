@@ -3,7 +3,7 @@ type: log
 tags: [hive-mind, session-log, append-only, cross-project]
 aliases: [Hive Mind Log, Agent Session Journal]
 created: 2026-04-22
-updated: 2026-05-02T00:55Z
+updated: 2026-05-02T03:30Z
 ---
 
 # Hive Mind — Session Log (Append-Only)
@@ -30,6 +30,15 @@ Keep entries tight. Format:
 ---
 
 ## Log (newest first)
+
+### 2026-05-02 (Suleman Remittance v10.0.11 → v10.0.24 — 14 versions in one day, capped by Treasury Dashboard + real GL balances) — D:/Development — biggest single-session module evolution since v9 launched
+- **Shipped 14 versions in one day**: v10.0.11 (currency lock + cash-in dual-leg JE rewrite + sign flip) · v10.0.12 (settlement model + scaled tx dashboard) · v10.0.13 (FATF beneficiary + crypto-random MTCN + nominee list + compliance gate) · v10.0.14 (menu reorg + Daily Console + form polish) · v10.0.15 (Stripe-grade enterprise theme) · v10.0.16 (new geometric module icon) · v10.0.17 (auto-settlement + warning banner) · v10.0.18 (split inbound/outbound volume KPI — fixes 2× double-count) · v10.0.19 (dashboard layout balance) · v10.0.20 (late auto-link + multi-deposit FIFO + Auto-Settle Now button) · v10.0.21 (cryptographically-random 10-digit MTCN — replaces sequential predictable code) · v10.0.22 (kind-adaptive lifecycle stages) · **v10.0.23 (Treasury Dashboard + Cash Management Suite — flagship)** · v10.0.24 (real GL balance compute replacing v9 stub).
+- **Treasury Dashboard (v10.0.23)** delivered via 6-group Subagent-Driven Development: module-developer (implementer) + module-validator (spec) + odoo-engineer (code quality) for each group. Catches 4 IMPORTANT issues at the code-quality stage that spec review alone wouldn't have flagged (race condition in Cash Count, HTML injection in chatter, FX company-currency JE math, broken bank-rec action tag). Treasury tag tests pass 6/6.
+- **GitHub `engrmuhammadamirnazir/remittance_management` `cd42724..0ef5a90` + new tags `v19.0.10.0.23` + `v19.0.10.0.24`.** 19 commits stripped of AI attribution via `git filter-branch --msg-filter` + `git update-index --assume-unchanged` workaround for dirty working tree (client-owned-repo rule).
+- **6 fleet-wide Odoo 19 patterns captured this session** (reusable in any other Odoo client module): (1) `fields.Monetary(related='x.float_field')` rejects with TypeError — use computed Monetary; (2) Canonical bank-rec widget launcher is `account.bank.statement.line._action_open_bank_reconciliation_widget(default_context={...})` — the `tag: 'bank_statements_review'` does NOT exist in v19; (3) `account.account.company_id` is now `company_ids` M2M; (4) `git filter-branch` on dirty trees combined with `git update-index --assume-unchanged`; (5) Stripe-grade design tokens via `static/src/theme/enterprise.scss` reusable across OWL dashboards; (6) Hybrid treasury architecture (thin wrapper over `account.journal` + leverage Odoo Enterprise's bank reconciliation widget) reusable for any Odoo client cash-management feature.
+- **Cross-project impact:** Subagent-Driven Development pattern (module-developer + module-validator + odoo-engineer trio) is reusable for any future client-module multi-group rollout. The Stripe-grade theme + Treasury architecture transfer to any other client needing cash-management visibility.
+- **Pending Suleman:** record demo video showcasing Treasury Dashboard + Cash Count + Transfer + Statement Import (supersedes v10.0.10 demo doc). Schedule 30-min accountant call to finalise `_je_bank_eur_out_usd_in` JE pattern (now has Treasury Transfer's `_to_company_currency` helper as reference). 3 local stashes on `feat/v19.0.10-balances-and-ux` left for user to drop manually after verifying nothing valuable.
+- Canonical facts promoted to Unity: [[Remittance — Salueman Arif]] (module bumped to v10.0.24, GitHub state, Treasury Dashboard feature block, 6 cross-project patterns appended).
 
 ### 2026-05-02 (Oenoteca Phase B Fintech) — D:/Development (Oenoteca client) — Niccolò replied to 6 deferred items; booked 4 cleanly on prod, 2 escalated back as questions
 - **4 of 6 booked on prod with pre-backup** (`pre_apr2026_phase_b_20260502_005739.dump`, 12 MB, sha `e21c89f098…`): #2 Houston Oaks CCBG $152 refund recognition (`MISC/2026/04/0051` posted but DR unmatched — existing P814 chain closed; partner net balance correct via offset). #3 Houston Oaks MB $1,260 net Option A (`MISC/2026/04/0048` → INV/2026/00538 PAID). #4 Long Point Wine LLC $469 Option B (new `RINV/2026/00010` against THE LIBRARY since Long Point is DBA per Niccolò + `MISC/2026/04/0049` reconciled). #6 La Estancia $80 Châteauneuf-du-Pape (new `RINV/2026/00011` qty 1 of 6 bottles `[CHTLANER-FR-RHOCDP21]` + `MISC/2026/04/0050` reconciled, La Estancia balance −$80).

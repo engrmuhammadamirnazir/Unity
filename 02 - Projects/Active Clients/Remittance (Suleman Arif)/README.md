@@ -19,14 +19,52 @@ updated: 2026-05-02
 | Server | Bitnami Odoo 19 Enterprise — `52.28.45.137` |
 | SSH key | `Unity/03 - Areas/Credentials & Access/SSH Keys/remittance.pem` · user `bitnami` |
 | Domains | `remittanceaccounting.ecosire.com` (prod) + `remtest.ecosire.com` (staging) |
-| Custom module | `remittance_management` @ **`v19.0.10.0.10`** (LIVE on both DBs 2026-05-02 — UX flagship + report hotfix wave + NEW Partner Balance Detail drill-down) |
-| Last pre-deploy backup | `20260502_0200` — both DB dumps + module folder tarball at `/home/bitnami/backups/` (also stamps for v10.0.4 through v10.0.9 retained) |
-| GitHub | `engrmuhammadamirnazir/remittance_management` (PRIVATE) — main `cd42724` + tags `v19.0.10.0.4` `v19.0.10.0.5` `v19.0.10.0.6` `v19.0.10.0.7` `v19.0.10.0.8` `v19.0.10.0.9` `v19.0.10.0.10` |
+| Custom module | `remittance_management` @ **`v19.0.10.0.24`** (LIVE on both DBs 2026-05-02 — Treasury Dashboard + Cash Management Suite + real GL balance compute) |
+| Last pre-deploy backup | `pre_v10_0_23_remtest_20260501_212923.dump` + `pre_v10_0_23_remittanceaccounting_20260501_212923.dump` at `/opt/bitnami/odoo/backups/` (stamps for v10.0.4 through v10.0.22 retained) |
+| GitHub | `engrmuhammadamirnazir/remittance_management` (PRIVATE) — main `0ef5a90` + new tags `v19.0.10.0.23` + `v19.0.10.0.24` (NO AI attribution per client-repo rule) |
 | User Manual PDF (latest) | `D:/EcosireClients/ActiveClients/Suleman-Remittance/docs/Remittance_User_Manual_v19.0.10.0.0_Addendum.pdf` (in-app User Guide is now the canonical source — refreshed via lxml migration in v10.0.7) |
 
-## Current state (2026-05-02 — UPDATED)
+## Current state (2026-05-02 evening — UPDATED)
 
-**v19.0.10.0.10 LIVE both DBs.** Module is in the strongest shape since v9 launched. UX flagship release (v10.0.4) + 3 back-to-back report-system P0 hotfix waves (v10.0.5/6/7) + knowledge articles refreshed + NEW Partner Balance Detail drill-down (v10.0.8) + 2 follow-on P0 hotfixes (v10.0.9 XLSX 502, v10.0.10 Dashboard alert xmlids).
+**v19.0.10.0.24 LIVE both DBs.** Treasury Dashboard + Cash Management Suite (v10.0.23) + real GL balance compute (v10.0.24). 14 versions in one day (v10.0.10 → v10.0.24): currency-lock hardening, dual-leg cash-in JE rewrite, sign-flip dashboards, settlement model + wizard, Stripe-grade enterprise theme, MTCN crypto-random codes, kind-adaptive lifecycle, Treasury suite, real balances. Six fleet-wide Odoo 19 patterns captured.
+
+### What v10.0.23 added (Treasury Dashboard + Cash Management Suite — Suleman's biggest UX win since v10.0.4)
+- **`Accounting → Treasury`** new client action (sequence 0). Single-page company-side view of all cash + bank balances at a glance:
+  - 3 KPI cards per currency (EUR / USD / AED) summed across all accounts
+  - Currency × location heatmap card
+  - Per-account table with reconciliation pill (green ≤7d / amber ≤30d / red >30d), count variance dot, 30-day sparkline from snapshots, 5 row-actions (Reconcile / Cash Count / Transfer From / Open Ledger / Edit)
+  - Filter chips + free-text search
+  - Single round-trip via `remittance.account.treasury_dashboard_payload()`
+- **3 new wizards** accessible from the Treasury topbar AND per-row kebab:
+  - `remittance.cash.count` — EOD physical-vs-ledger variance, books difference to suspense as `variance_adjust`, stamps `last_count_date` + `last_count_amount`. Validate-before-mutate, `markupsafe.escape()` on operator notes.
+  - `remittance.account.transfer` — same-currency or cross-currency, posts a balanced JE in **company currency** via new `_to_company_currency` helper (caught a CRITICAL Odoo 19 invariant: debit/credit must be company-currency), with FX clearing pair on cross-currency.
+  - `remittance.statement.import` — CSV upload + column mapping + 5-row preview (`preview_html` computed Html), redirects to Odoo's native bank reconciliation widget via `account.bank.statement.line._action_open_bank_reconciliation_widget(default_context=...)` (the canonical v19 launcher — `tag: 'bank_statements_review'` does NOT exist).
+- **Daily snapshot cron** at 23:55 server time: `remittance.account.snapshot._cron_daily_snapshot()` captures every visible + active treasury account into `remittance.account.snapshot` for the dashboard sparklines. Reuses existing snapshot model (deviation: snapshot is keyed on `account.account` GL not `remittance.account`, so payload resolves through `journal_id.default_account_id`).
+- **10 new fields on `remittance.account`**: `bank_name` · `account_holder_name` · `iban` · `account_owner_id` · `treasury_role` · `is_treasury_visible` · `last_count_date` · `last_count_amount` · `current_count_variance` (computed) · `last_reconciled_date` (computed from `account.bank.statement.line.is_reconciled`).
+- **Migration** `19.0.10.0.23/post-treasury-init.py` backfills `is_treasury_visible=True` + `treasury_role` from `journal_id.type` on existing accounts; warns on companies missing `remittance_suspense_account_id`.
+- **Treasury tag tests pass 6/6** on remtest (`--test-tags=treasury`).
+
+### What v10.0.24 fixed (real GL balance — replaces v9 stub)
+- `remittance.account._compute_balance` had been a stub since v19.0.9.0.0 returning only `opening_balance`, ignoring all posted journal entries. Treasury Dashboard built on top therefore showed stale figures.
+- Replaced with `read_group` over `account.move.line` filtered `parent_state='posted'` on `journal.default_account_id`, multi-company-guarded. `current_balance = opening_balance + total_debit − total_credit` (cash + bank are asset accounts).
+- Verified post-deploy: AED Cash Position correctly shows `5,000.00 AED` from posted moves; totals roll up across the 10 treasury accounts; heatmap places the balance in the correct location bucket.
+
+### Implementation pattern — 6-group Subagent-Driven Development
+Spec → Plan → Subagent-Driven Development with the same per-task quality bar (module-developer implementer + module-validator spec compliance + odoo-engineer code quality) was used for the entire Treasury Dashboard build. ~10–14 hours total across 18 commits. Three IMPORTANT issues caught at the code-quality stage (race condition, HTML injection, FX company-currency math, broken bank-rec action tag) — none of them would have been caught by spec review alone. Pattern reusable for any future client-module rollout.
+
+### Cross-project Odoo 19 patterns captured this session (fleet-wide reuse)
+1. **`fields.Monetary(related='x.float_field')` rejects with TypeError** in Odoo 19 — registry validation enforces type-compatibility on related fields. Use `compute` field instead.
+2. **Canonical bank-rec widget launcher** is `account.bank.statement.line._action_open_bank_reconciliation_widget(default_context={...})` returning `ir.actions.act_window` — NOT `tag: 'bank_statements_review'` (does NOT exist in v19).
+3. **`account.account.company_id` is now `company_ids` M2M** in Odoo 19 (was singular in v17/v18).
+4. **AI-footer-strip on client-owned repos**: `git filter-branch --msg-filter` works around dirty working trees by combining with `git update-index --assume-unchanged` on the unrelated dirt.
+5. **Stripe-grade design tokens** shared via `static/src/theme/enterprise.scss` are now reusable across all OWL dashboards in this module — pattern transferable.
+6. **Hybrid treasury architecture**: thin wrapper over `account.journal` + leverage Odoo Enterprise's bank reconciliation widget rather than rebuild. Reusable for any Odoo client needing cash-management visibility.
+
+---
+
+## Prior state (earlier 2026-05-02) — v19.0.10.0.10
+
+**v19.0.10.0.10 was LIVE both DBs.** UX flagship release (v10.0.4) + 3 back-to-back report-system P0 hotfix waves (v10.0.5/6/7) + knowledge articles refreshed + NEW Partner Balance Detail drill-down (v10.0.8) + 2 follow-on P0 hotfixes (v10.0.9 XLSX 502, v10.0.10 Dashboard alert xmlids).
 
 ### What v10.0.8 added (NEW FEATURE — Partner Balance Detail drill-down)
 - Click any partner row's "View Details" button in the Balances list → opens single-page OWL drill-down at `remittance_partner_balance_detail` client action.
@@ -131,17 +169,24 @@ These four are now fleet-wide feedback files in D:/Development project-local mem
 - **D:/Development project memory** — `remittance_client.md`, `remittance_v19_0_9_lifecycle_first.md`, `session_2026_04_22_remittance_v09_lifecycle.md`, `feedback_enterprise_account_create_asset.md`, `feedback_bitnami_odoo19_migration_signature.md`, `remittance_server.md`, and all prior session/v8.x memory files.
 - **Code** — `D:\Development\odoo19\server\addons\remittance_management\` (dev) + `D:\EcosireClients\ActiveClients\Suleman-Remittance\` (client repo + docs + backups).
 
-## Open threads (post-v10.0.7)
+## Open threads (post-v10.0.24)
 
-- **Suleman client video walkthrough** — Amir to record on remtest. All 17 PDFs + 14 XLSX/CSV exports work. Demo doc at `D:/Development/tmp/remittance_v10_e2e_2026_05_01/SULEMAN_DEMO_PREP.md` covers 10-min flow. Skip `bank_eur_out_usd_in` kind in any live demo until v10.0.8 ships.
-- **v10.0.8 sprint** — fix `_je_bank_eur_out_usd_in` JE math. Latent since v3.2 (April 2026), no real user has exercised it end-to-end. Needs Suleman accountant call to confirm intended FX gain/loss + company-currency conversion pattern.
-- **v10.0.9 backlog** — Reports inline date filter chips, Send-by-email on every report, Statement smart button audit signature on partner record, Save-and-continue keyboard shortcut.
-- **Residual payment** collectable upon v10 sign-off (if any of original $2,500 milestone outstanding — confirm with Suleman after video walkthrough).
+- **Suleman client demo video** — should now feature the full Treasury Dashboard + Cash Count + Transfer + Statement Import flow, replacing the v10.0.10-era 10-min flow. Record after Suleman has tested.
+- **`_je_bank_eur_out_usd_in` JE math** — still needs Suleman accountant call to confirm intended FX gain/loss + company-currency conversion pattern. Now relevant alongside the new Treasury Transfer wizard which already does cross-currency JE math correctly via `_to_company_currency`. Use the transfer wizard's pattern as a reference when fixing the bank wizard.
+- **App Store HTML refresh** — `static/description/index.html` still references PKR/Pakistan copy. Should also feature the Treasury Dashboard screenshot now that it's the marquee feature.
+- **v10.0.25 backlog candidates** — surfaced during v10.0.23/24 build:
+  - Reports inline date filter chips (carried from v10.0.9 backlog)
+  - Send-by-email on every report
+  - Statement smart-button audit signature on partner record
+  - Save-and-continue keyboard shortcut on tx form
+  - Treasury Dashboard pagination + `read_group` batching when account count exceeds ~50 (current per-account `read_group` is fine for Suleman's 10–15 accounts but won't scale)
+- **Residual payment** collectable upon v10 sign-off.
 
 ## Next actions
 
-- [ ] Record client video walkthrough on remtest (10-min flow per demo doc).
-- [ ] Send Suleman the video + a one-page release-note PDF.
-- [ ] Schedule 30-min call with Suleman + accountant to confirm `bank_eur_out_usd_in` GL pattern (v10.0.8 prerequisite).
-- [ ] Refresh `static/description/index.html` (App Store HTML) to drop PKR/Pakistan copy + add Dashboard screenshot.
+- [ ] Record client demo video that includes Treasury Dashboard + Cash Count + Transfer + Statement Import (supersedes the v10.0.10 demo doc).
+- [ ] Schedule 30-min call with Suleman + accountant to confirm `bank_eur_out_usd_in` GL pattern (v10.0.25 prerequisite).
+- [ ] Refresh `static/description/index.html` — drop PKR copy, add Treasury Dashboard screenshot.
+- [ ] Test the Treasury features end-to-end on real Suleman accounts (he has 5–15 EUR/USD/AED accounts across Estonia/France/UAE).
+- [ ] Drop the three local stashes on `feat/v19.0.10-balances-and-ux` once verified nothing useful remains (`stash@{0}/{1}/{2}` summaries: see session notes).
 - [ ] Collect residual upon v10 sign-off.
