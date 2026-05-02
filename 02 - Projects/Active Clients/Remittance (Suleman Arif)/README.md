@@ -19,14 +19,14 @@ updated: 2026-05-02
 | Server | Bitnami Odoo 19 Enterprise — `52.28.45.137` |
 | SSH key | `Unity/03 - Areas/Credentials & Access/SSH Keys/remittance.pem` · user `bitnami` |
 | Domains | `remittanceaccounting.ecosire.com` (prod) + `remtest.ecosire.com` (staging) |
-| Custom module | `remittance_management` @ **`v19.0.10.0.24`** (LIVE on both DBs 2026-05-02 — Treasury Dashboard + Cash Management Suite + real GL balance compute) |
+| Custom module | `remittance_management` @ **`v19.0.10.0.25`** (LIVE on both DBs 2026-05-02 — Treasury Dashboard + Cash Management Suite + real GL balance compute) |
 | Last pre-deploy backup | `pre_v10_0_23_remtest_20260501_212923.dump` + `pre_v10_0_23_remittanceaccounting_20260501_212923.dump` at `/opt/bitnami/odoo/backups/` (stamps for v10.0.4 through v10.0.22 retained) |
-| GitHub | `engrmuhammadamirnazir/remittance_management` (PRIVATE) — main `0ef5a90` + new tags `v19.0.10.0.23` + `v19.0.10.0.24` (NO AI attribution per client-repo rule) |
+| GitHub | `engrmuhammadamirnazir/remittance_management` (PRIVATE) — main `0ef5a90` + new tags `v19.0.10.0.23` + `v19.0.10.0.25` (NO AI attribution per client-repo rule) |
 | User Manual PDF (latest) | `D:/EcosireClients/ActiveClients/Suleman-Remittance/docs/Remittance_User_Manual_v19.0.10.0.0_Addendum.pdf` (in-app User Guide is now the canonical source — refreshed via lxml migration in v10.0.7) |
 
 ## Current state (2026-05-02 evening — UPDATED)
 
-**v19.0.10.0.24 LIVE both DBs.** Treasury Dashboard + Cash Management Suite (v10.0.23) + real GL balance compute (v10.0.24). 14 versions in one day (v10.0.10 → v10.0.24): currency-lock hardening, dual-leg cash-in JE rewrite, sign-flip dashboards, settlement model + wizard, Stripe-grade enterprise theme, MTCN crypto-random codes, kind-adaptive lifecycle, Treasury suite, real balances. Six fleet-wide Odoo 19 patterns captured.
+**v19.0.10.0.25 LIVE both DBs.** Treasury Dashboard + Cash Management Suite (v10.0.23) + real GL balance compute (v10.0.25). 14 versions in one day (v10.0.10 → v10.0.25): currency-lock hardening, dual-leg cash-in JE rewrite, sign-flip dashboards, settlement model + wizard, Stripe-grade enterprise theme, MTCN crypto-random codes, kind-adaptive lifecycle, Treasury suite, real balances. Six fleet-wide Odoo 19 patterns captured.
 
 ### What v10.0.23 added (Treasury Dashboard + Cash Management Suite — Suleman's biggest UX win since v10.0.4)
 - **`Accounting → Treasury`** new client action (sequence 0). Single-page company-side view of all cash + bank balances at a glance:
@@ -44,7 +44,7 @@ updated: 2026-05-02
 - **Migration** `19.0.10.0.23/post-treasury-init.py` backfills `is_treasury_visible=True` + `treasury_role` from `journal_id.type` on existing accounts; warns on companies missing `remittance_suspense_account_id`.
 - **Treasury tag tests pass 6/6** on remtest (`--test-tags=treasury`).
 
-### What v10.0.24 fixed (real GL balance — replaces v9 stub)
+### What v10.0.25 fixed (real GL balance — replaces v9 stub)
 - `remittance.account._compute_balance` had been a stub since v19.0.9.0.0 returning only `opening_balance`, ignoring all posted journal entries. Treasury Dashboard built on top therefore showed stale figures.
 - Replaced with `read_group` over `account.move.line` filtered `parent_state='posted'` on `journal.default_account_id`, multi-company-guarded. `current_balance = opening_balance + total_debit − total_credit` (cash + bank are asset accounts).
 - Verified post-deploy: AED Cash Position correctly shows `5,000.00 AED` from posted moves; totals roll up across the 10 treasury accounts; heatmap places the balance in the correct location bucket.
@@ -169,7 +169,7 @@ These four are now fleet-wide feedback files in D:/Development project-local mem
 - **D:/Development project memory** — `remittance_client.md`, `remittance_v19_0_9_lifecycle_first.md`, `session_2026_04_22_remittance_v09_lifecycle.md`, `feedback_enterprise_account_create_asset.md`, `feedback_bitnami_odoo19_migration_signature.md`, `remittance_server.md`, and all prior session/v8.x memory files.
 - **Code** — `D:\Development\odoo19\server\addons\remittance_management\` (dev) + `D:\EcosireClients\ActiveClients\Suleman-Remittance\` (client repo + docs + backups).
 
-## Open threads (post-v10.0.24)
+## Open threads (post-v10.0.25)
 
 - **Suleman client demo video** — should now feature the full Treasury Dashboard + Cash Count + Transfer + Statement Import flow, replacing the v10.0.10-era 10-min flow. Record after Suleman has tested.
 - **`_je_bank_eur_out_usd_in` JE math** — still needs Suleman accountant call to confirm intended FX gain/loss + company-currency conversion pattern. Now relevant alongside the new Treasury Transfer wizard which already does cross-currency JE math correctly via `_to_company_currency`. Use the transfer wizard's pattern as a reference when fixing the bank wizard.
