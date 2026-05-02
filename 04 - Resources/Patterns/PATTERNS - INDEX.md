@@ -31,7 +31,14 @@ updated: 2026-05-03
 3. Add a one-line entry below.
 4. The next `hive-mind-sync` push commits it.
 
+## The principle
+
+**Lessons propagate, artifacts stay scoped.** What lives here are *patterns* — universal gotchas, rules, and conventions that apply in every workspace. What does NOT live here (and is NOT auto-broadcast across workspaces) are project-specific *implementations* — skills, agents, and hooks that encode a workspace's particular models, server names, or conventions. Sharing what we *learned* is right; copying what we *built* is wrong. See [[feedback_propagate_learning_not_artifacts]] in the source memory for the full reasoning.
+
 ## Canonical patterns (newest first)
+
+### Hive-mind / Fleet
+- [[feedback_propagate_learning_not_artifacts]] — Don't auto-broadcast workspace skills/agents to peer workspaces. Each workspace's `.claude/skills/` is scoped to that codebase. Cross-workspace propagation = bloat + drift + false uniformity. Broadcast LESSONS via `~/.claude/lessons/`, not implementations.
 
 ### Odoo / ORM
 - [[feedback_aggregator_currency_axis_bug]] — Custom Odoo SQL aggregators over `account_move_line` that group by `currency_id` MUST use `SUM(amount_currency)` not `SUM(debit-credit)`. Otherwise foreign-currency-tagged AMLs get attributed to the wrong currency bucket and totals silently double-count.
