@@ -2,7 +2,7 @@
 type: resource
 tags: [system, navigation, development, infrastructure, ai-agent, reference]
 created: 2026-03-02
-updated: 2026-03-02
+updated: 2026-05-02
 ---
 
 # System Navigation Map — Complete Laptop File & Software Organization
@@ -16,8 +16,8 @@ updated: 2026-03-02
 
 | Drive | Type | Total | Free | Purpose |
 |-------|------|-------|------|---------|
-| **C:** | NTFS | 200 GB | 20 GB | OS, user profile, Dropbox, tools |
-| **D:** | NTFS | 275 GB | 164 GB | Development, projects, modules, customer data |
+| **C:** | NTFS | 200 GB | 65 GB | OS, user profile, Dropbox, tools (post 2026-05-02 cleanup; was 3.66 GB free pre-cleanup) |
+| **D:** | NTFS | 275 GB | 80 GB | Development, projects, modules, customer data, dev-tool caches (`D:\caches\`), Docker disk image (`D:\Software\Docker\`) |
 
 ---
 
@@ -44,8 +44,8 @@ C:\Users\Amir Nazir\
 ├── OneDrive\                         Microsoft OneDrive (minimal use)
 ├── .openclaw\                        OpenClaw AI agent workspace
 ├── .claude\                          Claude Code config, project memories
-├── .kiro\                            Kiro editor extensions
 └── Apple\                            Apple device sync
+                                      (.cursor/.kiro/.trae/.windsurf/.antigravity/.codeium all REMOVED 2026-05-02 — user uses VS Code only)
 ```
 
 ### Sensitive Files (DO NOT output values)
@@ -58,6 +58,20 @@ C:\Users\Amir Nazir\
 | Enterprise codes | `Dropbox/Commands/Enterprise Codes.txt` |
 | SSH keys | `Dropbox/Keys/` |
 | Vault credentials | `03 - Areas/Credentials & Access/` (6 files) |
+
+### Dev tool cache locations (relocated 2026-05-02 to keep C: from filling)
+
+| Tool | Cache/Store path | Mechanism |
+|------|------------------|-----------|
+| **npm** | `D:\caches\npm` | global `~/.npmrc` (`npm config get cache` to verify) |
+| **Playwright** | `D:\caches\ms-playwright` | `PLAYWRIGHT_BROWSERS_PATH` user env var |
+| **pip** | default `%LOCALAPPDATA%\pip` (back on C:) | run `pip cache purge` periodically |
+| **pnpm** | not installed (corepack disabled) | if installing, `pnpm config set store-dir D:\caches\pnpm` BEFORE first use |
+| **Docker Desktop** | `D:\Software\Docker\DockerDesktopWSL\disk\docker_data.vhdx` (~16 GB) | Set via Docker Desktop Settings → Resources → Advanced → Disk image location |
+
+**Hibernation OFF** (`powercfg -h off` ran 2026-05-02; Fast Startup also disabled as side-effect).
+
+Future Claude sessions in any workspace must respect these paths and avoid creating heavy build artifacts under `C:\Users\Amir Nazir\` unless explicitly needed. See `~/.claude/CLAUDE.md` for the rules section visible in every session.
 
 ---
 
