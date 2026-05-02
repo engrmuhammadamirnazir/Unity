@@ -6,8 +6,8 @@ platform: Odoo 19 Enterprise
 start-date: 2025-10-08
 tags: [project, oenoteca, odoo, accounting]
 created: 2025-10-08
-updated: 2026-04-29
-milestone: v4 Q1+Apr P&L PDF delivered 2026-04-29 — Q1 NI $72,407 (29.5%), Q1+Apr NI $101,117 (33.3%), BS balances $0.00
+updated: 2026-05-02
+milestone: 2026-05-02d Apr Fintech Phase B — 4 of 6 deferred items booked on prod (Items 2/3/4/6); 2 questions back to Niccolò on La Estancia (Canon $1,200 + $3,204 invoice ID). Phase A 2026-05-01j: 76 reclasses ($77,497) + 153 S1xxx backdates ($895k→$663k matching books $664k). v4 P&L PDF 2026-04-29.
 ---
 
 # PRJ — Oenoteca Fine Wines
