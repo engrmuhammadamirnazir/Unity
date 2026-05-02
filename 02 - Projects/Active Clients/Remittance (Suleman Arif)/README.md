@@ -5,7 +5,7 @@ client: Salueman Arif — Remittance
 status: live
 location: TBD (Pakistani bridge-remittance operator)
 created: 2026-04-22
-updated: 2026-05-02-night
+updated: 2026-05-02-evening
 ---
 
 # Remittance — Salueman Arif
@@ -19,14 +19,14 @@ updated: 2026-05-02-night
 | Server | Bitnami Odoo 19 Enterprise — `52.28.45.137` |
 | SSH key | `Unity/03 - Areas/Credentials & Access/SSH Keys/remittance.pem` · user `bitnami` |
 | Domains | `remittanceaccounting.ecosire.com` (prod) + `remtest.ecosire.com` (staging) |
-| Custom module | `remittance_management` @ **`v19.0.10.0.31`** (LIVE on both DBs 2026-05-02 night — full hawala outbound posting convention shipped, including cross-currency FX bridge with FATF-aligned compliance guards, two-tier rate guardrails, and immutable audit snapshots) |
-| Last pre-deploy backup | `pre_v10_0_31_remtest_20260502_121046.dump` + `pre_v10_0_31_remittanceaccounting_20260502_121046.dump` (plus `_v10_0_30_*_112831` and `_v10_0_28_*_143703` retained at `/tmp/`) |
-| GitHub | `engrmuhammadamirnazir/remittance_management` (PRIVATE) — main `90635e8` + new tags `v19.0.10.0.28/29/30/31` (NO AI attribution per client-repo rule) |
+| Custom module | `remittance_management` @ **`v19.0.10.0.36`** (LIVE on both DBs 2026-05-02 evening — UX hardening + FX UX live spot prefill + `bank_eur_out_usd_in` pivoted to balance-shift convention per Suleman's hawala model: customer's EUR liability shuffles to USD liability, no cash movement, cash payout happens later as separate `bank_usd_out`) |
+| Last pre-deploy backup | `pre_v10_0_36_remtest_20260502_155903.dump` + `pre_v10_0_36_remittanceaccounting_20260502_155903.dump` (plus `_v10_0_3{2,3,4,5}_*` stamps retained at `/tmp/`) |
+| GitHub | `engrmuhammadamirnazir/remittance_management` (PRIVATE) — main `66e9dbc` + new tags `v19.0.10.0.32/33/34/35/36` (NO AI attribution per client-repo rule) |
 | User Manual PDF (latest) | `D:/EcosireClients/ActiveClients/Suleman-Remittance/docs/Remittance_User_Manual_v19.0.10.0.0_Addendum.pdf` (in-app User Guide is now the canonical source — refreshed via lxml migration in v10.0.7) |
 
-## Current state (2026-05-02 night — UPDATED — v10.0.31 cross-currency hawala outbound)
+## Current state (2026-05-02 evening — UPDATED — v10.0.36 balance-shift convention + FX UX)
 
-**v19.0.10.0.31 LIVE both DBs.** Full hawala posting convention complete: inbound (v10.0.27 — sender deposit posts to Customer Liability + only fees to Income) + same-currency outbound (v10.0.30 — sender Liability drawdown) + cross-currency outbound (v10.0.31 — FX bridge with operator-quoted rate, audit snapshots, two-tier guardrails, FATF-aligned KYC threshold + per-tx cap). Plus v10.0.28 P0 hotfixes (bank journal currency-routing bug + Treasury Dashboard JS error + Treasury KPI on main dashboard) and v10.0.29 dashboard layout cleanup (Pipeline card promoted out of orphan row).
+**v19.0.10.0.36 LIVE both DBs.** Five back-to-back versions added on top of the v10.0.31 hawala foundation, all driven by Amir's testing on `remtest`: **v10.0.32** UX hardening (Ledger IN/OUT now reads in customer-statement POV; pickup-by-code wizard has fallback resolution + specific diagnostics replacing the generic "no deposit selected"). **v10.0.33** pickup wizard FIFO double-counting collision fixed (operator's typed MTCN now always overrides FIFO date-order). **v10.0.34** FX rate UX (directional label "1 EUR = ? USD" + live `res.currency.rate` spot hint + auto-prefill from spot + auto-compute `converted_amount`; activated Odoo's currency rate cron that had been stuck since 2026-04-17 — populated EUR/USD/AED rates daily from CBUAE/ECB providers). **v10.0.35** `_je_bank_eur_out_usd_in` v9-era arithmetic bug fixed (literal foreign amounts had been used as company-currency `debit/credit` plus an unbalanced 5th line; replaced with clean 4-line + FX plug). **v10.0.36** pivot to balance-shift convention (Suleman: "intended balance is for amir USD account and not company account") — JE now shuffles customer's EUR liability to USD liability inside their account, no bank/cash movement, cash payout happens later as separate `bank_usd_out`. Hard pre-check ensures sender has enough EUR liability before posting. Plus v10.0.31 prior foundation: full hawala posting convention (inbound v10.0.27, same-currency outbound v10.0.30, cross-currency outbound v10.0.31 with FX bridge + FATF-aligned KYC threshold + per-tx cap + audit snapshots).
 
 ### What v10.0.28 → v10.0.31 added (this session, 2026-05-02 evening/night)
 
