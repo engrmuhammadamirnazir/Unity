@@ -3,7 +3,7 @@ type: moc
 tags: [patterns, gotchas, hive-mind, cross-project]
 aliases: [Patterns MOC, Fleet Patterns]
 created: 2026-05-03
-updated: 2026-05-03
+updated: 2026-05-04
 ---
 
 # Fleet Patterns — Cross-Project Gotchas
@@ -39,6 +39,9 @@ updated: 2026-05-03
 
 ### Hive-mind / Fleet
 - [[feedback_propagate_learning_not_artifacts]] — Don't auto-broadcast workspace skills/agents to peer workspaces. Each workspace's `.claude/skills/` is scoped to that codebase. Cross-workspace propagation = bloat + drift + false uniformity. Broadcast LESSONS via `~/.claude/lessons/`, not implementations.
+
+### Client deliverables / Branding
+- [[feedback_client_docs_in_client_folder_with_editable_version]] — Every client-facing document goes to `D:\EcosireClients\ActiveClients\<Client>\docs\` (NOT scratch/tmp paths) and ships as a PDF + editable DOCX pair sharing one filename stem. Use `letterhead_full.png` (not split header/footer crops, which lose the side decorations). Page size = A4 to match the 0.707 letterhead aspect. Includes the exact `<wp:anchor behindDoc="1">` XML pattern for python-docx behind-text full-page background (no built-in API).
 
 ### Odoo / ORM
 - [[feedback_aggregator_currency_axis_bug]] — Custom Odoo SQL aggregators over `account_move_line` that group by `currency_id` MUST use `SUM(amount_currency)` not `SUM(debit-credit)`. Otherwise foreign-currency-tagged AMLs get attributed to the wrong currency bucket and totals silently double-count.

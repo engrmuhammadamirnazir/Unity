@@ -5,7 +5,7 @@ client: Salueman Arif — Remittance
 status: live
 location: TBD (Pakistani bridge-remittance operator)
 created: 2026-04-22
-updated: 2026-05-02-evening
+updated: 2026-05-04-morning
 ---
 
 # Remittance — Salueman Arif
@@ -24,7 +24,17 @@ updated: 2026-05-02-evening
 | GitHub | `engrmuhammadamirnazir/remittance_management` (PRIVATE) — main `66e9dbc` + new tags `v19.0.10.0.32/33/34/35/36` (NO AI attribution per client-repo rule) |
 | User Manual PDF (latest) | `D:/EcosireClients/ActiveClients/Suleman-Remittance/docs/Remittance_User_Manual_v19.0.10.0.0_Addendum.pdf` (in-app User Guide is now the canonical source — refreshed via lxml migration in v10.0.7) |
 
-## Current state (2026-05-02 evening — UPDATED — v10.0.36 balance-shift convention + FX UX)
+## Current state (2026-05-04 morning — clarification doc delivered for Monday meeting after demo-video paradigm-shift pushback)
+
+**Latest deployed:** v19.0.10.0.40 LIVE on both `remtest` + `remittanceaccounting` (since 2026-05-03 noon — IAS 21 FX gain/loss fix on cross-currency invoice payment, GitHub `engrmuhammadamirnazir/remittance_management` `main 9d099f6` + tag `v19.0.10.0.40`).
+
+**2026-05-03 evening:** Amir shared a YouTube Short demo of v10.0.40. Suleman replied with detailed feedback on WhatsApp signalling a **paradigm-shift request**: the system should be a *historical data-entry tool* for past hawala transactions, not a forward-looking regulated MTO with KYC gates / MTCN auto-gen / beneficiary capture / TT-upload / 10-stage Kanban. Cancellation risk explicit: *"this needs to be clear all within 1-2 days. if again gap of 5-7 days, this software we cant finish."* Six numbered complaints + his own 4-account / 3-case spec.
+
+**2026-05-03 / 04 morning:** Built a 30-question clarification doc on ECOSIRE letterhead in `D:\EcosireClients\ActiveClients\Suleman-Remittance\docs\Suleman_Clarification_Questions_2026-05-04.{pdf,docx}` (9 pages A4, single Python source generates both PDF and answerable DOCX, full-page letterhead behind text on every page). Sections A–K cover workflow simplification, MTCN rename to "Reference No", beneficiary on/off, cash-hawala-leg single-form design (biggest UX change), 4 commission accounting models, bridge USD→AED pairing, bank transfers, 4-account confirmation, existing-data migration, reporting, roll-out. Promoted the document-format rule to Unity Patterns: [[feedback_client_docs_in_client_folder_with_editable_version]].
+
+**2026-05-04 (today):** Meeting scheduled with Suleman to walk through the clarification doc together. Amir's 1-day implementation commitment is contingent on his answers. Internal note (NEVER mention to client): 1-day target uses parallel module-developer subagents.
+
+## Prior state (2026-05-02 evening — v10.0.36 balance-shift convention + FX UX)
 
 **v19.0.10.0.36 LIVE both DBs.** Five back-to-back versions added on top of the v10.0.31 hawala foundation, all driven by Amir's testing on `remtest`: **v10.0.32** UX hardening (Ledger IN/OUT now reads in customer-statement POV; pickup-by-code wizard has fallback resolution + specific diagnostics replacing the generic "no deposit selected"). **v10.0.33** pickup wizard FIFO double-counting collision fixed (operator's typed MTCN now always overrides FIFO date-order). **v10.0.34** FX rate UX (directional label "1 EUR = ? USD" + live `res.currency.rate` spot hint + auto-prefill from spot + auto-compute `converted_amount`; activated Odoo's currency rate cron that had been stuck since 2026-04-17 — populated EUR/USD/AED rates daily from CBUAE/ECB providers). **v10.0.35** `_je_bank_eur_out_usd_in` v9-era arithmetic bug fixed (literal foreign amounts had been used as company-currency `debit/credit` plus an unbalanced 5th line; replaced with clean 4-line + FX plug). **v10.0.36** pivot to balance-shift convention (Suleman: "intended balance is for amir USD account and not company account") — JE now shuffles customer's EUR liability to USD liability inside their account, no bank/cash movement, cash payout happens later as separate `bank_usd_out`. Hard pre-check ensures sender has enough EUR liability before posting. Plus v10.0.31 prior foundation: full hawala posting convention (inbound v10.0.27, same-currency outbound v10.0.30, cross-currency outbound v10.0.31 with FX bridge + FATF-aligned KYC threshold + per-tx cap + audit snapshots).
 

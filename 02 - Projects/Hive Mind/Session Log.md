@@ -3,7 +3,7 @@ type: log
 tags: [hive-mind, session-log, append-only, cross-project]
 aliases: [Hive Mind Log, Agent Session Journal]
 created: 2026-04-22
-updated: 2026-05-02T16:30Z
+updated: 2026-05-04T08:00Z
 ---
 
 # Hive Mind — Session Log (Append-Only)
@@ -30,6 +30,14 @@ Keep entries tight. Format:
 ---
 
 ## Log (newest first)
+
+### 2026-05-04 (Suleman Remittance — clarification document for Monday meeting after demo-video pushback) — D:/Development — no code changes, professional client deliverable on letterhead
+- **Trigger:** 2026-05-03 evening Suleman watched the v10.0.40 YouTube Short demo and replied with detailed feedback signalling a paradigm shift (regulated workflow → historical data-entry tool) plus cancellation risk: *"this needs to be clear all within 1-2 days. if again gap of 5-7 days, this software we cant finish."* Six explicit complaints (beneficiary unnecessary on cash, MTCN auto-gen unnecessary, KYC not per-tx, commission cut before sending, bridge-owes-USD not visible, USD→AED bridge-pairing not visible) plus his own shortcut spec (4 accounts: EUR/AED cash + USD/EUR bank; 3 cases: cash-leg / EUR-bank / USD-bank). Amir committed in WhatsApp to 1-day delivery — internally relies on parallel module-developer subagents, externally always framed as "our development team."
+- **Deliverable:** 30-question clarification doc on ECOSIRE letterhead, 9 pages A4, sections A–K covering workflow simplification, MTCN rename to "Reference No" (Amir's view: keep unique auto identifier even for historic data entries), beneficiary on/off, cash-hawala-leg one-vs-two-row design (biggest UX change), 4 commission accounting models, bridge USD→AED pairing, bank transfers, 4-account confirmation, existing-data migration, reporting, roll-out. Generator + outputs colocated at `D:\EcosireClients\ActiveClients\Suleman-Remittance\docs\Suleman_Clarification_Questions_2026-05-04.{pdf,docx}` — single Python content model feeds both formats.
+- **4 iterations to land the deliverable:** (1) wrong location (Development/tmp) + 24% vertical squash on header. (2) Aspect-correct + DOCX with answer lines + relocated to client folder. (3) Switched to full-page `letterhead_full.png` as background — split header/footer crops were silently losing the side triangle decorations and right-side wedge continuation. Page size pivoted to A4 to match the 0.707 letterhead aspect. PDF uses `onPage` callback drawing full image at (0,0); DOCX uses behind-text anchored picture in section header (`<wp:anchor behindDoc="1" relativeFrom="page">` — python-docx has no direct API for this, has to be hand-constructed XML; verified via `zipfile` inspection of `word/header1.xml`). (4) Address trimmed to "Mr. Suleman Arif" only — removed company line + country line per client preference.
+- Cross-project impact: ONE new fleet-wide pattern promoted — [[feedback_client_docs_in_client_folder_with_editable_version]] under [[PATTERNS - INDEX]]. Codifies: every client-facing document MUST go to `D:\EcosireClients\ActiveClients\<Client>\docs\` (never tmp/scratch); always ship PDF + editable DOCX as a pair sharing one filename stem; use `letterhead_full.png` not split crops; A4 page size; full-page background via PDF `onPage` and DOCX `<wp:anchor behindDoc="1">`. Includes the exact reusable XML pattern for the DOCX trick (no python-docx high-level API exists). Applies to every Ecosire workspace and every future client deliverable.
+- Canonical facts promoted to Unity: [[feedback_client_docs_in_client_folder_with_editable_version]] (new pattern), [[PATTERNS - INDEX]] (entry added under new "Client deliverables / Branding" subsection), [[Remittance — Salueman Arif]] (status block updated with 2026-05-04 meeting context + clarification doc reference; v10.0.40 unchanged).
+- Pending: Suleman replies to clarification questions (target 2026-05-04 / 05) → 1-day implementation: per-company `simplified_data_entry_mode` flag, collapse stage flow, hide KYC/MTCN/beneficiary, new `cash_hawala_leg` form posting both legs in one JE, verify bridge-owes-USD balance, "Linked Leg" pairing UI, migration leaves existing tx untouched.
 
 ### 2026-05-03 (Suleman Remittance v10.0.39 → v10.0.40 — IAS 21 FX gain/loss fix on cross-currency invoice payment) — D:/Development — solves the deferred partial-paid + EUR Bank -2,700 bug
 - **Trigger:** user asked me to act as expert accountant and solve the deferred FX-residual bug from v10.0.27.
