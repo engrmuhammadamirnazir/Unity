@@ -37,6 +37,12 @@ updated: 2026-05-04
 
 ## Canonical patterns (newest first)
 
+### Content / i18n / Translation
+- [[feedback_brand_name_translation_audit]] — Google Translate translates English brand names that are common words (Drizzle→rocíe/beträufeln/regue, Wave→ola/vague, Tally→cuenta/décompte, Drift→deriva, Notion→noción, Vault→bóveda). After every auto-translate run, audit + hand-fix non-EN locale files for brand-vs-verb mistranslations. Affected 4-of-8 auto-translated locales on 2026-05-04 ECOSIRE.COM SEO push.
+
+### Agents / Parallel execution
+- [[feedback_subagent_shard_merge_pattern]] — When dispatching N parallel content-writing subagents that all add to a shared registry (en.json, sitemap data, glossary file), each agent writes to its own shard JSON file in a coordination dir; parent merges atomically after all return. Avoids write-contention races, gives per-agent traceability, validates shape per shard. Demonstrated 2026-05-04 with 5+2 parallel writers producing 180 articles, 0 collisions, 0 lost entries.
+
 ### Hive-mind / Fleet
 - [[feedback_propagate_learning_not_artifacts]] — Don't auto-broadcast workspace skills/agents to peer workspaces. Each workspace's `.claude/skills/` is scoped to that codebase. Cross-workspace propagation = bloat + drift + false uniformity. Broadcast LESSONS via `~/.claude/lessons/`, not implementations.
 
