@@ -37,6 +37,11 @@ updated: 2026-05-04
 
 ## Canonical patterns (newest first)
 
+### Disaster recovery / Backup infrastructure
+- [[Pattern_3_Tier_Backup_Model]] — Three concentric backup tiers that fail independently: (1) local git committed daily to a private master GitHub repo, (2) per-artifact remotes (e.g. per-module repos already on GitHub), (3) off-platform SFTP to Hetzner Storage Box BX11. All three wired into a single composite scheduled task with non-zero exit on any-step failure. Deployed for D:/Development on 2026-05-04 after the May 2 wipe; reusable for other workspaces (D:/ECOSIRE.COM, D:/Company etc.).
+- [[feedback_hollow_folder_wipe_fingerprint]] — A folder with subcomponent shells (models/ controllers/ views/) but no `__manifest__.py` is the canonical signature of a partial filesystem wipe — the wipe killed source files but left directory structure. Detector exits 1 on any hollow folder; daily commit pre-flight refuses damaged tree. Fingerprint of the May 2 2026 wipe of `.claude/` AND addons trees.
+- [[feedback_graphify_post_commit_hook_hangs]] — On a repo with the graphify post-commit hook AND many tracked files (60k+), automated commit scripts appear to hang silently after `git commit` — the hook rebuilds knowledge graph for minutes and consumes the script's stdout/stderr FDs. Bypass via `git -c core.hooksPath=/dev/null commit` for that one invocation. Required for any unattended cron-style commit script.
+
 ### Content / i18n / Translation
 - [[feedback_brand_name_translation_audit]] — Google Translate translates English brand names that are common words (Drizzle→rocíe/beträufeln/regue, Wave→ola/vague, Tally→cuenta/décompte, Drift→deriva, Notion→noción, Vault→bóveda). After every auto-translate run, audit + hand-fix non-EN locale files for brand-vs-verb mistranslations. Affected 4-of-8 auto-translated locales on 2026-05-04 ECOSIRE.COM SEO push.
 
