@@ -3,10 +3,19 @@ type: log
 tags: [hive-mind, session-log, append-only, cross-project]
 aliases: [Hive Mind Log, Agent Session Journal]
 created: 2026-04-22
-updated: 2026-05-04T08:00Z
+updated: 2026-05-06T00:00Z
 ---
 
 # Hive Mind — Session Log (Append-Only)
+
+### 2026-05-06 — D:/Development — Edwin Ardila closed at $2,000 + bilingual invoice with new Wise/IBAN dual-payment block
+- Yesterday's $2,290 floor breached by $290 (12.7%) for same-day cash close. Two strategic concessions added on acceptance: free upgrade to Odoo v20 (releases late 2026) + v21+ preferential rate as direct client. Edwin confirmed install in ~10 days when ready, asked whether eBay/Amazon/Temu/AliExpress modules support US+UK+Europe accounts simultaneously (yes — each region as separate "instance" in same install).
+- **Bilingual invoice ECO-INV-2026-0050 generated** (EN + ES, PDF + DOCX) at `D:/EcosireClients/ProspectiveClients/Edwin-Ardila/01-Contract/`. Self-contained reportlab+python-docx generator (`_generate_invoice_2026_05_06.py`); single page after 3 rounds of ES compression (Spanish content runs ~15-20% longer than English).
+- **NEW two-option payment block pattern** on Ecosire invoices (canonical Diamond M2 / Alvi-Dental had only single method): Option 1 Wise pay-link + Option 2 Bank Wire (USD via SWIFT) with IBAN. Reusable for any future international USD invoice path. Both accounts on Muhammad Amir Nazir personal name; ECOSIRE issues invoice on his behalf.
+- **Discovery reconfirmed**: canonical `D:/Development/scripts/client_docs/ecosire_invoice_template.py` is still missing post May-2 wipe (Diamond M2 generator imports it but file gone). Today's generator can serve as basis for rebuilding the canonical with bilingual + dual-payment support — deferred, low priority.
+- **NEW fleet-wide rule**: talk to Amir in English; Spanish (or any client language) only inside the actual client artifacts (WhatsApp drafts, proposal/invoice copy). Generalizes to Arabic for Hussam/Future Vision and any future non-English client.
+- Cross-project impact: D:/Development (memory + EcosireClients) only; canonical price SQL on D:/ECOSIRE.COM was reaffirmed as the quote source but not modified this session.
+- Canonical facts promoted to Unity: [[feedback_user_english_only_spanish_for_clients]] (new fleet-wide rule)
 
 ### 2026-05-05 — D:/Development — Future Vision Waredat: wizard fix (PR #3) + ABIR re-cert produces first GENUINE production CSID
 - Hussam screenshot showed Phase-2 wizard Step 2 stuck at HTTP 400 Invalid-OTP. Diagnosed: `templates/zatca/phase2.html` was sending users to `fatoora.zatca.gov.sa` for ALL envs including simulation — same trap captured in [[feedback_zatca_three_portal_otp_separation]]. Fixed via PR #3 (commit `c1c2256` → merge `f4b01f3e`), env-scoped 6 portal links in phase2.html + 2 in settings.html. User republished waredaterp.com.
