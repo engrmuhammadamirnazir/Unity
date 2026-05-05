@@ -3,10 +3,19 @@ type: log
 tags: [hive-mind, session-log, append-only, cross-project]
 aliases: [Hive Mind Log, Agent Session Journal]
 created: 2026-04-22
-updated: 2026-05-06T00:00Z
+updated: 2026-05-06T22:00Z
 ---
 
 # Hive Mind — Session Log (Append-Only)
+
+### 2026-05-06 — D:/Development — Edwin Ardila bundle expanded 10→12 modules at unchanged $2,000 (free add-on)
+- Late-evening WhatsApp: Edwin "olvide incluir 2" — Google Shopping Store Management + Facebook & Meta Shop Store Management. Amir verbally agreed "incluiremos estos dos en el paquete" with no price qualified.
+- 3 pricing options proposed (A free / B $2,200 / C $2,400) — Amir picked **A**. Per-module rate dropped $200→**$167** (60% off $5,038 list — still demolishes Webkul's $303 avg from yesterday's research).
+- Invoice ECO-INV-2026-0050 regenerated with 12-module line description (`_generate_invoice_2026_05_06.py` `LINE_DESC` EN+ES) at unchanged $2,000. Invoice number, payment block (Wise + IBAN), NOTE — all unchanged. Old 10-module PDF+DOCX archived to `_superseded/*_v_10mods.*`. Both PDFs verified single-page.
+- Theme Prime question (asked separately by Edwin) handled directly by Amir — verified zero `theme_*`/`website_*`/storefront-theme modules in ECOSIRE 215-module portfolio. ECOSIRE doesn't compete in that lane.
+- **Local-memory pattern**: free add-on to existing unpaid invoice = expand line description in SAME invoice, never separate $0 addendum. User initially said "make invoice for these modules alone" → corrected within seconds to "no include in same invoice".
+- Cross-project impact: D:/Development (memory + EcosireClients ProspectiveClients/Edwin-Ardila) only. Bundle list price reference still pulls from `D:/ECOSIRE.COM/_update_product_prices.sql` per yesterday's canonical pointer.
+- Canonical facts promoted to Unity: none (incremental update to existing prospective client; no new fleet-wide rules).
 
 ### 2026-05-06 — D:/Development — Edwin Ardila closed at $2,000 + bilingual invoice with new Wise/IBAN dual-payment block
 - Yesterday's $2,290 floor breached by $290 (12.7%) for same-day cash close. Two strategic concessions added on acceptance: free upgrade to Odoo v20 (releases late 2026) + v21+ preferential rate as direct client. Edwin confirmed install in ~10 days when ready, asked whether eBay/Amazon/Temu/AliExpress modules support US+UK+Europe accounts simultaneously (yes — each region as separate "instance" in same install).
