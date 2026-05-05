@@ -5,7 +5,7 @@ client: Salueman Arif — Remittance
 status: live
 location: TBD (Pakistani bridge-remittance operator)
 created: 2026-04-22
-updated: 2026-05-04-morning
+updated: 2026-05-05-evening
 ---
 
 # Remittance — Salueman Arif
@@ -24,7 +24,17 @@ updated: 2026-05-04-morning
 | GitHub | `engrmuhammadamirnazir/remittance_management` (PRIVATE) — main `66e9dbc` + new tags `v19.0.10.0.32/33/34/35/36` (NO AI attribution per client-repo rule) |
 | User Manual PDF (latest) | `D:/EcosireClients/ActiveClients/Suleman-Remittance/docs/Remittance_User_Manual_v19.0.10.0.0_Addendum.pdf` (in-app User Guide is now the canonical source — refreshed via lxml migration in v10.0.7) |
 
-## Current state (2026-05-04 morning — clarification doc delivered for Monday meeting after demo-video paradigm-shift pushback)
+## Current state (2026-05-05 evening — Monday 2026-05-06 meeting-ready)
+
+**v19.0.10.0.42 LIVE on both DBs.** Both `remittanceaccounting` + `remtest` are now PRISTINE — wiped 2026-05-05 evening per Suleman's *"Both are intitial phases so you can remove data from both"*: 0 remittance.transaction / 0 account.move / 17 ir.sequence reset to next=1 per DB / HTTP 200. Seed data intact (3 companies × 2 DBs, Bel Junes 179/194 + Sumeet 180/195, 3 CRYPT (Crypto USDT) journals/DB, 7 categories, 5 locations, 10 stage configs, 10 remittance accounts). Backups in `/tmp/pre_practice_cleanup_20260505_175018/` (49 MB total: both DB dumps + filestores tarball).
+
+**Verification matrix complete:** 37 of 38 implementable items shipped (97%). Built at `D:/EcosireClients/ActiveClients/Suleman-Remittance/docs/00-meeting-prep/verification-matrix.md` (17.5 KB Q-by-Q). Only ⚠ FOLLOW-UP is Q22 USDT auto-seed (manually-seeded journals already work; data-file re-enable deferred to v10.0.43 with raw-SQL bypass for `account_asset.create_asset` race). 2 ⏸ DEFERRED by Suleman himself (Q25/R2-Q5 retroactive pairing — *"not sure, need to talk"*). 1 ⏭ unanswered (Q27 dashboards-to-hide).
+
+**Tomorrow's meeting agenda** (4 items): (1) Q25/R2-Q5 retroactive pairing decision, (2) Q27 dashboards-to-hide decision, (3) Q23 mark specific cash journals `is_shared_cash=True` across Daleel/Stocklot/Ventrax (bank stays per-company), (4) Q22 USDT auto-seed informational. Plus YouTube Short demo video post-meeting featuring chain-pairing UI ("this i need to see specific in video this step").
+
+**Suleman-Remittance/ folder reorganized** 2026-05-05 into clean numbered structure (`docs/00-meeting-prep/01-clarification-rounds/02-user-manuals/03-deploy/04-plans/05-specs/06-acceptance-screenshots/07-user-guide-march-2026/_archive/_generators/` + new `internal/` for prod scripts + new `proposals/` consolidating Ecosire proposals + service-inquiries + client-quotes + generators). New `FOLDER-LAYOUT.md` documents convention. Removed 3.4MB stale `remittance_management.zip`, empty `Memos/`, placeholder text.
+
+## Prior state (2026-05-04 morning — clarification doc delivered)
 
 **Latest deployed:** v19.0.10.0.40 LIVE on both `remtest` + `remittanceaccounting` (since 2026-05-03 noon — IAS 21 FX gain/loss fix on cross-currency invoice payment, GitHub `engrmuhammadamirnazir/remittance_management` `main 9d099f6` + tag `v19.0.10.0.40`).
 
