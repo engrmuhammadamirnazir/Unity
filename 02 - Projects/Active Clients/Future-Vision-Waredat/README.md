@@ -7,15 +7,16 @@ service: ZATCA Phase 2 + Phase 3 e-invoicing on custom Waredat ERP (Replit-hoste
 fee: USD 750
 created: 2026-04-28
 went-live: 2026-05-05
-updated: 2026-05-05
+recert-genuine-prod-ca: 2026-05-05
+updated: 2026-05-06
 tags: [client, active, zatca, ksa, replit, flask, e-invoicing]
 ---
 
 # Future Vision Waredat (KSA — ZATCA Phase 2/3)
 
-## Status: LIVE on production (2026-05-05)
+## Status: LIVE on GENUINE production CA (2026-05-05 evening, corrective re-cert)
 
-ZATCA Phase 2 + Phase 3 fully delivered for tenant **ABIR ALMANAFETH Establishment Ltd** (`aber-almanafez`, VAT `300832422400003`) on Waredat ERP. Production CSID issued via `/core/production/csids` and live invoice reported via `/core/reporting/single`. First production ZATCA tax record created (`SIN-SMOKE-001` smoke test, 1.00 SAR).
+ZATCA Phase 2 + Phase 3 fully delivered for tenant **ABIR ALMANAFETH Establishment Ltd** (`aber-almanafez`, VAT `300832422400003`) on Waredat ERP. Initial cert run on 2026-05-05 morning issued a CSID accepted by ZATCA `/core/reporting/single`, BUT the cert in DB was actually issued by the sandbox/simulation CA (`CN=eInvoicing`) — corrective re-cert on 2026-05-05 evening (after PR #3 wizard fix) produced ABIR's first GENUINE production CSID issued by `CN=PRZEINVOICESCA4-CA` (ZATCA's real production CA, `PR` prefix = Production). Cert validity ~2026-05-04 to 2030-04-02. First production ZATCA tax record created via SIN-SMOKE-001 (1.00 SAR) earlier still applies.
 
 ## Client
 
@@ -52,8 +53,9 @@ ZATCA Phase 2 + Phase 3 fully delivered for tenant **ABIR ALMANAFETH Establishme
 | VAT | `300832422400003` |
 | Commercial Registration | `7006925437` |
 | EGS Serial | `1-Waredat\|2-ERP-1.0\|3-EGS-AAM-001` |
-| Production compliance CSID requestID | `1777931841180` |
-| Production CSID requestID | `147515858278` |
+| Production compliance CSID requestID | `1778003183231` (re-cert 2026-05-05 evening) — replaces 2026-05-05 morning's `1777931841180` |
+| Production CSID requestID | issued 2026-05-05 evening; cert issuer `CN=PRZEINVOICESCA4-CA`; replaces 2026-05-05 morning's `147515858278` (which was sandbox-CA-issued) |
+| Production CSID validity | ~2026-05-04 to 2030-04-02 (~4 years) |
 
 Both CSIDs encrypted via `EncryptedText` TypeDecorator using Replit Secret `FIELD_ENCRYPT_KEY` (Bitwarden-backed by Hussam).
 

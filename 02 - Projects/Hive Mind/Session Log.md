@@ -8,6 +8,14 @@ updated: 2026-05-04T08:00Z
 
 # Hive Mind — Session Log (Append-Only)
 
+### 2026-05-05 — D:/Development — Future Vision Waredat: wizard fix (PR #3) + ABIR re-cert produces first GENUINE production CSID
+- Hussam screenshot showed Phase-2 wizard Step 2 stuck at HTTP 400 Invalid-OTP. Diagnosed: `templates/zatca/phase2.html` was sending users to `fatoora.zatca.gov.sa` for ALL envs including simulation — same trap captured in [[feedback_zatca_three_portal_otp_separation]]. Fixed via PR #3 (commit `c1c2256` → merge `f4b01f3e`), env-scoped 6 portal links in phase2.html + 2 in settings.html. User republished waredaterp.com.
+- Drove cert flow server-side via SSH on Replit using Hussam-provided prod OTP `016672`. Step 2 issued fresh compliance CSID `1778003183231`; ran 6 mandatory scenarios on `/core/compliance/invoices` (6/6 HTTP 202 REPORTED); Step 3 promoted successfully.
+- **Discovery**: yesterday's session-05c production_csid was actually issued by `CN=eInvoicing` (the SANDBOX/SIMULATION CA — accepted by /core/reporting/single but full chain validation would have failed). Today's recert produced ABIR's first GENUINE production CSID issued by `CN=PRZEINVOICESCA4-CA` (ZATCA's real production CA). Cert validity ~2026-05-04 to 2030-04-02.
+- Subtle 3-iteration bug: `generate_and_sign_invoice` in `zatca_phase2.py` returns `{xml, hash_b64, ...}` on success — NO `success` key. v1+v2 reported 0/6 SIGN_FAIL with empty errors before v3 corrected the check. Captured at [[feedback_zatca_generate_and_sign_no_success_key]].
+- Cross-project impact: D:/Development memory + EcosireClients folder both updated. No other workspace touched.
+- Canonical facts promoted to Unity: [[Future-Vision-Waredat]] (corrective production_csid issuer + new compliance_request_id + cert validity), [[feedback_zatca_generate_and_sign_no_success_key]] (new — fleet-wide ZATCA cert-driver helper-shape lesson)
+
 ### 2026-05-05 — D:/Development — Edwin Ardila 10-module bundle proposal vs Webkul, $2,290 final
 - New prospective client **Edwin Ardila** (LATAM Spanish, Odoo SH v19) — folder at `D:/EcosireClients/ProspectiveClients/Edwin-Ardila/`. Final proposal $2,290 USD flat (43% off $4,040 website-true list, saves $1,750).
 - Webkul module-by-module research: Webkul covers only 5 of 10 ($1,515.64 total avg $303/module). 5 modules (Zalando, Miravia, Temu, TikTok Shop, Target Plus) are ECOSIRE-only.
