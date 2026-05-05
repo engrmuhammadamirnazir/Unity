@@ -3,10 +3,19 @@ type: log
 tags: [hive-mind, session-log, append-only, cross-project]
 aliases: [Hive Mind Log, Agent Session Journal]
 created: 2026-04-22
-updated: 2026-05-06T22:00Z
+updated: 2026-05-05T23:30Z
 ---
 
 # Hive Mind — Session Log (Append-Only)
+
+### 2026-05-05 — D:/Development — Future Vision Waredat ZATCA Phase 2 LIVE on PRODUCTION (Neon, not heliumdb) + canonical impl guide written for upcoming ECOSIRE Odoo ZATCA module
+- Continuation of session-05h customs flow + print template fixes (PR #4 merged on `hussamalmohaimeed-a11y/waredat-erp` main, commit `86b5501`).
+- Critical discovery: Hussam's autoscale runs against **Neon** (`ep-holy-voice-ae40jzow.../neondb`), NOT dev workspace's heliumdb. Yesterday's session-05g recert ran on heliumdb — useless for production. Hussam's tenant on Neon = id=5 (NOT id=2 like heliumdb), `database_name='tenant__5'` for invoice isolation.
+- Backfilled tenant 5 (VAT 300832422400003, CR 7006925437, Building 6307, حي البلد, postal 22233 — replaced literal placeholder address "البلد"). First cert attempt OTP `177664` failed at production CSID with `0x80094800 NOT_COMPLIANT / TSTZATCA-Code-Signing` — Neon's CSR was sim-template. Regenerated keypair + production-template CSR. Second OTP `486472` succeeded: 6/6 cert PASS + production CSID `146900859001` (2288 chars) issued by `PRZEINVOICESCA4-CA` (real ZATCA prod CA, ~4-year validity).
+- **MAJOR DELIVERABLE for the upcoming ECOSIRE Odoo ZATCA module** (planned in D:/Development): 15-section canonical implementation guide at `~/.claude/projects/D--Development/memory/reference_zatca_phase2_implementation_guide.md` capturing crypto stack (ECDSA secp256k1, XAdES-BES, OIDs 2.5.4.97/15/26), 5-stage cert flow, 6 mandatory cert scenarios with correct names, QR rendering rules (TLV vs PNG), UBL XML required fields, SignedProperties/cert digest pitfalls, _auto_generate_zatca pattern, print template requirements, multi-tenant data layout, Replit autoscale gotchas, common error codes, Odoo module design checklist.
+- 4 NEW fleet-wide feedback memories: CSR template OID locks at generation; Replit autoscale Deployment Secrets can override DATABASE_URL; tenants.database_name=tenant__N means separate logical DB; generate_and_sign_invoice returns no 'success' key (check xml + hash_b64 instead).
+- Cross-project impact: D:/Development (Odoo ZATCA module to be built will reuse implementation guide); D:/EcosireClients/ActiveClients/Future-Vision-Waredat/README.md updated with LIVE status + reference pointer; D:/Company/PORTFOLIO.md unchanged (Future Vision is a paid client, not an ECOSIRE business line).
+- Canonical facts promoted: [[Future Vision Waredat]] now LIVE on Neon production (production CSID issued by real ZATCA CA, not sandbox masquerade); 4 ECOSIRE ZATCA module pitfalls catalogued for fleet reuse.
 
 ### 2026-05-06 — D:/Development — Edwin Ardila bundle expanded 10→12 modules at unchanged $2,000 (free add-on)
 - Late-evening WhatsApp: Edwin "olvide incluir 2" — Google Shopping Store Management + Facebook & Meta Shop Store Management. Amir verbally agreed "incluiremos estos dos en el paquete" with no price qualified.
