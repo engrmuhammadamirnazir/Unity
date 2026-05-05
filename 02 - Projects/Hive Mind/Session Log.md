@@ -8,6 +8,14 @@ updated: 2026-05-04T08:00Z
 
 # Hive Mind — Session Log (Append-Only)
 
+### 2026-05-05 — D:/Development — Edwin Ardila 10-module bundle proposal vs Webkul, $2,290 final
+- New prospective client **Edwin Ardila** (LATAM Spanish, Odoo SH v19) — folder at `D:/EcosireClients/ProspectiveClients/Edwin-Ardila/`. Final proposal $2,290 USD flat (43% off $4,040 website-true list, saves $1,750).
+- Webkul module-by-module research: Webkul covers only 5 of 10 ($1,515.64 total avg $303/module). 5 modules (Zalando, Miravia, Temu, TikTok Shop, Target Plus) are ECOSIRE-only.
+- Mid-session correction #1: **manifest prices drift after Wave pumps**. 4 modules diverged from website by $150-$250 (AliExpress $499→$249, Temu/TikTok/Walmart $499→$349). Canonical price source is `D:/ECOSIRE.COM/_update_product_prices.sql` for client quotes — NOT `__manifest__.py`.
+- Mid-session correction #2: pushed bundle discount from 37% to 43% per "offer her good price".
+- Cross-project impact: D:/Development (proposal generation) + D:/ECOSIRE.COM (canonical price SQL) — both touched. CLAUDE.md updated with website-price canonical pointer.
+- Canonical facts promoted to Unity: [[feedback_quote_clients_use_website_prices_not_manifest]], [[feedback_webkul_comparison_leverage_module_gap]]
+
 > Every Claude Code session — in any workspace — writes a 1–5 line entry here on close via the `hive-mind-sync` skill. Entries are reverse-chronological. This file is the single thread that connects all project workspaces into one continuous conversation for future agents.
 
 ## How to write an entry
