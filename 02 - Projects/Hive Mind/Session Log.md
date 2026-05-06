@@ -3,10 +3,17 @@ type: log
 tags: [hive-mind, session-log, append-only, cross-project]
 aliases: [Hive Mind Log, Agent Session Journal]
 created: 2026-04-22
-updated: 2026-05-05T23:30Z
+updated: 2026-05-06T20:00Z
 ---
 
 # Hive Mind — Session Log (Append-Only)
+
+### 2026-05-06 — D:/Development — Bimal Tamrakar (Nepal) Daraz $250 invoice DRAFT + 2 fleet-wide invoice rules captured
+- New prospective client Bimal Tamrakar (`bimaltamrakar@gmail.com` / `+977 985-1063038`); single-module Daraz Store Management at $250 USD (discounted from $349). Folder `D:/EcosireClients/ProspectiveClients/Bimal-Tamrakar/01-Contract/`; invoice **ECO-INV-2026-0051** generated as PDF + DOCX (single page, English-only); generator copied + adapted from Edwin Ardila's `_generate_invoice_2026_05_06.py`.
+- **TWO fleet-wide invoice errors caught mid-session**, both saved as canonical patterns: (1) carried over Edwin Ardila's specific Wise pay-link `https://wise.com/pay/r/07D4DQeMK9HWtA4` (locked to his $2,000 invoice) — Wise URLs are per-payment-request artifacts, NOT reusable; (2) line description said "lifetime updates across Odoo 17 / 18 / 19" — when selling for a specific version, lifetime support is ONLY for that version, never all three.
+- Invoice STILL DRAFT — blocked on Bimal's Odoo version (need to ask) + Wise option choice (drop / keep generic / Amir generates fresh $250 link) + PDF unlock for regen (viewer was open during last attempt). Bank IBAN `PK73MEZN0022040105909195` IS a stable fleet constant, only the per-invoice Wise URL varies.
+- Cross-project impact: BOTH new rules apply to invoice generation across ALL workspaces touching `D:/EcosireClients/`, especially when canonical `D:/Development/scripts/client_docs/ecosire_invoice_template.py` (wiped 2026-05-02) is rebuilt — `WISE_LINK` must be per-invoice parameter with `None` default; line wording must key off `ODOO_VERSION` argument.
+- Canonical facts promoted to Unity: [[feedback_wise_pay_links_are_per_invoice_not_reusable]], [[feedback_lifetime_support_scoped_to_purchased_version]] (both also indexed under [[PATTERNS - INDEX#Sales / Pricing / Competitive]]).
 
 ### 2026-05-05 — D:/Development — Future Vision Waredat ZATCA Phase 2 LIVE on PRODUCTION (Neon, not heliumdb) + canonical impl guide written for upcoming ECOSIRE Odoo ZATCA module
 - Continuation of session-05h customs flow + print template fixes (PR #4 merged on `hussamalmohaimeed-a11y/waredat-erp` main, commit `86b5501`).
