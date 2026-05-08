@@ -3,10 +3,17 @@ type: log
 tags: [hive-mind, session-log, append-only, cross-project]
 aliases: [Hive Mind Log, Agent Session Journal]
 created: 2026-04-22
-updated: 2026-05-09T01:30Z
+updated: 2026-05-08T21:05Z
 ---
 
 # Hive Mind — Session Log (Append-Only)
+
+### 2026-05-09 (early hours) — D:/Development — Suleman Remittance v19.0.10.1.20 published + deployed to correct AWS target
+- Released `remittance_management` `19.0.10.1.20` with enterprise UI consolidation across Dashboard, Daily Console, Treasury, Owes Matrix, AED Cash Count, Balance Detail, Flow Timeline, Partner Ledger, and Partner Balance Banner.
+- Published GitHub `engrmuhammadamirnazir/remittance_management`: `main` at `5f4848a`, `19.0` at `0f418f5`; client folder synced at `D:/EcosireClients/ProjectClients/Suleman-Remittance/remittance_management`.
+- Deployment target was corrected mid-session from non-canonical host to client-documented AWS host `52.28.45.137` (from `D:/EcosireClients/ProjectClients/Suleman-Remittance/README.md`), then module upgraded on both DBs (`remtest`, `remittanceaccounting`) and verified at `installed|19.0.10.1.20`.
+- Cross-project impact: reinforced deploy-target discipline for all client ops — resolve host/user/key/db paths from client README before any SSH/scp/`odoo-bin -u` action.
+- Canonical facts promoted to Unity: none (client/server entities unchanged; version/deploy state captured in project-local memory and client README).
 
 ### 2026-05-08 (evening → 2026-05-09) — D:/Development — Oenoteca 5-task sales-side cleanup HALTED with 4 questions back to Niccolò; v19 `account.move.reversal` schema gap surfaced as fleet-wide feedback
 - Niccolò sent WhatsApp 2026-05-08 18:00 closing 4 of the 11 orange-JE rows (rows 6/8/9/10/11) plus a 5th task (Encry depletion margin protection on INV/2026/00615 Dallas Fine Wines + INV/2026/00608 Latuli). Dispatched the accountant agent end-to-end with the canonical `oenoteca-vendor-pipeline` skill.
