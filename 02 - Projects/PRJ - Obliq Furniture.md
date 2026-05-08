@@ -10,7 +10,7 @@ updated: 2026-05-01
 # PRJ — Obliq Furniture Manufacturing LLC
 
 > Odoo 19 ERP cleanup and optimization for Studio Obliq, a Dubai-based furniture manufacturer.
-> Source: `D:\EcosireClients\ActiveClients\Obliq\`
+> Source: `D:\EcosireClients\ProjectClients\Obliq\`
 
 > **2026-05-01 evening update (Raw Material Usage dashboard expanded — v19.0.8.2.0 → v19.0.8.3.1):**
 > - Same session, after backfill verification, user requested product-wise breakdown → shipped 4 sub-versions in one afternoon: **v19.0.8.2.0** added Top 30 Finished Products section (qty / cost-per-unit / top-3 raw materials as pills) + clickable raw-material rows opening drilldown modal (4 KPIs, monthly trend chart, finished products that consumed it). **v19.0.8.3.0** added clickable finished-product rows opening mirror drilldown modal (KPIs + monthly chart + ALL raw materials consumed, no limit) + cross-navigation (Ziad can pivot freely between modals). **v19.0.8.3.1** = CSS hot-fix (`min-height:100vh` → `height:100%; overflow-y:auto`) so the page scrolls within Odoo's `.o_action_manager`.

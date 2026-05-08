@@ -58,7 +58,7 @@ updated: 2026-04-30
 - [ ] Amir reviews regenerated PDFs (letterhead applied after fix); confirms Cc list (m.abdellatif, Manan, Zouheir Farhoud).
 - [ ] Send email to Yehia with both PDFs.
 - [ ] On working-session slot confirmed: send video conf invite + agenda.
-- [ ] Within 3 business days post-session: issue final SoW; on countersign, mv ProspectiveClients → ActiveClients + Phase 1 invoice (5% of agreed tier).
+- [ ] Within 3 business days post-session: issue final SoW; on countersign, mv ProspectiveClients -> ProjectClients (or ModulesClients for module-only sales) + Phase 1 invoice (5% of agreed tier).
 
 ---
 

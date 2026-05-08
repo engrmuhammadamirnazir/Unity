@@ -55,7 +55,7 @@ Full ex-post 2025 restatement executed per Niccolò's CPA ex-post BS PDF (A&N Fi
 - **TB balanced**: DR = CR = $1,703,150.52 at 2025-12-31
 - **3 rollback snapshots** at `/var/backups/` (server) + local mirror; all 11 JEs reversible via Odoo UI
 - **Fiscal year 2025 NOT locked** — pending Niccolò sign-off on variances
-- **Deliverables**: `D:/EcosireClients/ActiveClients/Oenoteca/Reports/2025_Restatement/` → 13_Combined_Nick_Report_2026-04-24.pdf (primary) + 12_Q1_2026_Financial_Statements_RESTATED.pdf + supporting xlsx + 14_Final_Email_to_Nick.md (draft, not sent)
+- **Deliverables**: `D:/EcosireClients/ProjectClients/Oenoteca/Reports/2025_Restatement/` → 13_Combined_Nick_Report_2026-04-24.pdf (primary) + 12_Q1_2026_Financial_Statements_RESTATED.pdf + supporting xlsx + 14_Final_Email_to_Nick.md (draft, not sent)
 - **Open items for Niccolò** (all non-blocking): Lincoln Financial source docs + 2025-12-31 physical inventory per-SKU + missing 2025 vendor bills + 4 disputed AP partners + capital contribution date confirm + Gelato Rossa entity status
 
 Project-local detail: `D:/Development/memory/session_2026_04_24_oenoteca_2025_restatement.md`.

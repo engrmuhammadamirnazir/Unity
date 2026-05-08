@@ -8,13 +8,13 @@ updated: 2026-04-29
 
 > Index of all active and completed projects across Ecosire and Odovation.
 >
-> **2026-04-22 reorganization:** Top active clients now have dedicated folders under `02 - Projects/Active Clients/`. Pipeline tracked under `02 - Projects/Prospective Clients/`. Short module engagements under `02 - Projects/One-Off Modules/`. Business lines under `03 - Areas/Businesses/`.
+> **2026-04-22 reorganization:** Top active clients now have dedicated folders under `02 - Projects/Project Clients/`. Pipeline tracked under `02 - Projects/Prospective Clients/`. Short module engagements under `02 - Projects/Modules Clients/`. Business lines under `03 - Areas/Businesses/`.
 
 ## Quick navigation
 
-- [[../02 - Projects/Active Clients/README|Active Clients — Index]]
+- [[../02 - Projects/Project Clients/README|Active Clients — Index]]
 - [[../02 - Projects/Prospective Clients/README|Prospective Clients — Pipeline]]
-- [[../02 - Projects/One-Off Modules/README|One-Off Modules — Short Engagements]]
+- [[../02 - Projects/Modules Clients/README|One-Off Modules — Short Engagements]]
 - [[../03 - Areas/Businesses/README|Businesses — Product Lines]]
 
 ---

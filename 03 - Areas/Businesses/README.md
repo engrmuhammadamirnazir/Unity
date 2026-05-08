@@ -26,7 +26,7 @@ ECOSIRE Private Limited operates multiple product lines and brands. Each has a d
 
 ## Separation from Clients
 
-**Clients** (`02 - Projects/Active Clients/`) = people who pay us for Ecosire's capabilities.
+**Clients** (`02 - Projects/Project Clients/`) = people who pay us for Ecosire's capabilities.
 **Businesses** (this folder) = the capabilities themselves as product lines.
 
 A single client may consume multiple businesses (e.g., Amalfi = Managed Hosting + custom Odoo Modules + ECOSIRE.COM consulting hours).

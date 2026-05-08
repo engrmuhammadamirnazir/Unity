@@ -134,7 +134,7 @@ ssh -i "sahara.pem" bitnami@3.232.201.222
 |---|---|---|
 | saharaproperties.ecosire.com | `saharaproperties` | Sahara Properties prod (PMS) |
 | testingsahara.ecosire.com | `testingsahara` | Sahara Properties UAT clone |
-| suleman.ecosire.com | `suleman` | Suleman Arif vanilla Odoo (added 2026-04-24, see [[PRJ - Sahara Properties]] / D:/EcosireClients/ActiveClients/Sulaman-Standard/) |
+| suleman.ecosire.com | `suleman` | Suleman Arif vanilla Odoo (added 2026-04-24, see [[PRJ - Sahara Properties]] / D:/EcosireClients/ProjectClients/Sulaman-Standard/) |
 
 > **Shared-box reminder:** Apache/Odoo restart hits all 3 DBs simultaneously. Batch maintenance.
 

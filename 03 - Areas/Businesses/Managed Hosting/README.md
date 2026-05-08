@@ -37,7 +37,7 @@ No setup fee. No lock-in. Runs on **Hetzner** (CPX42 baseline, CPX51 for scaled)
 ## Where detail lives
 
 - **Memory pointer:** `~/.claude/projects/D--Development/memory/ecosire_managed_hosting.md`
-- **Per-client sessions:** see each active client's README (Diamond, Amalfi) under `02 - Projects/Active Clients/`.
+- **Per-client sessions:** see each active client's README (Diamond, Amalfi) under `02 - Projects/Project Clients/`.
 
 ## Current focus
 

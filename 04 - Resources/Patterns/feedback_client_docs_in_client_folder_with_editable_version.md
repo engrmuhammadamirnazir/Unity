@@ -31,7 +31,7 @@ Both files share an identical filename stem (`<Client>_<DocPurpose>_<YYYY-MM-DD>
 
 ```bash
 # Look for existing folder
-ls "D:/EcosireClients/ActiveClients/" | grep -i <client>
+ls "D:/EcosireClients/ProjectClients/" | grep -i <client>
 # Create if missing
 mkdir -p "D:\EcosireClients\ActiveClients\<Client-Slug>\docs"
 ```

@@ -22,13 +22,13 @@ updated: 2026-05-08-night
 | Custom module | `remittance_management` @ **`v19.0.10.1.17`** (LIVE on both DBs 2026-05-08 night — cross-currency field promotion: `target_currency_id` / `converted_amount` / `exchange_rate` now write back from JE engine for cross-ccy cash IN / cash OUT / hawala outbound, render via the same form view group as kind=conversion. Backfilled TXN/2026/00006 + TXN/2026/00007 on remtest with USD/11000.00 audit detail. Pre-fill validation guard added as third silent-miss layer over v10.1.11 + v10.1.16. `funds_origin_hint` Char compute walks `source_transaction_id` chain for cash/bank OUT to surface upstream conversion. v10.1.10→v10.1.16 prior versions established the comprehensive defensive guard family closing every silent-failure class encountered while running Suleman's Case 2 acceptance scenario hop-by-hop; Case 2 chain remains validated end-to-end on `remtest`.) |
 | Last pre-deploy backup | `pre_v10_0_36_remtest_20260502_155903.dump` + `pre_v10_0_36_remittanceaccounting_20260502_155903.dump` (plus `_v10_0_3{2,3,4,5}_*` stamps retained at `/tmp/`) |
 | GitHub | `engrmuhammadamirnazir/remittance_management` (PRIVATE) — main `66e9dbc` + new tags `v19.0.10.0.32/33/34/35/36` (NO AI attribution per client-repo rule) |
-| User Manual PDF (latest) | `D:/EcosireClients/ActiveClients/Suleman-Remittance/docs/Remittance_User_Manual_v19.0.10.0.0_Addendum.pdf` (in-app User Guide is now the canonical source — refreshed via lxml migration in v10.0.7) |
+| User Manual PDF (latest) | `D:/EcosireClients/ProjectClients/Suleman-Remittance/docs/Remittance_User_Manual_v19.0.10.0.0_Addendum.pdf` (in-app User Guide is now the canonical source — refreshed via lxml migration in v10.0.7) |
 
 ## Current state (2026-05-05 evening — Monday 2026-05-06 meeting-ready)
 
 **v19.0.10.0.42 LIVE on both DBs.** Both `remittanceaccounting` + `remtest` are now PRISTINE — wiped 2026-05-05 evening per Suleman's *"Both are intitial phases so you can remove data from both"*: 0 remittance.transaction / 0 account.move / 17 ir.sequence reset to next=1 per DB / HTTP 200. Seed data intact (3 companies × 2 DBs, Bel Junes 179/194 + Sumeet 180/195, 3 CRYPT (Crypto USDT) journals/DB, 7 categories, 5 locations, 10 stage configs, 10 remittance accounts). Backups in `/tmp/pre_practice_cleanup_20260505_175018/` (49 MB total: both DB dumps + filestores tarball).
 
-**Verification matrix complete:** 37 of 38 implementable items shipped (97%). Built at `D:/EcosireClients/ActiveClients/Suleman-Remittance/docs/00-meeting-prep/verification-matrix.md` (17.5 KB Q-by-Q). Only ⚠ FOLLOW-UP is Q22 USDT auto-seed (manually-seeded journals already work; data-file re-enable deferred to v10.0.43 with raw-SQL bypass for `account_asset.create_asset` race). 2 ⏸ DEFERRED by Suleman himself (Q25/R2-Q5 retroactive pairing — *"not sure, need to talk"*). 1 ⏭ unanswered (Q27 dashboards-to-hide).
+**Verification matrix complete:** 37 of 38 implementable items shipped (97%). Built at `D:/EcosireClients/ProjectClients/Suleman-Remittance/docs/00-meeting-prep/verification-matrix.md` (17.5 KB Q-by-Q). Only ⚠ FOLLOW-UP is Q22 USDT auto-seed (manually-seeded journals already work; data-file re-enable deferred to v10.0.43 with raw-SQL bypass for `account_asset.create_asset` race). 2 ⏸ DEFERRED by Suleman himself (Q25/R2-Q5 retroactive pairing — *"not sure, need to talk"*). 1 ⏭ unanswered (Q27 dashboards-to-hide).
 
 **Tomorrow's meeting agenda** (4 items): (1) Q25/R2-Q5 retroactive pairing decision, (2) Q27 dashboards-to-hide decision, (3) Q23 mark specific cash journals `is_shared_cash=True` across Daleel/Stocklot/Ventrax (bank stays per-company), (4) Q22 USDT auto-seed informational. Plus YouTube Short demo video post-meeting featuring chain-pairing UI ("this i need to see specific in video this step").
 
@@ -244,8 +244,8 @@ These four are now fleet-wide feedback files in D:/Development project-local mem
 - 12 control accounts seeded per company (1010/1020/1110/1120/1210/1310/1410/1420/2910/4910/4920/6910) + cash+bank journals per activated currency (EUR/USD/AED/PKR).
 
 **Deployment trail:**
-- Spec: `D:/EcosireClients/ActiveClients/Suleman-Remittance/docs/specs/2026-04-22-remittance-v19.0.9-lifecycle-first-design.md` (883 lines, commit `5239ce7`)
-- Plan: `D:/EcosireClients/ActiveClients/Suleman-Remittance/docs/plans/2026-04-22-remittance-v19.0.9-implementation-plan.md` (4085 lines, commit `8110f38`)
+- Spec: `D:/EcosireClients/ProjectClients/Suleman-Remittance/docs/specs/2026-04-22-remittance-v19.0.9-lifecycle-first-design.md` (883 lines, commit `5239ce7`)
+- Plan: `D:/EcosireClients/ProjectClients/Suleman-Remittance/docs/plans/2026-04-22-remittance-v19.0.9-implementation-plan.md` (4085 lines, commit `8110f38`)
 - Pre-deploy backups: `/home/bitnami/backups/remittanceaccounting_pre_v19_0_9_final_20260422_161808.dump` + `remtest_pre_v19_0_9_20260422_145324.dump`
 - Rollback script: `/home/bitnami/rollback_v19_0_9.sh` (prompts YES for safety)
 - Post-seed shell script (Enterprise `create_asset` workaround): `D:/Development/odoo19/server/addons/remittance_management/scripts/seed_control_accounts.py`

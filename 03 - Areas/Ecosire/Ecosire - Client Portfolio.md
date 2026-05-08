@@ -224,7 +224,8 @@ updated: 2026-05-01T23:55Z
 - Ecosire Main ed25519 at `~/.ssh/ecosire_main` (for Hetzner EX44)
 
 ### Client Data
-- Active clients: `D:\Development\EcosireClients\ActiveClients\{Name}\`
+- Project clients: `D:\EcosireClients\ProjectClients\{Name}\` (was `ActiveClients/`, renamed 2026-05-09)
+- Modules clients: `D:\EcosireClients\ModulesClients\{Name}\` (NEW 2026-05-09 — off-the-shelf module buyers)
 - Custom module repos: github.com/engrmuhammadamirnazir (PRIVATE)
 - Documents/Proposals: `D:\Development\Quotations\`
 

@@ -36,7 +36,7 @@ updated: 2026-04-22
 ## Where detail lives
 
 - Project memory: `~/.claude/projects/D--Development/memory/sahara_client.md`, `sahara_opening_entry.md`, `session_2026_04_22*.md`
-- Code: `D:\Development\odoo19\server\addons\property_management_system\` + `D:\EcosireClients\ActiveClients\Sahara-Properties\`
+- Code: `D:\Development\odoo19\server\addons\property_management_system\` + `D:\EcosireClients\ProjectClients\Sahara-Properties\`
 - Vault legacy: [[PRJ - Sahara Properties]]
 
 ## Open threads

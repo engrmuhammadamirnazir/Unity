@@ -26,7 +26,7 @@ Each row is an independent Claude Code working directory with its own `CLAUDE.md
 | 4 | **ECOSIRE.IO** | `D:\ECOSIRE.IO\` | `CLAUDE.md` | Managed Odoo/ERPNext hosting SaaS — competes with Cloudpepper.io and odoo.sh. Domains: ecosire.io (marketing), app.ecosire.io, api.ecosire.io. Private repo. |
 | 5 | **Company legal vault** | `D:\Company\` | `CLAUDE.md` + `memory/company_legal.md` | NOT code. Corporate/legal docs for ECOSIRE (PRIVATE) LIMITED (Pakistan SECP) + ECOSIRE LLC (Wyoming). Letterheads, SECP filings, bank docs, brand assets. **Confidential — never quote values.** |
 | 6 | **OpenClaw source** | `D:\OpenClaw\openclaw\` | `AGENTS.md` + per-module `CLAUDE.md` | OpenClaw AI product source (separate from Odoo-embedded OpenClaw module inside `D:/Development`). |
-| 7 | **EcosireClients** | `D:\EcosireClients\` | per-client `CLAUDE.md` under `ActiveClients/<Client>/` | Client project workspaces: Sahara Properties, Ai Content Automation, Redxpider, Diamond/STIG, Amalfi Foods, etc. SSH keys + per-client runbooks live under each subfolder. |
+| 7 | **EcosireClients** | `D:\EcosireClients\` | per-client `CLAUDE.md` under `ProjectClients/<Client>/` | Client project workspaces: Sahara Properties, Ai Content Automation, Redxpider, Diamond/STIG, Amalfi Foods, etc. SSH keys + per-client runbooks live under each subfolder. |
 | 8 | **Ad Network Platform** (ADNET) | `D:\Ad Network Website\` | `CLAUDE.md` + `.claude/` + `docs/superpowers/` | Per-install CPI ad network. Turborepo: NestJS 11 API + Next.js 15 web + Fastify 5 tracking + 5 BullMQ workers + 8 packages. Drizzle + PG16 + Redis 7. **Live at `adsnetwork.ecosire.com`** (AWS 50.16.169.132, Cloudflare). Whitelabel from day 1 via root `tenant.config.ts`. GitHub: `engrmuhammadamirnazir/ad-network-platform` (private). Deployed 2026-04-24. |
 | 9 | **Office** | `D:\Office\` | `CLAUDE.md` | Pixel-art virtual office visualization of 21 ECOSIRE agents across 6 departments. `gen.js` produces `pixel-agent-office.html`. |
 | 10 | **Unity (this vault)** | `C:\Users\Amir Nazir\Dropbox\Unity\` | `CLAUDE.md` + `.claude/skills/` (kepano/obsidian-skills) | Obsidian hive brain. PARA method. Canonical source for credentials, MOCs, production server runbooks, team directory, client portfolio. Renamed 2026-04-22. |
@@ -77,7 +77,7 @@ Full list in [[Ecosire - Production Servers]]. Canonical keys in Unity `03 - Are
 |------|----|------|----|
 | ECOSIRE.COM | 13.223.116.181 | Platform (PM2 + Docker) | ecosire.pem |
 | ECOSIRE.AI | 54.197.92.23 | 11-container AI engine | ecosire.pem |
-| Sahara Properties | 3.232.201.222 | Bitnami Odoo 19 | `D:/EcosireClients/ActiveClients/Sahara-Properties/sahara.pem` |
+| Sahara Properties | 3.232.201.222 | Bitnami Odoo 19 | `D:/EcosireClients/ProjectClients/Sahara-Properties/sahara.pem` |
 | Oenoteca (Hetzner) | per session notes | Isolated Odoo 19 | session memory |
 | Obliq (Hetzner) | per session notes | Isolated Odoo 19 | session memory |
 | Remittance (prod) | 52.28.45.137 | Bitnami Odoo 19 Enterprise | session memory |

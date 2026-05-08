@@ -30,7 +30,7 @@ updated: 2026-04-22
 ## Where detail lives
 
 - Project memory: `~/.claude/projects/D--Development/memory/obliq_client.md`, `obliq_automation_module.md`, `obliq_financial_consolidation_progress.md`
-- Code: `D:\Development\odoo19\server\addons\obliq_automation\` + `D:\EcosireClients\ActiveClients\Obliq\`
+- Code: `D:\Development\odoo19\server\addons\obliq_automation\` + `D:\EcosireClients\ProjectClients\Obliq\`
 - Vault legacy: [[PRJ - Obliq Furniture Manufacturing LLC]]
 
 ## Open threads

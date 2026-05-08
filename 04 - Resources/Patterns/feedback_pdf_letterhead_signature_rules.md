@@ -94,7 +94,7 @@ The Mineralissima audit went from 13 pages to 11 pages (two orphan pages elimina
 
 ### 8. `ecosire_doc_generator` module is NOT on this machine
 
-Legacy proposal scripts under `D:\EcosireClients\ActiveClients\Suleman-Remittance\` and `Track-Congo\` reference `from ecosire_doc_generator import EcosireDoc` with `sys.path.insert(0, "D:/Development/scripts/client_docs")`. That folder does **NOT** exist on the current machine — the module was lost or never migrated. Build new client PDFs directly with `reportlab.platypus` (BaseDocTemplate + Frame + PageTemplate) using `letterhead_full.png` as the full-page background per Rule 1.
+Legacy proposal scripts under `D:\EcosireClients\ProjectClients\Suleman-Remittance\` and `Track-Congo\` reference `from ecosire_doc_generator import EcosireDoc` with `sys.path.insert(0, "D:/Development/scripts/client_docs")`. That folder does **NOT** exist on the current machine — the module was lost or never migrated. Build new client PDFs directly with `reportlab.platypus` (BaseDocTemplate + Frame + PageTemplate) using `letterhead_full.png` as the full-page background per Rule 1.
 
 ## Canonical reusable template
 

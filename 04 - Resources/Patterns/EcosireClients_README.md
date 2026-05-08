@@ -65,7 +65,7 @@ ProspectiveClients/<Client-Slug>/
 
 **Rules:**
 - `sales-proposal` agent writes new prospect proposals to `01-Contract/`.
-- When a prospect signs and converts to active: move `<Client-Slug>/` from `ProspectiveClients/` to `ActiveClients/`. The numbered subdirs translate naturally (01-Contract → quotations/; 02-Discovery → docs/specs/; 03-Deployment → docs/deploy/; 04-06 → keep as-is or merge into the active-client equivalents).
+- When a prospect signs and converts to active: move `<Client-Slug>/` from `ProspectiveClients/` to `ProjectClients/`. The numbered subdirs translate naturally (01-Contract → quotations/; 02-Discovery → docs/specs/; 03-Deployment → docs/deploy/; 04-06 → keep as-is or merge into the active-client equivalents).
 - Old version of any document goes into `_superseded/`, never deleted, never overwritten in place.
 
 ---
@@ -111,7 +111,7 @@ Ecosire's own internal "client". Currently sparse (just `credentials.md` and `se
 Every client-facing PDF + DOCX pair is produced by a single Python generator script colocated with the deliverables it produces (filename pattern `_generate_<doc-purpose>_<YYYY-MM-DD>.py` so the underscore prefix sorts above the deliverables and reads as "tooling, not deliverable"). One content model feeds both `build_pdf()` and `build_docx()` so the two formats stay in lock-step — never hand-author one and try to keep the other in sync.
 
 **Reference implementation (use as template — both Development AND ECOSIRE.COM):**
-- `D:/EcosireClients/ActiveClients/Suleman-Remittance/docs/_generate_clarification_questions_2026_05_04.py` — proven 2026-05-03, 9-page A4, full-page ECOSIRE letterhead behind text on every page, "Answer:" labels with underline rows for Q&A docs.
+- `D:/EcosireClients/ProjectClients/Suleman-Remittance/docs/_generate_clarification_questions_2026_05_04.py` — proven 2026-05-03, 9-page A4, full-page ECOSIRE letterhead behind text on every page, "Answer:" labels with underline rows for Q&A docs.
 
 **Required ingredients (every generator must include all of these):**
 - **Page size:** A4 (595.27 × 841.89 pt). NOT US Letter.
@@ -198,14 +198,14 @@ Every active client has either a self-managed server OR a server we provision. E
 2. **Unity** `03 - Areas/Credentials & Access/SSH Keys/<client>.pem` — the actual key file (gitignored, Dropbox-only)
 3. **Unity** `03 - Areas/Credentials & Access/Client Credentials.md` and/or `Server Access Credentials.md` — admin password references
 4. **Project memory** `~/.claude/projects/D--Development/memory/<client>_server.md` — live operational context (deploy flow, DBs, modules installed, recent migrations, common gotchas)
-5. **Client folder** `D:/EcosireClients/ActiveClients/<Client-Slug>/credentials.md` — pointer-only file: `See Unity: 03 - Areas/Credentials & Access/Server & Key Inventory.md row "<Client-Slug>"` — never the value
+5. **Client folder** `D:/EcosireClients/ProjectClients/<Client-Slug>/credentials.md` — pointer-only file: `See Unity: 03 - Areas/Credentials & Access/Server & Key Inventory.md row "<Client-Slug>"` — never the value
 
 ### Inline-credential cleanup needed (legacy, 2026-05-04)
 
 Some active clients still have actual credential files saved inside their D:/EcosireClients/ folder rather than pointer files:
-- `D:/EcosireClients/ActiveClients/Diamond-Investment-Group/04-Credentials/ODOO_LOGIN_CREDENTIALS.md` + `OLD_SHARED_HOSTING_CREDENTIALS.md`
-- `D:/EcosireClients/ActiveClients/Sahara-Properties/docs/Sahara_User_Credentials.pdf`
-- `D:/EcosireClients/ActiveClients/Suleman-Remittance/Remittance_System_Access_Credentials.{docx,pdf}`
+- `D:/EcosireClients/ProjectClients/Diamond-Investment-Group/04-Credentials/ODOO_LOGIN_CREDENTIALS.md` + `OLD_SHARED_HOSTING_CREDENTIALS.md`
+- `D:/EcosireClients/ProjectClients/Sahara-Properties/docs/Sahara_User_Credentials.pdf`
+- `D:/EcosireClients/ProjectClients/Suleman-Remittance/Remittance_System_Access_Credentials.{docx,pdf}`
 
 **Migration plan (not yet done — flagged for next session):** for each, copy values into Unity `Server Access Credentials.md` / `Client Credentials.md` / `SSH Keys/`, then replace the in-folder file with a pointer-only `credentials.md`. Until migrated, these files are at risk if D: dies and client folder is not backed up off-machine.
 
@@ -242,7 +242,7 @@ End-session skill (Step 9 verification) should glance at the daily-backup log an
 
 - **Agents that produce client deliverables (any workspace):** `sales-proposal` (D:/Development — writes to `01-Contract/` for prospects, `quotations/` for active renewals), `documentation-writer`, `client-ops`, `functional-consultant`, `project-manager`, `opportunity-scout`. ECOSIRE.COM has analogous `documentation-writer`, `project-manager`, `business-strategist`. ALL of these read this file before producing client output.
 - **Feedback memory (full pattern):** `~/.claude/projects/D--Development/memory/feedback_client_docs_in_client_folder_with_editable_version.md` — exact XML for `behindDoc="1"` anchored picture in DOCX, full PDF letterhead spec.
-- **Reference generator script:** `D:/EcosireClients/ActiveClients/Suleman-Remittance/docs/_generate_clarification_questions_2026_05_04.py` — proven 2026-05-03, copy and adapt for new Q&A docs.
+- **Reference generator script:** `D:/EcosireClients/ProjectClients/Suleman-Remittance/docs/_generate_clarification_questions_2026_05_04.py` — proven 2026-05-03, copy and adapt for new Q&A docs.
 - **Holding-company portfolio (CANONICAL for cross-business awareness):** `D:/Company/PORTFOLIO.md` — full list of 7 ECOSIRE business lines (Odoo Modules + Implementation, ECOSIRE.COM SaaS, ECOSIRE.AI content platform, ECOSIRE.IO managed hosting, ADNET ad network, Dairy Business pre-launch, OpenClaw AI agents), legal-entity selection rules, cross-business dependencies, pending-launch attention items. Read this when writing any proposal so cross-sell and entity-selection decisions are correct.
 
 ---

@@ -61,7 +61,7 @@ Both CSIDs encrypted via `EncryptedText` TypeDecorator using Replit Secret `FIEL
 
 ## Deployment artifacts
 
-- Local archive: `D:/EcosireClients/ActiveClients/Future-Vision-Waredat/reports/production_csid_2026_05_05/`
+- Local archive: `D:/EcosireClients/ProjectClients/Future-Vision-Waredat/reports/production_csid_2026_05_05/`
 - On Replit: `/tmp/cert_out_prod/` (production CSID JSON, compliance CSID JSON, 6/6 cert proof, smoke-test result, DB pre-update backup)
 - Smoke test: `SIN-SMOKE-001` 1.00 SAR via `/core/reporting/single` → HTTP 202 REPORTED
 - Patched code: `repo/zatca_phase2.py` commit `439fd408` (3 fixes in `build_xmldsig_signature` +81/−34)
@@ -75,7 +75,7 @@ Both CSIDs encrypted via `EncryptedText` TypeDecorator using Replit Secret `FIEL
 
 ## Pending follow-ups
 
-- [ ] **Hussam:** send WhatsApp confirmation message at `D:/EcosireClients/ActiveClients/Future-Vision-Waredat/docs/04_whatsapp_to_hussam_zatca_live.md`
+- [ ] **Hussam:** send WhatsApp confirmation message at `D:/EcosireClients/ProjectClients/Future-Vision-Waredat/docs/04_whatsapp_to_hussam_zatca_live.md`
 - [ ] **Hussam:** decide smoke-test invoice housekeeping (keep `SIN-SMOKE-001` as deployment marker, or post a 1.00 SAR credit note)
 - [ ] **Hussam:** tighten tenant address fields (street/city length) before high invoice volume — 3 BR-KSA non-blocking warnings on first reported invoice
 - [ ] **Replit:** working tree on `fix/xades-simplified-hashing` post-merge — recommend `git checkout main && git pull origin main`
