@@ -5,7 +5,7 @@ client: Salueman Arif — Remittance
 status: live
 location: TBD (Pakistani bridge-remittance operator)
 created: 2026-04-22
-updated: 2026-05-05-evening
+updated: 2026-05-08-night
 ---
 
 # Remittance — Salueman Arif
@@ -19,7 +19,7 @@ updated: 2026-05-05-evening
 | Server | Bitnami Odoo 19 Enterprise — `52.28.45.137` |
 | SSH key | `Unity/03 - Areas/Credentials & Access/SSH Keys/remittance.pem` · user `bitnami` |
 | Domains | `remittanceaccounting.ecosire.com` (prod) + `remtest.ecosire.com` (staging) |
-| Custom module | `remittance_management` @ **`v19.0.10.0.36`** (LIVE on both DBs 2026-05-02 evening — UX hardening + FX UX live spot prefill + `bank_eur_out_usd_in` pivoted to balance-shift convention per Suleman's hawala model: customer's EUR liability shuffles to USD liability, no cash movement, cash payout happens later as separate `bank_usd_out`) |
+| Custom module | `remittance_management` @ **`v19.0.10.1.16`** (LIVE on both DBs 2026-05-08 night — comprehensive defensive guard family across 7 versions v10.1.10→v10.1.16 closing every silent-failure class encountered while running Suleman's Case 2 acceptance scenario hop-by-hop. Full Case 2 chain validated end-to-end on `remtest`: 6 hops posted clean, all partner AR cleared, treasury holds 915.20 AED operator profit. Guard family covers conversion overdraft / cash-IN cross-ccy silent miss / parallel-safety locks / bank-out overdraft / conversion-bridge handoff in one tx / treasury-config-first journal selection / conversion misclassification + Monetary widget suffix overlap fix.) |
 | Last pre-deploy backup | `pre_v10_0_36_remtest_20260502_155903.dump` + `pre_v10_0_36_remittanceaccounting_20260502_155903.dump` (plus `_v10_0_3{2,3,4,5}_*` stamps retained at `/tmp/`) |
 | GitHub | `engrmuhammadamirnazir/remittance_management` (PRIVATE) — main `66e9dbc` + new tags `v19.0.10.0.32/33/34/35/36` (NO AI attribution per client-repo rule) |
 | User Manual PDF (latest) | `D:/EcosireClients/ActiveClients/Suleman-Remittance/docs/Remittance_User_Manual_v19.0.10.0.0_Addendum.pdf` (in-app User Guide is now the canonical source — refreshed via lxml migration in v10.0.7) |
