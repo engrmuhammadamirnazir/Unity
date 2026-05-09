@@ -8,6 +8,14 @@ updated: 2026-05-09T00:50Z
 
 # Hive Mind — Session Log (Append-Only)
 
+### 2026-05-09 (late afternoon) — D:/ECOSIRE.COM — generateStaticParams hypothesis tested (round 7) and rejected (round 8 revert)
+- Tested the architecture insight surfaced earlier: maybe the Next.js 16 standalone notFound()→200 bug is specifically triggered by `generateStaticParams + dynamicParams=false` (since sister apps don't use that combo and return native 404). Removed both from `/glossary/[slug]` only — small dataset (~75 slugs), low traffic, low risk for an experiment. Commit `8a94bf0d` deployed in round 7 (~5 min).
+- Verified live via `scripts/test-glossary-hypothesis.sh`: phantom glossary URLs (e.g. `/glossary/this-term-does-not-exist`) STILL returned HTTP 200 with soft-404 metadata. Identical to pre-removal behavior. **Hypothesis REJECTED**.
+- Reverted in round 8 (commit `e6585a25`) to restore the standard pattern (generateStaticParams + dynamicParams=false) for consistency with the other 25 dynamic routes + build-time prerendering of ~825 glossary pages (75 slugs × 11 locales). Verified post-revert: glossary back to baseline.
+- Bug source still unknown. Sister apps' working 404 must come from a different difference between ecosire and odovation/muhammadamir. Top candidates: presence of `[...rest]` catch-all in ecosire vs absence in sister apps, Sentry `withSentryConfig` wrap interaction, or some other next.config.ts difference. Each future test = 1 deploy round.
+- Cross-project impact: updated `feedback_nextjs_standalone_notfound_status.md` "What does NOT fix it (verified)" list to include "removing generateStaticParams entirely" — saves the next agent from running the same experiment.
+- Session totals (D:/ECOSIRE.COM, 2026-05-09): 9 commits across 8 prod deploys. Production state: same as end of morning session — top-level real 404 ✅, slug-level soft-404 metadata ✅, sister apps branded 404 ✅. No regressions introduced by the experiment (revert restored exact pre-experiment state).
+
 ### 2026-05-09 (afternoon) — D:/ECOSIRE.COM — Sister apps follow-up: odovation + muhammadamir got friendly not-found.tsx (round 6, 52s deploy)
 - Continued the SEO audit work from earlier in the day. Audited `apps/odovation/` and `apps/muhammadamir/` for the same patterns we hit on ecosire.com.
 - **Doubled-suffix bug**: NEITHER sister app has it (no page hardcodes their brand suffix). Cleaner than ecosire by accident.
