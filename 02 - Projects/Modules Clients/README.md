@@ -3,7 +3,7 @@ type: index
 tags: [modules, modules-clients, short-engagement, index]
 aliases: [One-Off Modules, Module Customers]
 created: 2026-04-22
-updated: 2026-05-09
+updated: 2026-05-11
 ---
 
 # Modules Clients — Off-the-shelf Module Customers
@@ -18,7 +18,7 @@ When a Modules Client commissions custom work, graduate them to **Project Client
 
 ## Current / recent customers
 
-- **Bimal Tamrakar — Daraz module v17 + v18** (2026-05-08, paid). Tested on `demo.ecosire.com` (v19) before purchase. License keys: v17 `ECO-WA4K-PZ3X-NURT`, v18 `ECO-AXUN-UMJ5-D4DC`. Delivery r1 → activation hit version-mismatch bug (server-side normalization fix shipped 2026-05-08 night, License Client v2.1.1). r2 zip + email body ready to send. Folder: `D:/EcosireClients/ModulesClients/Bimal-Tamrakar/`.
+- **Bimal Tamrakar — Daraz module v17 + v18** (2026-05-08, paid). Tested on `demo.ecosire.com` (v19) before purchase. License keys: v17 `ECO-WA4K-PZ3X-NURT`, v18 `ECO-AXUN-UMJ5-D4DC`. Delivery iteration log: r1 → activation hit version-mismatch (License Client v2.1.1 normalize shipped 2026-05-08); r2 → r3 view_mode='list' on v17 → r3 → r4 //list xpath on v17 → r4 → **r5 (2026-05-11 00:30 sent)**: wizard view validator (`Field 'status' used in modifier`) + v17-only JS rpc backport (`@web/core/network/rpc` → `rpc_service`) fixed in `daraz_store_management 17.0.5.0.3`. End-to-end Playwright verified locally before delivery (all 4 wizards + Dashboard render, 0 console errors). Image-sync feature deferred to v17.0.6.0.0 within few days as free follow-up. 60-day support timer pending Bimal's install-success confirmation. Folder: `D:/EcosireClients/ModulesClients/Bimal-Tamrakar/`.
 - **Quicken Accounting — Wayfair module** (`v3.14.0`, 2026-05-08): retainer-style relationship, technically a Project Client (we host on Hetzner Docker). Listed here historically because Wayfair started as a single-module sale; lives at `D:/EcosireClients/ProjectClients/Quicken-Accounting/`.
 - **SAP B1 ↔ Odoo integration (Quicken)**: $1,250, 2-week delivery. Proposal sent 2026-03-31. Memory: `quicken_sap_b1_project.md`.
 
