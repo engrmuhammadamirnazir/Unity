@@ -3,10 +3,17 @@ type: log
 tags: [hive-mind, session-log, append-only, cross-project]
 aliases: [Hive Mind Log, Agent Session Journal]
 created: 2026-04-22
-updated: 2026-05-12T22:00Z
+updated: 2026-05-12T22:30Z
 ---
 
 # Hive Mind — Session Log (Append-Only)
+
+### 2026-05-12 evening (~20min) — D:/Development — Bimal Daraz r6 verified live on downstream customer Choice4 (https://choice17.dozoko.com)
+- Playwright login to Bimal's downstream customer (Choice4 instance) → Daraz Dashboard fully renders: $1.1M revenue / 5168 orders / 4185 customers / 476 products / 100% Sync Health (30D window). 30D↔7D filter toggle re-renders KPIs ($1.1M → $335.7K) proving OWL reactivity intact. Quick Actions row (the bug r6 fixed — `t-on-click="openInstances"` previously silent no-op) all 6 cards render. 0 console errors. r6 (`v17.0.6.0.0`) delivery status flipped: "ready to send" → **"DOWNSTREAM-VERIFIED ON CUSTOMER PROD"**. 60-day support window anchored to 2026-05-12, ends 2026-07-11.
+- Non-bug platform finding worth telling Bimal: Choice4 activity log shows `[E4226] Choice seller can not use this api (path=/products/get)` — Daraz platform restriction for "Choice" curated-catalog program sellers, NOT a module defect. Module already handles via order-derived + CSV-import fallback. Captured as reference memory `reference_daraz_choice_program_api_restriction.md` for future Daraz work.
+- Cross-project impact: **new canonical client entity captured** in Unity `03 - Areas/Credentials & Access/Client Credentials.md` — "Bimal Tamrakar (Reseller — ModulesClients tier)" section + downstream-customer table (Choice4 row). Password VALUE NOT stored (per user's explicit option choice at start of verification); only URL pointer + instance metadata. Future sessions: request password from Bimal via WhatsApp each time. Pattern is generalizable: reseller customers' downstream-instance creds are not our infrastructure → request-on-demand, never persist.
+- Canonical facts promoted to Unity: [[Client Credentials]] (Bimal Tamrakar reseller section + Choice4 downstream-instance table row).
+- Pending: send Bimal short WhatsApp/email heads-up on E4226 (documented restriction, no fix needed); optionally add docs.ecosire.com Daraz FAQ + `platform-api-intelligence/platforms/daraz/restrictions.md`; track Bimal's 60-day r6 feedback (image-sync UX, dashboard usability); reconcile pricing (still open from 2026-05-08 — $250 invoice for ONE version vs actual paid for both v17+v18).
 
 ### 2026-05-12 afternoon (~3h) — D:/Development — Suleman Remittance v10.1.25 AR-settlement primitive + treasury-card sweep + Case 2 demo prep + clean wipe for recording
 - Both Suleman DBs (`remtest` + `remittanceaccounting` on Bitnami 52.28.45.137) wiped at start for demo recording. User hit v10.1.16 misclassification UserError on a no-OBO conversion with non-treasury Payer (Sumeet paying AED to clear his USD AR from an upstream Bank Out hop). Shipped **v19.0.10.1.25** (`_je_conversion` no-OBO branch rewritten: non-treasury Payer with existing AR in source_ccy now routes to AR-settlement JE same shape as `_je_cash_in_clear_other_ccy` — `DR target Bank target_amount / CR Payer AR source_ccy self.amount / ± FX Margin plug`; payer-with-no-AR keeps clearer v10.1.16-style guard; payee-side deferred; treasury-to-treasury unchanged). Published to `engrmuhammadamirnazir/remittance_management` main+19.0+tag at SHA `90915d4`. Both DBs deployed and verified at `19.0.10.1.25 installed`.
