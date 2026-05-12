@@ -3,10 +3,21 @@ type: log
 tags: [hive-mind, session-log, append-only, cross-project]
 aliases: [Hive Mind Log, Agent Session Journal]
 created: 2026-04-22
-updated: 2026-05-12T03:50Z
+updated: 2026-05-12T20:00Z
 ---
 
 # Hive Mind — Session Log (Append-Only)
+
+### 2026-05-12 evening (~1h) — D:/Development — Brad & Brad ERP Analysis Report delivered (Cote Rotie PK, restaurant); 3-tier pricing model + Odoo PK subscription rates established
+- Delivered 11-page letterhead PDF+DOCX `BradAndBrad_2026-05-12_ERP_Analysis.{pdf,docx}` at `D:/EcosireClients/ProspectiveClients/Brad-and-Brad-Restaurant/01-Contract/` — POS scope, Community vs Enterprise comparison, Pakistan subscription pricing, 3 tiers, 5-year TCO, ERPNext migration plan.
+- New 3-tier pricing for restaurant ERP clients: (A) POS-only PKR 50K + PKR 10K/mo (unchanged); (B) Community ERP $350 + $35/mo; (C) Enterprise Custom self-hosted $500 + $35/mo + Odoo SA subscription. Recommended Tier C with recipe BOM / PLM scope.
+- Canonical Odoo Pakistan subscription rates captured: **Standard $8.95 / user / month (Odoo-hosted, no third-party modules) vs Custom $10.90 / user / month (self-hosted, third-party allowed)**. Always recommend Custom — Standard blocks Ecosire connectors + FBR plug-ins.
+- Client disclosed existing **ERPNext** that must be migrated. Migration scoped as separate fixed-price quote after free 30-min data-audit call. Typical range PKR 30K (opening-balances only) to PKR 100–250K (2–3 years historical).
+- Folder + `00-Lead.md` created at `D:/EcosireClients/ProspectiveClients/Brad-and-Brad-Restaurant/` — was missing despite Brad & Brad being a prospect since 2026-04-29. Gap closed.
+- **Cross-workspace pattern captured**: reportlab `Table` cells MUST be wrapped in `Paragraph` — raw strings don't word-wrap and don't decode HTML entities. First draft PDF rendered `&amp;`/`<b>`/`</b>` literally and overflowed cells. Pattern note added to Unity Patterns. Applies to any workspace generating letterhead proposals (D:/Development, D:/ECOSIRE.COM, D:/ECOSIRE.AI).
+- Cross-project impact: **Odoo PK pricing reference + 3-tier model are reusable across every future Pakistan client proposal in any workspace**. `sales-proposal` agent should consult both before quoting.
+- Canonical facts promoted to Unity: [[Ecosire - Client Portfolio]] (Brad & Brad added to Prospective table), [[Pattern - reportlab table cells must be paragraphs]] (new), [[Reference - Odoo Pakistan Subscription Pricing]] (new).
+- Pending: send report to Aamir Habib (`aamir.habib@coterotiepk.com`) by email + WhatsApp; client decision on tier A/B/C; PKR 60K payment on INV-2026-04-BB-001 (from 2026-04-29) still outstanding.
 
 ### 2026-05-12 evening (~3h continuous + autonomous-loop wakeups) — D:/Development — TWO v19 RNG strictness regressions identified + fixed fleet-wide; OWL fleet swept clean
 - **Regression 1 — `<group expand=/string=>` inside `<search>` view**: 35 modules affected, all fixed + published. Demo install of googleshopping confirmed v19 `<rng:define name="group">` removed both attributes; cascading lxml error "search has extra content: field" misattributed the cause until empirical demo install. State-machine-aware fixer at `D:/Development/scripts/fixes/fix_v19_group_expand_in_search.py` (preserves form-context `<group string="...">`). 35-module batch published via `_publish_group_expand_fleet_fix_2026_05_12.py` — 35 OK / 0 FAIL across 4 branches each.
