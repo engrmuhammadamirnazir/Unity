@@ -3,10 +3,18 @@ type: log
 tags: [hive-mind, session-log, append-only, cross-project]
 aliases: [Hive Mind Log, Agent Session Journal]
 created: 2026-04-22
-updated: 2026-05-12T20:00Z
+updated: 2026-05-12T18:30Z
 ---
 
 # Hive Mind — Session Log (Append-Only)
+
+### 2026-05-12 day (~7h, two arcs) — D:/Development — Diamond/STIG meeting prep on stig_prod: clean wipe + re-seed of 3 tier cascades + 4-page letterhead reference PDF for live meeting
+- **Morning (11:47-12:30 UTC):** wiped stig_prod cascade artefacts (7 SOs / 210 account.move / 7 chain runs / 49 chain lines / 52 pickings / 3 IC transfers / 1 buyback / 7 rebate) after pg_dump backup at `/var/backups/odoo/manual/stig_prod_pre_wipe_2026-05-12_1147.pgdump`. Re-seeded 3 tier cascades (AT EUR 10k Platinum 35% / US USD 15k Gold 30% / PH PHP 5k Silver 25%) — each reconciles to Konzernstruktur §2.1 with subsidiary keeping exactly 7% (700/1,050/350) ✓. Customer invoices INV/2026/00001 posted on AT (EUR 12,000) + PH (PHP 5,600); US left "to invoice" for live demo click. Buyback BBK/00010 fired full reverse cycle (credit notes + 3 reverse pickings + GIA-2026-0001 back at FZC/Stock + original IC transfer state=reversed).
+- **Afternoon teaching arc:** clarified user's confusion that "7 invoices = 7 SOs". Actual: 1 customer sale → 1 customer invoice + 7 inter-company cascade lines = 8 financial docs; "14 invoices" smart-button = 7 chain lines × 2 books (Odoo inter-company double-entry). Documented 4-way traceability backlinks (SO ↔ chain_run ↔ chain_line ↔ account.move via `invoice_origin` + `ref`). Verified commission-tier resolution live: `stig_company_config.commission_pct + fixed_fee_pct` → cascade line #6 = MATCH on all 3 tiers.
+- **Delivered:** `ECOSIRE_Diamond_SO_Workflow_Reference_2026-05-12.pdf` (1.88MB, 4 pages, Ecosire letterhead, UNSIGNED) at `D:/EcosireClients/ProjectClients/Diamond-Investment-Group/03-Deployment/` — Amir's cheat-sheet for the live meeting. v1 overflowed; v2 (compact tables, 8pt fonts) fits clean; PyMuPDF + visually inspected.
+- Cross-project impact: **2 new fleet feedback memos applicable to every workspace** — [[Pattern - verify Odoo menu paths from XML]] (always grep `views/menus.xml` before claiming a UI menu path; menus are XML-defined, remembered/guessed paths are often wrong — I made this error mid-session telling the user "Configuration → STIG Company Configurations" when actual is "Accounting → STIG Group → Company Fee Configs" under `account.menu_finance`) + [[Pattern - 4-page letterhead reference PDF]] (reusable compact-4-page client-meeting reference PDF scaffold with content-band sizing + Paragraph-wrapped cells + PyMuPDF verify + v1→v2 overflow-fix iteration discipline; applies to any client meeting in any workspace, not just Diamond). Plus 2 D:/Development-only feedback memos from the morning (v19 stock.picking.unlink done-move guard + odoo shell auto-import gotcha).
+- Canonical facts promoted to Unity: none (Diamond client portfolio entry already up-to-date; no new clients/servers/credentials/price tiers; the 2 cross-cutting patterns are workspace feedback memos, not vault canonical notes yet — promote on second occurrence).
+- Pending: meeting happens today with Amir using the PDF reference; post-meeting if Eddy signs off UAT → issue M2 invoice ECO-INV-2026-0042 ($2K, drafted 2026-04-22, "On successful demo $2,000"); SSH key rotation + FIRST24 inclusion decision still pending since 2026-04-17.
 
 ### 2026-05-12 afternoon/evening (~2h) — D:/Development — Oenoteca Q4 full close-out: 4 cleanup ops landed on prod, 5 financial PDFs delivered, Row 8 KR deferred + 2 NEW v19 fleet gotchas captured
 - Niccolo's WhatsApp Fintech screenshots (G&G + Lambert's + KR REFUND-line pattern) unblocked 3 of 4 halts from the 2026-05-08 cleanup round. 3-wave accountant dispatch: probe → deeper trace → execution.
