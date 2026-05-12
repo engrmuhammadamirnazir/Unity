@@ -18,7 +18,7 @@ Inbound leads and active proposals that haven't yet converted to paid engagement
 | **Wayfair (Quicken Accounting)** | Wayfair module v3.10.0, SAP B1 integration $1,250 | Proposal sent 2026-03-31 | `quicken_sap_b1_project.md` + `wayfair_client_inquiry.md` |
 | **Gaspar Muhlmann (Argentina)** | MELI module, channel partner (multiple downstream clients) | Phase 1 features urgent | `gaspar_meli_client.md` |
 | **MyFirstTech (China/SG)** | Lazada 4-issue diagnosis · $500 / 1 week / 100% upfront | Quote sent 2026-04-16, awaiting acceptance | `myfirsttech_client.md` |
-| **Tariq Almaimani (Saudi)** | Trendyol · Odoo.sh staging, 80 orders synced | Deployed v2.1.0, ongoing relationship | `tariq_trendyol_client.md` |
+| **Tariq Almaimani (Saudi)** | Trendyol · Odoo.sh staging | **WITHDRAWN 2026-05-13** — never paid; code removed from `tmaimani/erpdev` `st1` (`0c4e1fe`), both license keys deactivated. Re-push on payment. | `tariq_trendyol_client.md` |
 | **BreezIntl (Nepal)** | Daraz module · demo.ecosire.com · 76 products + 307 orders imported | On demo server, follow-up | `breezintl_demo_client.md` |
 | **Ximplifika (Mexico)** | Import/Trading ERP · $3,500 | Proposal sent 2026-03-26 | `ximplifika_client.md` + `texas_closeout_client.md` |
 | **Texas Closeout (Houston)** | 3PL WMS custom module via Mastero · $1,999 | Proposal sent 2026-03-26 | `texas_closeout_client.md` |

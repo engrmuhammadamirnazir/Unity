@@ -99,13 +99,14 @@ updated: 2026-05-01T23:55Z
 
 ## Active Clients — Module Delivery (App Store Customers)
 
-### Tariq Almaimani (Smart Beauty)
+### Tariq Almaimani (Smart Beauty) — WITHDRAWN 2026-05-13
 - **Industry**: E-commerce / Beauty
 - **Location**: Saudi Arabia
-- **Platform**: Odoo.sh (staging)
-- **Module**: Trendyol Store Management v2.1.0
-- **Status**: DEPLOYED — 80 orders synced, company 3 (Smart Beauty), Arabic translated
-- **Data**: 80 orders, 78 customers
+- **Platform**: Odoo.sh (`tmaimani-erpdev` — staging)
+- **Module**: Trendyol Store Management v2.1.0 — previously deployed 2026-04-05
+- **Status**: **WITHDRAWN 2026-05-13** — never converted to payment after the 2026-04-05 eval deployment. Code removed from `tmaimani/erpdev` branch `st1` (commit `0c4e1fe`); his own `account_report/` untouched. Both license keys deactivated: comp `ECO-3EKD-9VRB-WDEE` revoked earlier today on the ECOSIRE.COM licensing app, activation key `ECO-VGMX-TUB7-BQVA` deactivated on the license server.
+- **Data at peak**: 80 orders, 78 customers synced on company 3 (Smart Beauty / جمالي الذكي), Arabic translated (1,206/1,211 strings)
+- **Re-engagement**: payment lands → re-push from `D:/Development/EcosireSolutions/Trendyol-Store-Management/`, issue fresh license key, redeploy on company 3 / warehouse 2 (البحر). Playbook: `~/.claude/projects/D--Development/memory/feedback_prospective_deploy_no_pay_withdraw_code.md`.
 
 ### Quicken Accounting (Soovah)
 - **Industry**: Accounting / E-commerce

@@ -3,10 +3,18 @@ type: log
 tags: [hive-mind, session-log, append-only, cross-project]
 aliases: [Hive Mind Log, Agent Session Journal]
 created: 2026-04-22
-updated: 2026-05-13T22:00Z
+updated: 2026-05-13T23:30Z
 ---
 
 # Hive Mind — Session Log (Append-Only)
+
+### 2026-05-13 night (~15min) — D:/Development — Tariq Trendyol code WITHDRAWN from his repo (completes today's Tariq cleanup)
+- Removed `trendyol_store_management/` + `ecosire_license_client/` from `tmaimani/erpdev` branch `st1` (commit `0c4e1fe`); client's own `account_report/` untouched; other branches were already bare. Push-access verified via `gh api`; cloned shallow, `git rm -r`, neutral commit message ("Remove ECOSIRE evaluation modules") so client browsing history sees nothing punitive.
+- User confirmed activation key `ECO-VGMX-TUB7-BQVA` deactivated on license server — pairs with the comp license `ECO-3EKD-9VRB-WDEE` revoked earlier today (see late-night ECOSIRE.COM entry below). Both Tariq license keys now inactive across both systems.
+- Created `D:/EcosireClients/ProspectiveClients/Tariq-Almaimani/` (folder predated 2026-05-09 EcosireClients tier rollout). Standard scaffolding + `00-Lead.md` with re-engagement playbook.
+- New fleet feedback memo `feedback_prospective_deploy_no_pay_withdraw_code.md` codifies the 9-step deploy-no-pay withdrawal policy (verify push access → scan branches → identify scope precisely → shallow clone → `git rm -r` ours only → neutral commit → push + API verify → deactivate license → mark prospect dormant). Applies to other prospects holding our code without converting.
+- Cross-project impact: Tariq status in Unity portfolio + Prospective Clients README updated to WITHDRAWN. License-server (D:/ECOSIRE.COM licensing app) and module-server (D:/Development EcosireSolutions/) now both reflect retracted state — no orphaned activations.
+- Canonical facts promoted to Unity: [[Ecosire - Client Portfolio]] (Tariq entry status WITHDRAWN with both deactivated key IDs), [[Prospective Clients/README]] (status column).
 
 ### 2026-05-13 late-night (~45min) — D:/ECOSIRE.COM — Marketplace UNBLOCK follow-up: silent-failure protection shipped + 3 license version backfills + 1 comp-license revocation
 - Continuation of the late-evening unblock entry below. Tackled the two remaining doable-now ECOSIRE.COM tasks while D:/Development handles its 50-cell stale-content re-push.
