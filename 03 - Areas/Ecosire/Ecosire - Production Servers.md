@@ -76,6 +76,19 @@ powershell.exe ssh -i "C:\path\to\ecosire.pem" ubuntu@13.223.116.181
 - SSL: `/etc/ssl/cloudflare/ecosire.com.{pem,key}`
 - Nginx: `/etc/nginx/sites-available/ecosire.conf`
 
+**AWS Resources (added 2026-05-12 for modules marketplace):**
+- S3 bucket: `s3://ecosire-apps/` (us-east-1, Block Public Access on all 4, versioning enabled, SSE-S3) — stores Odoo module ZIPs, accessed only via pre-signed URLs (10-min TTL)
+- IAM user: `ecosire-marketplace` (machine-only, no console login) — attached policy `ecosire-apps-s3` (min-privilege: PutObject/GetObject/DeleteObject/ListBucket on `ecosire-apps` only)
+- Access keys: in prod `/opt/ecosire/app/.env.local` as `AWS_ACCESS_KEY_ID` + `AWS_SECRET_ACCESS_KEY` (also `AWS_REGION=us-east-1`, `S3_PRODUCTS_BUCKET=ecosire-apps` — env var name retained for backwards compat)
+- ⚠️ Access key was pasted in chat history during creation — rotate post-marketplace-launch
+
+**GitHub Org Secret (added 2026-05-12):**
+- `ECOSIRE_SYNC_TOKEN` at github.com/organizations/ecosire/settings/secrets/actions — visibility=all repos — powers the marketplace webhook auth. 64-char hex. Value also in prod `.env.local`. Both must match — rotate as a pair.
+
+**Marketplace Webhook (live 2026-05-13):**
+- Endpoint: `POST https://api.ecosire.com/api/internal/github-sync` — Bearer-auth via `ECOSIRE_SYNC_TOKEN`. Receives notifications from per-module-repo GitHub Actions (`.github/workflows/sync-to-s3.yml` installed in all 222 ecosire/* repos). Auto-syncs module zipballs from GitHub tags to S3 + `product_files` DB on every tag push.
+- Customer download path: `GET /downloads/file/:fileId` — generates 10-min pre-signed S3 URL after entitlement check + license-version-match enforcement.
+
 **Deployment (Quick):**
 ```bash
 powershell.exe ssh -i ecosire.pem ubuntu@13.223.116.181 "cd /opt/ecosire/app && git pull && pnpm install && pnpm build && pm2 restart all --update-env"
