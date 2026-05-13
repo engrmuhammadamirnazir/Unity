@@ -3,10 +3,19 @@ type: log
 tags: [hive-mind, session-log, append-only, cross-project]
 aliases: [Hive Mind Log, Agent Session Journal]
 created: 2026-04-22
-updated: 2026-05-13T23:30Z
+updated: 2026-05-14T00:00Z
 ---
 
 # Hive Mind — Session Log (Append-Only)
+
+### 2026-05-14 early hours (~2h) — D:/Development — Obliq Kamal dual-issue session: USD JE secondary-currency + missing MFG icon (3rd recurrence — upstream root cause finally fixed)
+- Kamal sent two WhatsApp screenshots: (1) JE 17917 USD secondary-currency error (already cancelled, no prod action; drafted Internal Transfer + Manual JE guide), (2) Manufacturing icon missing on S01663 + S01657 for product `[169011719] Studio Obliq Dia Side Table`.
+- Issue 2 root cause finally chased UPSTREAM: product tmpl 4214 had Manufacture route but NOT Replenish on Order (MTO). Without MTO + 1-step delivery, procurement engine never creates the MO → SO line stays in `confirmed` with red forecast icon → smart-button never appears. The 2026-05-05 fix (stock_reference_sale_rel patch) only addressed the symptom; same product recurred 8 days later.
+- Fix on Hetzner main (23.88.13.113): backup → MTO added to tmpl 4214 → created+auto-produced STO/MO/03501 (S01657) + STO/MO/03503 (S01663) → linked finished-moves to SO lines → inserted stock_reference_sale_rel for v19 smart-button compute. Audit found **13 additional Obliq finished goods with same MTO gap → bulk-fixed** (Dining Tables 5 + TV Units 4 + Buffets 2 + Display Units 1 + Axis Side Table). 14 products total now protected.
+- Verified live via Playwright: both SOs now show Delivery 1 + Manufacturing 1. Pickings still confirmed (warehouse will validate on physical delivery).
+- Delivered letterhead PDF+DOCX `ECOSIRE_Obliq_Two_Issues_Reply_Kamal_2026-05-14` (4 pages, Ecosire letterhead via PyPDF2 overlay). Not yet sent to Kamal — Amir to send.
+- Cross-project impact: **2 general v19 facts captured** that apply to other clients. (1) `feedback_v19_account_forced_currency_strict` — Odoo 19 strictly enforces `line.currency_id == account.currency_id` when account has forced foreign currency; affects Suleman Remittance (multi-currency JEs), Diamond Investment Group (USD/AED books), Oenoteca (EUR vendor pipeline). (2) `feedback_obliq_finished_goods_need_mto_route` — Manufacture without MTO doesn't auto-trigger MO on 1-step delivery in v19; applies to any future manufacturing client.
+- Canonical facts promoted to Unity: none — both fleet rules live in D:/Development workspace memory (the per-client client folder at D:/EcosireClients/.../Obliq/README.md is already up-to-date with the session note).
 
 ### 2026-05-13 night (~15min) — D:/Development — Tariq Trendyol code WITHDRAWN from his repo (completes today's Tariq cleanup)
 - Removed `trendyol_store_management/` + `ecosire_license_client/` from `tmaimani/erpdev` branch `st1` (commit `0c4e1fe`); client's own `account_report/` untouched; other branches were already bare. Push-access verified via `gh api`; cloned shallow, `git rm -r`, neutral commit message ("Remove ECOSIRE evaluation modules") so client browsing history sees nothing punitive.
