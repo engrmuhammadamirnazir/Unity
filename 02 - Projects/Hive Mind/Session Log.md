@@ -3,10 +3,20 @@ type: log
 tags: [hive-mind, session-log, append-only, cross-project]
 aliases: [Hive Mind Log, Agent Session Journal]
 created: 2026-04-22
-updated: 2026-05-14T00:00Z
+updated: 2026-05-14T12:00Z
 ---
 
 # Hive Mind — Session Log (Append-Only)
+
+### 2026-05-14 afternoon (~30min) — D:/Development — Bimal Tamrakar opens dropship-connector inquiry (1688 + AliExpress + CJ); pricing $500 flat × N, no bundle discount
+- Bimal asked via WhatsApp for buyer-side dropship connectors into his Odoo 17 site. Initially shared `wholesaleplus.com.bd` as reference; clarified his actual site is **https://dozoko.com/** (Lalitpur Nepal, "Nepal's First & Biggest Online Wholesale", Odoo-built). Subdomains under `*.dozoko.com` host his reseller customers (Choice4 already verified yesterday).
+- Scope locked: `aliexpress_dropshipping_connector` $500 / 2wk (uses official `aliexpress.ds.*` API, distinct from existing seller-side `aliexpress_store_management`); `1688_sourcing_connector` $500 / 2-3wk CONDITIONAL on Chinese registered entity (`open.1688.com` hard-gates on PRC: 营业执照 + ICP + 身份证 + +86 phone); `cj_dropshipping_connector` $500 / 2wk fallback (English official API, ~70% 1688 catalog overlap, ships to Nepal).
+- Pricing **LOCKED by user**: $500 flat per connector, 50% on confirmation + 50% on delivery, NO bundle discount even for 2-3 (my earlier $799/$1199 bundle suggestions overridden).
+- Fleet impact: net-new product category established — buyer-side sourcing connectors, separate from existing 215+ seller-side store-management modules. Intelligence repo `odoo-modules-intelligence/20-pipeline/adjacent-tools/buyer-side-sourcing-connectors.md` opened the umbrella category (SHA `0b0e589`).
+- 5 workspace memories written + Bimal `README.md` + Unity `Client Credentials.md` (his entry now anchors dozoko.com as primary site + adds open dropship-connector pipeline).
+- Cross-project impact: low — purely a sales/scoping session, no code shipped. Pattern of "client sends a reference URL ≠ client's own site" worth flagging at fleet level if it happens again.
+- Canonical facts promoted to Unity: [[Client Credentials]] — Bimal section now lists dozoko.com as his primary Odoo 17 site + open dropship pipeline.
+- Pending NEXT SESSION: Bimal's reply on (a) which connectors, (b) Chinese co. for 1688, (c) AE Open Platform app reg started today. On reply → issue 50% advance invoice(s) → walk Bimal through AE app reg → build sequence AE first → 1688 or CJ second.
 
 ### 2026-05-14 morning (~1h) — D:/ECOSIRE.AI — New site emulatorgamesdownload.net pipeline built + seeded; BLOCKED on WP 401 (App Password rejected)
 - New WordPress site `emulatorgamesdownload.net` recognized in prod (`is_active=true`, created 2026-05-12, last_connected 2026-05-12 10:31 UTC). Added to `scripts/dump_wp_creds.py` TARGET_DOMAINS (3→4 sites); `.wp-creds.json` refreshed via SSH. Connected-sites tally now 8 active (was 7 in 2026-04-13 snapshot; ativadorparapc.net previously deactivated).
