@@ -3,10 +3,17 @@ type: log
 tags: [hive-mind, session-log, append-only, cross-project]
 aliases: [Hive Mind Log, Agent Session Journal]
 created: 2026-04-22
-updated: 2026-05-14T12:00Z
+updated: 2026-05-17T00:00Z
 ---
 
 # Hive Mind — Session Log (Append-Only)
+
+### 2026-05-17 (~50min) — D:/ECOSIRE.AI — Bulk romsportal v1 resume: +202 drafts at concurrency=15 (paused at 558/2017)
+- Continued the bulk romsportal.net WP draft pipeline that's been paused since 2026-05-06. Reset 130 SDK-throttle FAILED rows back to PENDING, launched `--full --concurrency 15` (up from 5), then stopped cleanly at Claude Code Max window exhaustion mid-batch-7. 4 batches cleared (1, 2, 5, 6) — 558/2017 DONE / 31 FAILED (genuine validator misses) / 1428 PENDING.
+- Confirmed the c=15 ceiling: ~230 drafts/hr vs ~150/hr at c=5. SDK throttle (not the asyncio semaphore) is the binding constraint above ~10 concurrency. Future bulk pipelines should target c=10-15. Publisher 2-layer dedup verified live (4 batch-1 articles claimed orphaned WP posts at p=156/179/180/183 without regen).
+- Cross-project impact: none — single-workspace SEO content work. The c=15 concurrency observation is captured in `project_bulk_romsportal_v1_paused_2026_05_17.md` (workspace memory) and supersedes the 2026-05-06 paused note.
+- Canonical facts promoted to Unity: none. romsportal.net WordPress site is already in workspace MEMORY.md connected-sites table; no new server/client/credential rotation.
+- Pending NEXT SESSION: wait ~5h for Claude Code Max window reset → re-run `--full --concurrency 15` → ledger picks up at batch 6 leftover (10) + batches 7-21 (1418 PENDING). ~6-7h more compute to clear remaining 1428 = likely 2-3 more sessions of similar 50-min window length.
 
 ### 2026-05-16 (~6h) — D:/ECOSIRE.COM — Sprint 2 marketplace platformization SHIPPED then Sprint 1+2 DEPLOYED to production
 - Sprint 2 execution (~4h afternoon): 15 commits on `feat/platformization-sprint-2-app-layer` via `superpowers:subagent-driven-development` — 14 plan tasks executed. Added `@ecosire/utils.normalizePlatformVersion` + `deriveModuleNameForPlatform` helpers. Migrations 0012 (5 CONCURRENTLY platform-aware indexes) + 0013 (4 CHECK constraints enforcing `platform_version NOT NULL`). API now dual-reads `coalesce(platform_version, odoo_version)` and dual-writes both columns across products / licenses / downloads / github-sync / billing services. `POST /api/licenses/validate` + `/activate` accept either `odoo_version` OR `platform_version` body field (new takes precedence). New `/apps/<platform>/<slug>` Next.js route renders identical UI to legacy `/products/<slug>` via shared `<ProductsCollection>` / `<ProductDetailPage>` / `<CategoryHub>` lib components. `?ff=apps_marketplace` cookie opt-in for QA preview. **PR #3 opened**. `@ecosire/api` 1969/1969 unit tests pass (Sprint 1 baseline 1950 + 19 new). All typechecks clean. Stripe-billing dual-write gap from T7 review closed in T10.
