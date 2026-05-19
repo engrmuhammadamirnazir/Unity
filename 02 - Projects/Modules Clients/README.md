@@ -3,7 +3,7 @@ type: index
 tags: [modules, modules-clients, short-engagement, index]
 aliases: [One-Off Modules, Module Customers]
 created: 2026-04-22
-updated: 2026-05-11
+updated: 2026-05-19
 ---
 
 # Modules Clients — Off-the-shelf Module Customers
