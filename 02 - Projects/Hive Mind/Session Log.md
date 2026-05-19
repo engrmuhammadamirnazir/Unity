@@ -3,10 +3,22 @@ type: log
 tags: [hive-mind, session-log, append-only, cross-project]
 aliases: [Hive Mind Log, Agent Session Journal]
 created: 2026-04-22
-updated: 2026-05-19T00:00Z
+updated: 2026-05-19T23:30Z
 ---
 
 # Hive Mind — Session Log (Append-Only)
+
+### 2026-05-19 (~4h, night) — D:/Development — Oenoteca Q1 2026 bank rec diagnostics; systemic MISC-entry AR closure anti-pattern surfaced as fleet-wide rule
+- 100% read-only session (4 accountant-agent turns + local PDF/CSV analysis + letterhead PDF generation). Zero prod writes. Niccolò provided fresh Chase bundle (16 PDFs Jan-Apr 2026 across 4 accounts + 4 CC + Fintech AR CSV).
+- **Journal mapping definitively proved** for Oenoteca: BNK1=Chase 5820, BNK2=Chase 6821 (display name "OENOTECA EXCELLENCE" is misleading), BNK3=internal Library sub-ledger. 5th Chase **CHK 6913** discovered in BSL refs (net $30, pending Niccolò scope).
+- **+$5,891 Q1 variance fully decomposed algebraically**: +$8,480 (BSL 513 dup of BSL 304, 2026-03-16 re-import) + $198 (BSL 613 dup of BSL 408, same re-import) − $2,682 (move 305 in DRAFT since 2025-10-16) + ~$165 small drafts = $5,891 ± $110 noise. 4 surgical writes ready for execution after Niccolò signoff.
+- **BIGGEST finding — fleet-wide anti-pattern**: 42 of 42 AR-credit AMLs across 12 wholesale partners are `move_type='entry'` MISC entries, not BSL-anchored. Invoices flip "paid" but Chase deposits sit unreconciled forever. Worst: LA GRIGLIA net $22,131 open of $27,228. This is the root cause of multi-period bank-rec backlog. Captured as [[Patterns MOC]]-eligible memo `feedback_misc_entry_ar_closure_anti_pattern` in D:/Development project memory + agent-fleet `shared-knowledge/anti-patterns.md`.
+- Two companion fleet anti-patterns also captured (workspace memory): `feedback_draft_state_move_silent_running_balance` (Odoo running_balance skips DRAFT moves while BSL claims `is_reconciled=True`) and `feedback_bsl_reimport_creates_duplicates` (re-importing overlapping period creates dupes; Odoo has no native dedupe).
+- 48 Q1 unrec BSLs classified by payment_ref pattern (8 buckets: INTERNAL_TRANSFER / FINTECH_AR_POOL / WIRE_VENDOR / ACH_VENDOR / OTHER / CHASE_CARD / ATM / ZELLE). Pre-bucketing reduces upcoming Niccolò screen-share to ~30 min.
+- Deliverables: 4-page letterhead-branded PDF + DOCX to Niccolò (`D:/EcosireClients/ProjectClients/Oenoteca/shared_with_client/ECOSIRE_Oenoteca_Q1_2026_Close_Questions_Niccolo_2026-05-19.{pdf,docx}`, 1.88 MB / 43 KB) with 5 questions + 1 bonus, answer boxes embedded. Amir sends morning of 2026-05-20.
+- **Canonical entity change**: Oenoteca prod login renamed `nick@winehuntersconsulting.com` → `nick@oenotecafinewines.com` (uid 2, same password). `D:/EcosireClients/ProjectClients/Oenoteca/CLAUDE.md` patched in 2 places.
+- Cross-project impact: **medium-high**. The MISC-entry AR closure anti-pattern applies to ANY wholesale-distribution Odoo client using Fintech / payment aggregators (BlueCart, Square Invoices, Pixelpay, etc.). Fleet detector SQL provided in workspace memo. Worth a Unity Patterns promotion if pattern surfaces on a second client. Draft-state move detector + BSL-reimport-dedupe detector are also Odoo-fleet-general; combined weekly cron candidate.
+- Canonical facts promoted to Unity: [[Client Credentials]] (Oenoteca login email change — pointer-only, no values).
 
 ### 2026-05-19 (~45min) — D:/Development — Suleman remtest TXN/2026/00069 diagnosis + dual-DB wipe; TRUNCATE CASCADE near-miss recovered from pg_dump
 - Operator posted TXN/2026/00069 with `currency_id=AED` (should have been EUR) while using `fx_rate=1.10` (EUR/USD-appropriate, not AED/USD ≈ 0.272). Recipe choice was correct (`kind=conversion` + `conversion_mode=book_only` + `on_behalf_of_partner_id=Sul KO` is the codebase's cross-ccy OBO recipe). System computed `fx_spread_pct=303.98%` and `fx_spread_amount=8277.06 USD` but **posted anyway, no hard-stop**, booking phantom USD 8,277.06 to 46001 FX Margin Income and contaminating Sul KO's A/R on `121000` with mixed-currency lines (+AED 10,000 and −USD 11,000). One field input error compounded into 3 cascading bookkeeping defects. Pure diagnostic — no code changes shipped.
